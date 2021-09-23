@@ -12,7 +12,7 @@ export const CharacterListItem = (props: { character: Character; }) => {
 
         return (
             <List component="nav" aria-label="secondary mailbox folders">
-                <ListItemLink href="/test">
+                <ListItemLink href={`/characterSheet?id=${props.character.Id}`}>
                     <ListItemText primary={props.character.Name} />
                 </ListItemLink>
             </List>

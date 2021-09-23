@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import './App.css';
 import React from 'react';
+import { CharacterSheet } from './components/CharacterSheet/CharacterSheet';
 
 
 export default function App() {
@@ -21,8 +22,8 @@ export default function App() {
               <Route exact path="/">
                 <Home />
               </Route>
-              <Route path="/test">
-
+              <Route path="/characterSheet">
+                <CharacterSheet />
               </Route>
             </Switch>
           </Router>

@@ -1,3 +1,4 @@
+import { Character } from "../interfaces/Character";
 import { ModelType } from "../interfaces/Enumerations/ModelType";
 import { SyncModel } from "../interfaces/SyncModel";
 
@@ -14,4 +15,21 @@ export const getDeserializedModelsForModelType = (syncModels: SyncModel[], model
     });
 
     return modelList;
-};
+}
+
+export const getCharacterFromSyncModelListForId = (syncModels: SyncModel[], id: string): Character => {
+
+    let character = {} as Character;
+    let characterSyncModel = {} as SyncModel | undefined;
+
+    characterSyncModel = syncModels.find(x => x.id == id);
+
+    console.log(id);
+    //console.log(characterSyncModel);
+
+    if (characterSyncModel !== undefined) {
+        character = JSON.parse(characterSyncModel.json);
+    }
+
+    return character;
+}

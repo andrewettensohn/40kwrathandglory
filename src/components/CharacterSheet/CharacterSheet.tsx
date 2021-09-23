@@ -3,6 +3,9 @@ import React, { useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { getCharacterListFromSyncAPI } from "../../data/SyncModelService";
 import { Character } from "../../interfaces/Character";
+import { getSyncModels } from "../../data/RestService";
+import { SyncModel } from "../../interfaces/SyncModel";
+import { getCharacterFromSyncModelListForId } from "../../helpers/SyncModelHelper";
 
 const useStyles = makeStyles({
     formSurface: {
@@ -22,33 +25,37 @@ const useStyles = makeStyles({
 });
 
 export const CharacterSheet = () => {
+    const [syncModels, setSyncModels] = React.useState([] as SyncModel[]);
     const [character, setCharacter] = React.useState({} as Character);
     const classes = useStyles();
-    const params = new URLSearchParams(document.location.search.substring(1));
-    const id = params.get("id");
+    let params = new URLSearchParams(document.location.search.substring(1));
+    let id = params.get("id") as string;
 
-    // useEffect(() => {
+    useEffect(() => {
+        setCharacterSheetData();
+    }, []);
 
-    //     get(id as string)
-    //         .then((item) => setPark(item))
-    //         .catch((err) => console.log(err));
+    const setCharacterSheetData = async () => {
 
-    // }, []);
+        await getSyncModels()
+            .then((models) => setSyncModels(models))
 
-    // const onGetCharacterListClicked = async () => {
-    //     setCharacter(await getCharacterListFromSyncAPI());
+        setCharacter(getCharacterFromSyncModelListForId(syncModels, id));
+    }
 
-    // };
+    console.log(character);
 
     return (
         <div>
             <Paper className={classes.formSurface}>
                 <Grid justifyContent="flex-start" container>
                     <Grid item>
-
+                        <Typography gutterBottom variant="body1">
+                            {character.Name}
+                        </Typography>
                     </Grid>
                     <Grid item>
-                        <Typography gutterBottom variant="h6" component="h2">
+                        <Typography gutterBottom variant="body1">
                             {character.Archetype?.Name}
                         </Typography>
                     </Grid>
