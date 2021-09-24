@@ -22,10 +22,7 @@ export const getCharacterFromSyncModelListForId = (syncModels: SyncModel[], id: 
     let character = {} as Character;
     let characterSyncModel = {} as SyncModel | undefined;
 
-    characterSyncModel = syncModels.find(x => x.id == id);
-
-    console.log(id);
-    //console.log(characterSyncModel);
+    characterSyncModel = syncModels.find(x => x.id === id);
 
     if (characterSyncModel !== undefined) {
         character = JSON.parse(characterSyncModel.json);

@@ -11,3 +11,9 @@ export const getSyncModels = async (): Promise<SyncModel[]> => {
 
     return syncModels;
 }
+
+export const updateSyncModels = async (syncModels: SyncModel[]) => {
+
+    const action = `syncModels`;
+    await axios.post(`${baseApiRoute}${action}`, syncModels);
+}
