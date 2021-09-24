@@ -1,8 +1,7 @@
 import { Button, Grid, IconButton, TextField, Typography } from "@material-ui/core";
 import React from "react";
 import { Character } from "../../interfaces/Character";
-import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
-import { Edit, EditLocation } from "@material-ui/icons";
+import { Edit } from "@material-ui/icons";
 
 export const NameInput = (props: { character: Character; updateCharacter: (character: Character) => Promise<void> }) => {
 

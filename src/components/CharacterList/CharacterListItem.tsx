@@ -11,11 +11,9 @@ export const CharacterListItem = (props: { character: Character; }) => {
     if (props.character) {
 
         return (
-            <List component="nav" aria-label="secondary mailbox folders">
-                <ListItemLink href={`/characterSheet?id=${props.character.Id}`}>
-                    <ListItemText primary={props.character.Name} />
-                </ListItemLink>
-            </List>
+            <ListItemLink href={`/characterSheet?id=${props.character.Id}`}>
+                <ListItemText primary={props.character.Name} />
+            </ListItemLink>
         );
     } else {
         return (<div></div>);
