@@ -1,0 +1,22 @@
+import { Archetype } from "../interfaces/Archetype";
+import { Character } from "../interfaces/Character";
+
+const attributeCost = 4;
+const skillCost = 2;
+
+export const CalculateXpForArchetype = (character: Character, archetype: Archetype): number => {
+
+    if (archetype.AttributeBonus > 0) {
+        character.XP += archetype.AttributeBonus * attributeCost;
+    }
+
+    if (archetype.SkillBonus > 0) {
+        character.XP += archetype.SkillBonus * skillCost;
+    }
+
+    character.XP -= archetype.XPCost;
+
+    return character.XP;
+}
+
+export const
