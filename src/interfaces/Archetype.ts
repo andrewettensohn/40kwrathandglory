@@ -1,11 +1,11 @@
 export interface Archetype {
-    id: string;
+    Id: string;
     Name: string;
-    xPCost: number;
-    tier: number;
-    archetypeAbility: string;
-    attributeBonus: number;
-    skillBonus: number;
-    influence: number;
-    keywords: string;
+    XPCost: number;
+    Tier: number;
+    ArchetypeAbility: string;
+    AttributeBonus: number;
+    SkillBonus: number;
+    Influence: number;
+    Keywords: string;
 }

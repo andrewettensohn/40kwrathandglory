@@ -24,34 +24,30 @@ export const NameInput = (props: { character: Character; updateCharacter: (chara
         await props.updateCharacter(props.character);
     };
 
-    if (showInput) {
-        return (
-            <Grid container>
-                <Grid item>
-                    <TextField
-                        id="character-name-input"
-                        label="Character Name"
-                        value={characterName}
-                        onChange={handleNameChange}
-                    />
-                </Grid>
-                <Grid item>
-                    <Button variant="contained" onClick={onSaveNameButtonClicked}>Save</Button>
-                </Grid>
+    return showInput
+        ?
+        <Grid container>
+            <Grid item>
+                <TextField
+                    id="character-name-input"
+                    label="Character Name"
+                    value={characterName}
+                    onChange={handleNameChange}
+                />
             </Grid>
-        );
-    } else {
-        return (
-            <Grid container>
-                <Grid item>
-                    <Typography variant="body1">
-                        {characterName}
-                        <IconButton onClick={onChangeNameBtnClicked} >
-                            <Edit />
-                        </IconButton>
-                    </Typography>
-                </Grid>
+            <Grid item>
+                <Button variant="contained" onClick={onSaveNameButtonClicked}>Save</Button>
             </Grid>
-        );
-    }
+        </Grid>
+        :
+        <Grid container>
+            <Grid item>
+                <Typography variant="body1">
+                    {characterName}
+                    <IconButton onClick={onChangeNameBtnClicked} >
+                        <Edit />
+                    </IconButton>
+                </Typography>
+            </Grid>
+        </Grid>
 }
