@@ -16,7 +16,7 @@ export default function App() {
     <div className="App">
       <AppBarHeader />
       <Box mt={10}>
-        <Container maxWidth="xs">
+        <Container>
           <Router>
             <Switch>
               <Route exact path="/">

@@ -52,7 +52,7 @@ export const CharacterSheet = () => {
 
     const [isLoading, setIsLoading] = React.useState(true as boolean);
     const [isActionModalOpen, setIsActionModalOpen] = React.useState(false as boolean);
-    const [selectedActionType, setSelectedActionType] = React.useState(ActionType.Archetype as ActionType);
+    const [selectedActionType, setSelectedActionType] = React.useState(ActionType.Attributes as ActionType);
 
     const [syncModels, setSyncModels] = React.useState([] as SyncModel[]);
     const [character, setCharacter] = React.useState({} as Character);
@@ -131,6 +131,9 @@ export const CharacterSheet = () => {
                             </ListItem>
                             <ListItem>
                                 <Button onClick={() => handleActionTypeSwitch(ActionType.Attributes)}>Attributes</Button>
+                            </ListItem>
+                            <ListItem>
+                                <Button onClick={() => handleActionTypeSwitch(ActionType.Skills)}>Skills</Button>
                             </ListItem>
                             <ListItem>
                                 <Button onClick={() => handleActionTypeSwitch(ActionType.Weapon)}>Weapons</Button>

@@ -9,6 +9,16 @@ export const AttributesAction = (props: {
     updateCharacter: (character: Character) => Promise<void>
 }) => {
 
+    const attributeNames = [
+        "Strength",
+        "Agility",
+        "Toughness",
+        "Intellect",
+        "Willpower",
+        "Fellowship",
+        "Initiative"
+    ] as string[];
+
     const handleAttributeChange = async (attributeName: string, newAttributeValue: number, oldAttributeValue: number): Promise<void> => {
 
         //calculate XP change before assigning new value
@@ -20,49 +30,16 @@ export const AttributesAction = (props: {
 
     return (
         <Grid container spacing={3} justifyContent='center'>
-            <Grid item>
-                <AttributesInput
-                    attributeName="Strength"
-                    attributeValue={props.character.Attributes.Strength}
-                    handleAttributeChange={handleAttributeChange} />
-            </Grid>
-            <Grid item>
-                <AttributesInput
-                    attributeName="Agility"
-                    attributeValue={props.character.Attributes.Agility}
-                    handleAttributeChange={handleAttributeChange} />
-            </Grid>
-            <Grid item>
-                <AttributesInput
-                    attributeName="Toughness"
-                    attributeValue={props.character.Attributes.Toughness}
-                    handleAttributeChange={handleAttributeChange} />
-            </Grid>
-            <Grid item>
-                <AttributesInput
-                    attributeName="Intellect"
-                    attributeValue={props.character.Attributes.Intellect}
-                    handleAttributeChange={handleAttributeChange} />
-            </Grid>
-            <Grid item>
-                <AttributesInput
-                    attributeName="Willpower"
-                    attributeValue={props.character.Attributes.Willpower}
-                    handleAttributeChange={handleAttributeChange} />
-            </Grid>
-            <Grid item>
-                <AttributesInput
-                    attributeName="Fellowship"
-                    attributeValue={props.character.Attributes.Fellowship}
-                    handleAttributeChange={handleAttributeChange} />
-            </Grid>
-            <Grid item>
-                <AttributesInput
-                    attributeName="Initiative"
-                    attributeValue={props.character.Attributes.Initiative}
-                    handleAttributeChange={handleAttributeChange} />
-            </Grid>
-
+            {attributeNames.map(x => {
+                return (
+                    <Grid item>
+                        <AttributesInput
+                            attributeName={x}
+                            attributeValue={props.character.Attributes[x] as number}
+                            handleAttributeChange={handleAttributeChange} />
+                    </Grid>
+                );
+            })}
         </Grid>
     );
 }

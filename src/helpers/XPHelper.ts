@@ -35,3 +35,20 @@ export const calculateXpForAttributeChange = (oldAttributeValue: number, newAttr
 
     return xp;
 }
+
+export const calculateXpForSkillChange = (oldSkillValue: number, newSkillValue: number, xp: number): number => {
+
+    if (oldSkillValue == newSkillValue) return xp;
+
+    const isIncrease = newSkillValue > oldSkillValue as boolean;
+
+    if (isIncrease) {
+        let attributeValueChange = newSkillValue - oldSkillValue;
+        xp -= attributeValueChange * skillCost;
+    } else {
+        let attributeValueChange = oldSkillValue - newSkillValue;
+        xp += attributeValueChange * skillCost;
+    }
+
+    return xp;
+}

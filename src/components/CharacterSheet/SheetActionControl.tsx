@@ -8,6 +8,7 @@ import { ModelType } from "../../interfaces/Enumerations/ModelType";
 import { SyncModel } from "../../interfaces/SyncModel";
 import { ArchetypeAction } from "./CharacterSheetActions/ArchetypeAction";
 import { AttributesAction } from "./CharacterSheetActions/AttributesAction";
+import { SkillsAction } from "./CharacterSheetActions/SkillsAction";
 
 export const SheetActionControl = (props: {
     character: Character,
@@ -35,6 +36,10 @@ export const SheetActionControl = (props: {
     } else if (actionType == ActionType.Weapon) {
         return (
             <AttributesAction character={props.character} updateCharacter={props.updateCharacter} />
+        );
+    } else if (actionType == ActionType.Skills) {
+        return (
+            <SkillsAction character={props.character} updateCharacter={props.updateCharacter} />
         );
     } else {
         return (<div></div>)
