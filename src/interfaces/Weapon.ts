@@ -1,13 +1,13 @@
 export interface Weapon {
-    id: string;
-    name: string;
-    description: string;
-    damage: number;
-    eD: number;
-    aP: number;
-    salvo: string;
-    range: string;
-    traits: string;
-    isMelee: boolean;
-    isEquipped: boolean;
+    Id: string;
+    Name: string;
+    Description: string;
+    Damage: number;
+    ED: number;
+    AP: number;
+    Salvo: string;
+    Range: string;
+    Traits: string;
+    IsMelee: boolean;
+    IsEquipped: boolean;
 }

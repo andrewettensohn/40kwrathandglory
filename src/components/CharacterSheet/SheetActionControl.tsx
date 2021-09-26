@@ -9,6 +9,7 @@ import { SyncModel } from "../../interfaces/SyncModel";
 import { ArchetypeAction } from "./CharacterSheetActions/ArchetypeAction";
 import { AttributesAction } from "./CharacterSheetActions/AttributesAction";
 import { SkillsAction } from "./CharacterSheetActions/SkillsAction";
+import { WeaponAction } from "./CharacterSheetActions/WeaponAction";
 
 export const SheetActionControl = (props: {
     character: Character,
@@ -35,7 +36,10 @@ export const SheetActionControl = (props: {
         );
     } else if (actionType == ActionType.Weapon) {
         return (
-            <AttributesAction character={props.character} updateCharacter={props.updateCharacter} />
+            <WeaponAction
+                weaponsList={getDeserializedModelsForModelType(props.syncModels, ModelType.Weapon)}
+                character={props.character}
+                updateCharacter={props.updateCharacter} />
         );
     } else if (actionType == ActionType.Skills) {
         return (
