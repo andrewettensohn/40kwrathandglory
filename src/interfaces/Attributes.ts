@@ -1,4 +1,5 @@
 export interface Attributes {
+    [key: string]: string | number;
     Strength: number;
     Agility: number;
     Toughness: number;

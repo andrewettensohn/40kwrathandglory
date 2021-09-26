@@ -10,6 +10,7 @@ import { NameInput } from "./NameInput";
 import { Casino } from "@material-ui/icons";
 import { SheetActionControl } from "./SheetActionControl";
 import { ActionType } from "../../interfaces/Enumerations/ActionType";
+import { CharacterHeader } from "./CharacterHeader";
 
 const useStyles = makeStyles({
     sheetHeader: {
@@ -30,7 +31,7 @@ const useStyles = makeStyles({
         justifyContent: 'center',
     },
     actionMenu: {
-        backgroundColor: "#1d1d1d",
+        //backgroundColor: "#1d1d1d",
         margin: 16,
         padding: 20
     },
@@ -46,20 +47,30 @@ const useStyles = makeStyles({
 });
 
 export const CharacterSheet = () => {
-    const [syncModels, setSyncModels] = React.useState([] as SyncModel[]);
-    const [character, setCharacter] = React.useState({} as Character);
+
+    const [rerender, setRerender] = React.useState(false);
+
     const [isLoading, setIsLoading] = React.useState(true as boolean);
     const [isActionModalOpen, setIsActionModalOpen] = React.useState(false as boolean);
     const [selectedActionType, setSelectedActionType] = React.useState(ActionType.Archetype as ActionType);
+
+    const [syncModels, setSyncModels] = React.useState([] as SyncModel[]);
+    const [character, setCharacter] = React.useState({} as Character);
     const classes = useStyles();
 
     let params = new URLSearchParams(document.location.search.substring(1));
     let id = params.get("id") as string;
 
     useEffect(() => {
-        setCharacterSheetData()
-            .catch((err) => console.log(err))
-            .finally(() => setIsLoading(false))
+
+        if (syncModels?.length <= 0) {
+            setCharacterSheetData()
+                .catch((err) => console.log(err))
+                .finally(() => setIsLoading(false))
+        }
+
+        setRerender(!rerender);
+
     }, []);
 
     const setCharacterSheetData = async () => {
@@ -67,15 +78,17 @@ export const CharacterSheet = () => {
             .then((models) => {
                 setSyncModels(models)
                 setCharacter(getCharacterFromSyncModelListForId(models, id));
-            })
+            });
     }
 
-    const setAndUpdateCharacter = async (character: Character) => {
-        setCharacter(character);
-        await updateCharacterAtSyncAPI(character);
+    const setAndUpdateCharacter = async (updatedCharacter: Character) => {
+        setCharacter(updatedCharacter);
+        await updateCharacterAtSyncAPI(updatedCharacter);
+        setRerender(!rerender);
     }
 
     const toggleModal = () => setIsActionModalOpen(!isActionModalOpen);
+
     const handleActionTypeSwitch = (actionType: ActionType) => {
         setSelectedActionType(actionType);
         toggleModal();
@@ -88,54 +101,7 @@ export const CharacterSheet = () => {
         <div>
             <Grid container>
                 <Grid item xs={12}>
-                    <Paper className={classes.sheetHeader}>
-                        <Grid justifyContent="space-between" container>
-                            <Grid item>
-                                <NameInput character={character} updateCharacter={setAndUpdateCharacter} />
-                            </Grid>
-                            <Grid item>
-                                <TextField
-                                    id="outlined-number"
-                                    label="Rank"
-                                    type="number"
-                                    className={classes.numberInput}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    variant="outlined"
-                                    value={character.Rank}
-                                />
-                            </Grid>
-                        </Grid>
-                        <Grid justifyContent="space-between" container spacing={3} className={classes.mt5}>
-                            <Grid item>
-                                <TextField
-                                    id="outlined-number"
-                                    label="XP"
-                                    type="number"
-                                    className={classes.numberInput}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    variant="outlined"
-                                    value={character.XP}
-                                />
-                            </Grid>
-                            <Grid item>
-                                <TextField
-                                    id="outlined-number"
-                                    label="Tier"
-                                    type="number"
-                                    className={classes.numberInput}
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    variant="outlined"
-                                    value={character.Tier}
-                                />
-                            </Grid>
-                        </Grid>
-                    </Paper>
+                    <CharacterHeader character={character} updateCharacter={setAndUpdateCharacter} />
                 </Grid>
                 <Grid item xs={12} className={classes.mt10}>
                     <Grid item>
@@ -165,6 +131,9 @@ export const CharacterSheet = () => {
                             </ListItem>
                             <ListItem>
                                 <Button onClick={() => handleActionTypeSwitch(ActionType.Attributes)}>Attributes</Button>
+                            </ListItem>
+                            <ListItem>
+                                <Button onClick={() => handleActionTypeSwitch(ActionType.Weapon)}>Weapons</Button>
                             </ListItem>
                         </List>
                     </Grid>

@@ -1,9 +1,9 @@
 import { Button, Grid, IconButton, List, ListItem, TextField, Typography } from "@material-ui/core";
 import React, { useEffect } from "react";
-import { Character } from "../../interfaces/Character";
+import { Character } from "../../../interfaces/Character";
 import { Edit } from "@material-ui/icons";
-import { Archetype } from "../../interfaces/Archetype";
-import { CalculateXpForArchetype } from "../../helpers/XPHelper";
+import { Archetype } from "../../../interfaces/Archetype";
+import { CalculateXpForArchetype } from "../../../helpers/XPHelper";
 
 export const ArchetypeAction = (props: {
     character: Character,
