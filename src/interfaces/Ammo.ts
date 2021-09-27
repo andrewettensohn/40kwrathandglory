@@ -1,11 +1,12 @@
 export interface Ammo {
-    projectile: number;
-    las: number;
-    flame: number;
-    bolt: number;
-    plasma: number;
-    melta: number;
-    shuriken: number;
-    grenade: number;
-    missle: number;
+    [key: string]: string | number;
+    Projectile: number;
+    Las: number;
+    Flame: number;
+    Bolt: number;
+    Plasma: number;
+    Melta: number;
+    Shuriken: number;
+    Grenade: number;
+    Missle: number;
 }

@@ -6,6 +6,7 @@ import { Character } from "../../interfaces/Character";
 import { ActionType } from "../../interfaces/Enumerations/ActionType";
 import { ModelType } from "../../interfaces/Enumerations/ModelType";
 import { SyncModel } from "../../interfaces/SyncModel";
+import { AmmoAction } from "./CharacterSheetActions/AmmoAction";
 import { ArchetypeAction } from "./CharacterSheetActions/ArchetypeAction";
 import { AttributesAction } from "./CharacterSheetActions/AttributesAction";
 import { SkillsAction } from "./CharacterSheetActions/SkillsAction";
@@ -44,6 +45,10 @@ export const SheetActionControl = (props: {
     } else if (actionType == ActionType.Skills) {
         return (
             <SkillsAction character={props.character} updateCharacter={props.updateCharacter} />
+        );
+    } else if (actionType == ActionType.Ammo) {
+        return (
+            <AmmoAction character={props.character} updateCharacter={props.updateCharacter} />
         );
     } else {
         return (<div></div>)
