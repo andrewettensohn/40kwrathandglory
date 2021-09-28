@@ -17,25 +17,23 @@ export const WeaponAction = ({ weaponsList, character, updateCharacter }: Weapon
 
     const onManageWeaponsClicked = () => setShowInput(!showInput);
 
-    const onAddToInventoryClicked = async (id: string): Promise<void> => {
-        const newWeapon = weaponsList.find(x => x.Id == id);
+    const onAddToInventoryClicked = async (weapon: Weapon): Promise<void> => {
 
-        if (newWeapon !== undefined) {
-            const update = character;
-            update.Weapons.push(newWeapon);
-            await updateCharacter(update);
-        }
+        const update = character;
+        update.Weapons.push(weapon);
+        await updateCharacter(update);
+
     }
 
-    const onRemoveFromInventoryClicked = async (id: string): Promise<void> => {
+    const onRemoveFromInventoryClicked = async (weapon: Weapon): Promise<void> => {
         const update = character;
-        update.Weapons = update.Weapons.filter(x => x.Id != id);
+        update.Weapons = update.Weapons.filter(x => x.Id != weapon.Id);
         await updateCharacter(update);
     }
 
-    const onEquipChangeClicked = async (id: string, isEquipped: boolean): Promise<void> => {
+    const onEquipChangeClicked = async (weapon: Weapon, isEquipped: boolean): Promise<void> => {
         const update = character;
-        const weaponToEquip = update.Weapons.find(x => x.Id == id);
+        const weaponToEquip = update.Weapons.find(x => x.Id == weapon.Id);
 
         if (weaponToEquip !== undefined) {
             weaponToEquip.IsEquipped = isEquipped;
@@ -61,7 +59,7 @@ export const WeaponAction = ({ weaponsList, character, updateCharacter }: Weapon
                             <ListItem key={x.Id}>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onRemoveFromInventoryClicked(x.Id)}>Remove From Inventory</Button>
+                                        <Button variant="contained" onClick={() => onRemoveFromInventoryClicked(x)}>Remove From Inventory</Button>
                                     </Grid>
                                     <WeaponStatBlock weapon={x} character={character} />
                                 </Grid>
@@ -70,7 +68,7 @@ export const WeaponAction = ({ weaponsList, character, updateCharacter }: Weapon
                             <ListItem key={x.Id}>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onAddToInventoryClicked(x.Id)}>Add to Inventory</Button>
+                                        <Button variant="contained" onClick={() => onAddToInventoryClicked(x)}>Add to Inventory</Button>
                                     </Grid>
                                     <WeaponStatBlock weapon={x} character={character} />
                                 </Grid>
@@ -96,7 +94,7 @@ export const WeaponAction = ({ weaponsList, character, updateCharacter }: Weapon
                             <ListItem key={x.Id}>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onEquipChangeClicked(x.Id, false)}>Unequip</Button>
+                                        <Button variant="contained" onClick={() => onEquipChangeClicked(x, false)}>Unequip</Button>
                                     </Grid>
                                     <WeaponStatBlock weapon={x} character={character} />
                                 </Grid>
@@ -105,7 +103,7 @@ export const WeaponAction = ({ weaponsList, character, updateCharacter }: Weapon
                             <ListItem key={x.Id}>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onEquipChangeClicked(x.Id, true)}>Equip</Button>
+                                        <Button variant="contained" onClick={() => onEquipChangeClicked(x, true)}>Equip</Button>
                                     </Grid>
                                     <WeaponStatBlock weapon={x} character={character} />
                                 </Grid>

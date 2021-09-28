@@ -9,7 +9,9 @@ import { SyncModel } from "../../interfaces/SyncModel";
 import { AmmoAction } from "./CharacterSheetActions/AmmoAction";
 import { ArchetypeAction } from "./CharacterSheetActions/ArchetypeAction";
 import { AttributesAction } from "./CharacterSheetActions/AttributesAction";
+import { QuestList } from "./CharacterSheetActions/Quests";
 import { SkillsAction } from "./CharacterSheetActions/SkillsAction";
+import { TalentAction } from "./CharacterSheetActions/TalentAction";
 import { WeaponAction } from "./CharacterSheetActions/WeaponAction";
 
 interface SheetActionControlProps {
@@ -50,7 +52,16 @@ export const SheetActionControl = ({ character, actionType, syncModels, updateCh
         return (
             <AmmoAction character={character} updateCharacter={updateCharacter} />
         );
+    } else if (actionType == ActionType.Talent) {
+        return (
+            <TalentAction character={character} updateCharacter={updateCharacter} talentList={getDeserializedModelsForModelType(syncModels, ModelType.Talent)} />
+        );
+    } else if (actionType == ActionType.Quest) {
+        return (
+            <QuestList questList={getDeserializedModelsForModelType(syncModels, ModelType.Quest)} />
+        );
     } else {
+
         return (<div></div>)
     }
 }

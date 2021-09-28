@@ -1,7 +1,7 @@
 export interface Talent {
-    id: string;
-    name: string;
-    description: string;
-    requirements: string;
-    xPCost: number;
+    Id: string;
+    Name: string;
+    Description: string;
+    Requirements: string;
+    XPCost: number;
 }

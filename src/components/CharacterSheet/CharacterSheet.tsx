@@ -141,6 +141,12 @@ export const CharacterSheet = () => {
                             <ListItem>
                                 <Button onClick={() => handleActionTypeSwitch(ActionType.Ammo)}>Ammo</Button>
                             </ListItem>
+                            <ListItem>
+                                <Button onClick={() => handleActionTypeSwitch(ActionType.Talent)}>Talent</Button>
+                            </ListItem>
+                            <ListItem>
+                                <Button onClick={() => handleActionTypeSwitch(ActionType.Quest)}>Quests</Button>
+                            </ListItem>
                         </List>
                     </Grid>
                 </Grid>

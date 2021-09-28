@@ -4,10 +4,14 @@ import { BallisticSkillCheck, WeaponSkillCheck } from "../../../helpers/SkillChe
 import { Character } from "../../../interfaces/Character";
 import { Weapon } from "../../../interfaces/Weapon"
 
-export const WeaponStatBlock = (props: { weapon: Weapon, character: Character }) => {
+interface WeaponStatBlockProps {
+    weapon: Weapon,
+    character: Character
+}
 
-    const weapon = props.weapon;
-    const hit = props.weapon.IsMelee ? WeaponSkillCheck(props.character) : BallisticSkillCheck(props.character);
+export const WeaponStatBlock = ({ weapon, character }: WeaponStatBlockProps) => {
+
+    const hit = weapon.IsMelee ? WeaponSkillCheck(character) : BallisticSkillCheck(character);
 
     return (
         <Grid container >
