@@ -6,13 +6,17 @@ function ListItemLink(props: ListItemProps<'a', { button?: true }>) {
     return <ListItem button component="a" {...props} />;
 }
 
-export const CharacterListItem = (props: { character: Character; }) => {
+interface CharacterListItemProps {
+    character: Character
+}
 
-    if (props.character) {
+export const CharacterListItem = ({ character }: CharacterListItemProps) => {
+
+    if (character) {
 
         return (
-            <ListItemLink href={`/characterSheet?id=${props.character.Id}`}>
-                <ListItemText primary={props.character.Name} />
+            <ListItemLink href={`/characterSheet?id=${character.Id}`}>
+                <ListItemText primary={character.Name} />
             </ListItemLink>
         );
     } else {

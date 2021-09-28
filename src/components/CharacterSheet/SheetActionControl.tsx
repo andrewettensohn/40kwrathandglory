@@ -12,43 +12,43 @@ import { AttributesAction } from "./CharacterSheetActions/AttributesAction";
 import { SkillsAction } from "./CharacterSheetActions/SkillsAction";
 import { WeaponAction } from "./CharacterSheetActions/WeaponAction";
 
-export const SheetActionControl = (props: {
+interface SheetActionControlProps {
     character: Character,
     actionType: ActionType,
     syncModels: SyncModel[],
     updateCharacter: (character: Character) => Promise<void>
-}) => {
+}
 
-    const actionType = props.actionType;
+export const SheetActionControl = ({ character, actionType, syncModels, updateCharacter }: SheetActionControlProps) => {
 
     if (actionType == ActionType.Archetype) {
 
         return (
             <ArchetypeAction
-                character={props.character}
-                updateCharacter={props.updateCharacter}
-                archetypeList={getDeserializedModelsForModelType(props.syncModels, ModelType.Archetype)} />
+                character={character}
+                updateCharacter={updateCharacter}
+                archetypeList={getDeserializedModelsForModelType(syncModels, ModelType.Archetype)} />
         );
     } else if (actionType == ActionType.Attributes) {
         return (
             <AttributesAction
-                character={props.character}
-                updateCharacter={props.updateCharacter} />
+                character={character}
+                updateCharacter={updateCharacter} />
         );
     } else if (actionType == ActionType.Weapon) {
         return (
             <WeaponAction
-                weaponsList={getDeserializedModelsForModelType(props.syncModels, ModelType.Weapon)}
-                character={props.character}
-                updateCharacter={props.updateCharacter} />
+                weaponsList={getDeserializedModelsForModelType(syncModels, ModelType.Weapon)}
+                character={character}
+                updateCharacter={updateCharacter} />
         );
     } else if (actionType == ActionType.Skills) {
         return (
-            <SkillsAction character={props.character} updateCharacter={props.updateCharacter} />
+            <SkillsAction character={character} updateCharacter={updateCharacter} />
         );
     } else if (actionType == ActionType.Ammo) {
         return (
-            <AmmoAction character={props.character} updateCharacter={props.updateCharacter} />
+            <AmmoAction character={character} updateCharacter={updateCharacter} />
         );
     } else {
         return (<div></div>)

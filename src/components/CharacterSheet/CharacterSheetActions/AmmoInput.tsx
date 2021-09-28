@@ -8,28 +8,30 @@ const useStyles = makeStyles({
     },
 });
 
-export const AmmoInput = (props: {
+interface AmmoInputProps {
     ammoName: string,
-    ammoValue: number,
     character: Character,
     updateCharacter: (character: Character) => Promise<void>
-}): JSX.Element => {
+}
 
-    const [value, setValue] = React.useState(props.character.Ammo[props.ammoName] as number);
+export const AmmoInput = ({ ammoName, character, updateCharacter }: AmmoInputProps): JSX.Element => {
+
+    const [value, setValue] = React.useState(character.Ammo[ammoName]);
     const classes = useStyles();
 
     const onValueChanged = async (event: React.ChangeEvent<{ value: unknown }>) => {
         const newValue = event.target.value as number;
+        const update = character;
 
-        props.character.Ammo[props.ammoName] = newValue;
+        update.Ammo[ammoName] = newValue;
         setValue(newValue);
-        await props.updateCharacter(props.character);
+        await updateCharacter(update);
     }
 
     return (
         <TextField
             id="outlined-number"
-            label={props.ammoName}
+            label={ammoName}
             type="number"
             InputLabelProps={{
                 shrink: true,

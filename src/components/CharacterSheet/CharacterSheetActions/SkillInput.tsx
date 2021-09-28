@@ -1,5 +1,6 @@
 import { Grid, makeStyles, TextField } from "@material-ui/core";
 import React, { } from "react";
+import { calculateXpForSkillChange } from "../../../helpers/XPHelper";
 import { Character } from "../../../interfaces/Character";
 
 const useStyles = makeStyles({
@@ -8,33 +9,44 @@ const useStyles = makeStyles({
     },
 });
 
-export const SkillInput = (props: {
+interface SkillInputProps {
     skillName: string,
-    skillValue: number,
-    handleSkillChange: (skillName: string, newSkillValue: number, oldSkillValue: number) => Promise<void>
-}) => {
+    character: Character,
+    updateCharacter: (character: Character) => Promise<void>
+}
 
-    const [attributeValue, setAttribute] = React.useState(props.skillValue as number)
+export const SkillInput = ({ skillName, character, updateCharacter }: SkillInputProps) => {
+
+    const [skillValue, setSkill] = React.useState(character.Skills[skillName])
     const classes = useStyles();
 
     const onValueChanged = async (event: React.ChangeEvent<{ value: unknown }>) => {
-        const oldValue = attributeValue;
+        const oldValue = skillValue as number;
         const newValue = event.target.value as number;
 
-        setAttribute(newValue);
-        await props.handleSkillChange(props.skillName, newValue, oldValue)
+        setSkill(newValue);
+        await updateCharacterForSkillChange(newValue, oldValue)
+    }
+
+    const updateCharacterForSkillChange = async (newSkillValue: number, oldSkillValue: number): Promise<void> => {
+        const update = character;
+        //calculate XP change before assigning new value
+        update.XP = calculateXpForSkillChange(oldSkillValue, newSkillValue, update.XP);
+
+        update.Skills[skillName] = newSkillValue;
+        await updateCharacter(update);
     }
 
     return (
         <TextField
             id="outlined-number"
-            label={props.skillName}
+            label={skillName}
             type="number"
             InputLabelProps={{
                 shrink: true,
             }}
             variant="outlined"
-            value={attributeValue}
+            value={skillValue}
             onChange={onValueChanged}
             className={classes.numberInput}
         />

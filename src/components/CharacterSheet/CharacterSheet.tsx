@@ -50,9 +50,9 @@ export const CharacterSheet = () => {
 
     const [rerender, setRerender] = React.useState(false);
 
-    const [isLoading, setIsLoading] = React.useState(true as boolean);
-    const [isActionModalOpen, setIsActionModalOpen] = React.useState(false as boolean);
-    const [selectedActionType, setSelectedActionType] = React.useState(ActionType.Attributes as ActionType);
+    const [isLoading, setIsLoading] = React.useState(true);
+    const [isActionModalOpen, setIsActionModalOpen] = React.useState(false);
+    const [selectedActionType, setSelectedActionType] = React.useState(ActionType.Attributes);
 
     const [syncModels, setSyncModels] = React.useState([] as SyncModel[]);
     const [character, setCharacter] = React.useState({} as Character);

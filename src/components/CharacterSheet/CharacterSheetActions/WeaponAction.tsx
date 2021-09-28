@@ -5,42 +5,43 @@ import { Character } from "../../../interfaces/Character";
 import { Weapon } from "../../../interfaces/Weapon";
 import { WeaponStatBlock } from "./WeaponStatBlock";
 
-
-export const WeaponAction = (props: {
+interface WeaponActionProps {
     weaponsList: Weapon[],
     character: Character,
     updateCharacter: (character: Character) => Promise<void>
-}): JSX.Element => {
+}
 
-    const [showInput, setShowInput] = React.useState(false as boolean);
+export const WeaponAction = ({ weaponsList, character, updateCharacter }: WeaponActionProps): JSX.Element => {
+
+    const [showInput, setShowInput] = React.useState(false);
 
     const onManageWeaponsClicked = () => setShowInput(!showInput);
 
     const onAddToInventoryClicked = async (id: string): Promise<void> => {
-        const newWeapon = props.weaponsList.find(x => x.Id == id);
+        const newWeapon = weaponsList.find(x => x.Id == id);
 
         if (newWeapon !== undefined) {
-            props.character.Weapons.push(newWeapon);
-            await props.updateCharacter(props.character);
+            const update = character;
+            update.Weapons.push(newWeapon);
+            await updateCharacter(update);
         }
     }
 
     const onRemoveFromInventoryClicked = async (id: string): Promise<void> => {
-
-        props.character.Weapons = props.character.Weapons.filter(x => x.Id != id);
-        await props.updateCharacter(props.character);
+        const update = character;
+        update.Weapons = update.Weapons.filter(x => x.Id != id);
+        await updateCharacter(update);
     }
 
     const onEquipChangeClicked = async (id: string, isEquipped: boolean): Promise<void> => {
-
-        const weaponToEquip = props.character.Weapons.find(x => x.Id == id);
+        const update = character;
+        const weaponToEquip = update.Weapons.find(x => x.Id == id);
 
         if (weaponToEquip !== undefined) {
             weaponToEquip.IsEquipped = isEquipped;
-            await props.updateCharacter(props.character);
+            await updateCharacter(update);
         }
     }
-
 
     return showInput
         ?
@@ -54,15 +55,15 @@ export const WeaponAction = (props: {
             </Grid>
             <Grid item>
                 <List component="nav">
-                    {props.weaponsList.map(x => {
-                        return props.character.Weapons.some(y => y.Id == x.Id)
+                    {weaponsList.map(x => {
+                        return character.Weapons.some(y => y.Id == x.Id)
                             ?
                             <ListItem key={x.Id}>
                                 <Grid container>
                                     <Grid item xs={12}>
                                         <Button variant="contained" onClick={() => onRemoveFromInventoryClicked(x.Id)}>Remove From Inventory</Button>
                                     </Grid>
-                                    <WeaponStatBlock weapon={x} character={props.character} />
+                                    <WeaponStatBlock weapon={x} character={character} />
                                 </Grid>
                             </ListItem>
                             :
@@ -71,7 +72,7 @@ export const WeaponAction = (props: {
                                     <Grid item xs={12}>
                                         <Button variant="contained" onClick={() => onAddToInventoryClicked(x.Id)}>Add to Inventory</Button>
                                     </Grid>
-                                    <WeaponStatBlock weapon={x} character={props.character} />
+                                    <WeaponStatBlock weapon={x} character={character} />
                                 </Grid>
                             </ListItem>
                     })}
@@ -89,7 +90,7 @@ export const WeaponAction = (props: {
             </Grid>
             <Grid item>
                 <List component="nav">
-                    {props.character.Weapons.map(x => {
+                    {character.Weapons.map(x => {
                         return x.IsEquipped
                             ?
                             <ListItem key={x.Id}>
@@ -97,7 +98,7 @@ export const WeaponAction = (props: {
                                     <Grid item xs={12}>
                                         <Button variant="contained" onClick={() => onEquipChangeClicked(x.Id, false)}>Unequip</Button>
                                     </Grid>
-                                    <WeaponStatBlock weapon={x} character={props.character} />
+                                    <WeaponStatBlock weapon={x} character={character} />
                                 </Grid>
                             </ListItem>
                             :
@@ -106,7 +107,7 @@ export const WeaponAction = (props: {
                                     <Grid item xs={12}>
                                         <Button variant="contained" onClick={() => onEquipChangeClicked(x.Id, true)}>Equip</Button>
                                     </Grid>
-                                    <WeaponStatBlock weapon={x} character={props.character} />
+                                    <WeaponStatBlock weapon={x} character={character} />
                                 </Grid>
                             </ListItem>
                     })}

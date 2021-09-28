@@ -21,52 +21,57 @@ const useStyles = makeStyles({
     },
 });
 
-export const CharacterHeader = (props: {
+interface CharacterHeaderProps {
     character: Character,
     updateCharacter: (character: Character) => Promise<void>
-}) => {
+}
 
-    const [xp, setXp] = React.useState(props.character.XP as number);
-    const [tier, setTier] = React.useState(props.character.Tier as number);
-    const [rank, setRank] = React.useState(props.character.Rank as number);
+export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderProps) => {
+
+    const [xp, setXp] = React.useState(character.XP);
+    const [tier, setTier] = React.useState(character.Tier);
+    const [rank, setRank] = React.useState(character.Rank);
     const classes = useStyles();
 
     const onXpChange = async (event: React.ChangeEvent<{ value: unknown }>) => {
         const value = event.target.value as number;
+        const update = character;
 
-        props.character.XP = value;
+        update.XP = value;
         setXp(value);
 
-        await props.updateCharacter(props.character);
+        await updateCharacter(update);
     }
 
     const onRankChange = async (event: React.ChangeEvent<{ value: unknown }>) => {
         const value = event.target.value as number;
+        const update = character;
 
-        props.character.Rank = value;
+        update.Rank = value;
         setRank(value);
 
-        await props.updateCharacter(props.character);
+        await updateCharacter(update);
     }
 
     const onTierChange = async (event: React.ChangeEvent<{ value: unknown }>) => {
         const value = event.target.value as number;
+        const update = character;
 
-        props.character.Tier = value;
+        update.Tier = value;
         setTier(value);
 
-        await props.updateCharacter(props.character);
+        await updateCharacter(update);
     }
 
     useEffect(() => {
-        setXp(props.character.XP);
-    }, [props]);
+        setXp(character.XP);
+    }, [character.XP]);
 
     return (
         <Paper className={classes.sheetHeader}>
             <Grid justifyContent="space-between" container>
                 <Grid item>
-                    <NameInput character={props.character} updateCharacter={props.updateCharacter} />
+                    <NameInput character={character} updateCharacter={updateCharacter} />
                 </Grid>
                 <Grid item>
                     <TextField

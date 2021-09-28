@@ -4,10 +4,12 @@ import { calculateXpForAttributeChange } from "../../../helpers/XPHelper";
 import { Character } from "../../../interfaces/Character";
 import { AttributesInput } from "./AttributeInput";
 
-export const AttributesAction = (props: {
-    character: Character,
+interface AttributesActionProps {
+    character: Character;
     updateCharacter: (character: Character) => Promise<void>
-}) => {
+}
+
+export const AttributesAction = ({ character, updateCharacter }: AttributesActionProps) => {
 
     const attributeNames = [
         "Strength",
@@ -17,26 +19,17 @@ export const AttributesAction = (props: {
         "Willpower",
         "Fellowship",
         "Initiative"
-    ] as string[];
-
-    const handleAttributeChange = async (attributeName: string, newAttributeValue: number, oldAttributeValue: number): Promise<void> => {
-
-        //calculate XP change before assigning new value
-        props.character.XP = calculateXpForAttributeChange(oldAttributeValue, newAttributeValue, props.character.XP);
-
-        props.character.Attributes[attributeName] = newAttributeValue;
-        await props.updateCharacter(props.character);
-    }
+    ];
 
     return (
         <Grid container spacing={3} justifyContent='center'>
             {attributeNames.map(x => {
                 return (
-                    <Grid item>
+                    <Grid item key={x}>
                         <AttributesInput
                             attributeName={x}
-                            attributeValue={props.character.Attributes[x] as number}
-                            handleAttributeChange={handleAttributeChange} />
+                            character={character}
+                            updateCharacter={updateCharacter} />
                     </Grid>
                 );
             })}

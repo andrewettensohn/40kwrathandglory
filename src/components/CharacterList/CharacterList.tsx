@@ -3,15 +3,19 @@ import React from "react";
 import { Character } from "../../interfaces/Character";
 import { CharacterListItem } from "./CharacterListItem";
 
-export const CharacterList = (props: { characters: Character[]; }) => {
+interface CharacterListProps {
+    characters: Character[]
+}
 
-    if (props.characters.length > 0) {
+export const CharacterList = ({ characters }: CharacterListProps) => {
+
+    if (characters.length > 0) {
 
         return (
             <Grid container justifyContent="center">
                 <Grid item>
                     <List component="nav">
-                        {props.characters.map(character => {
+                        {characters.map(character => {
                             return (
                                 <CharacterListItem character={character} key={character.Id} />
                             )

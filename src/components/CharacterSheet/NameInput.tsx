@@ -3,10 +3,15 @@ import React from "react";
 import { Character } from "../../interfaces/Character";
 import { Edit } from "@material-ui/icons";
 
-export const NameInput = (props: { character: Character; updateCharacter: (character: Character) => Promise<void> }) => {
+interface NameInputProps {
+    character: Character,
+    updateCharacter: (character: Character) => Promise<void>
+}
 
-    const [characterName, setCharacterName] = React.useState(props.character.Name as string);
-    const [showInput, setShowInput] = React.useState(false as boolean);
+export const NameInput = ({ character, updateCharacter }: NameInputProps) => {
+
+    const [characterName, setCharacterName] = React.useState(character.Name);
+    const [showInput, setShowInput] = React.useState(false);
 
     const onChangeNameBtnClicked = () => {
         setShowInput(!showInput);
@@ -19,9 +24,10 @@ export const NameInput = (props: { character: Character; updateCharacter: (chara
 
     const onSaveNameButtonClicked = async () => {
         setShowInput(!showInput);
+        const update = character;
 
-        props.character.Name = characterName;
-        await props.updateCharacter(props.character);
+        update.Name = characterName;
+        await updateCharacter(update);
     };
 
     return showInput

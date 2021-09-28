@@ -5,15 +5,17 @@ import { Edit } from "@material-ui/icons";
 import { Archetype } from "../../../interfaces/Archetype";
 import { CalculateXpForArchetype } from "../../../helpers/XPHelper";
 
-export const ArchetypeAction = (props: {
+interface ArchetypeActionProps {
     character: Character,
     archetypeList: Archetype[],
     updateCharacter: (character: Character) => Promise<void>
-}) => {
-    const [showInput, setShowInput] = React.useState(true as boolean);
+}
+
+export const ArchetypeAction = ({ character, archetypeList, updateCharacter }: ArchetypeActionProps) => {
+    const [showInput, setShowInput] = React.useState(true);
 
     useEffect(() => {
-        const characterHasArchetype = props.character.Archetype?.Id?.length > 0;
+        const characterHasArchetype = character.Archetype?.Id?.length > 0;
         setShowInput(!characterHasArchetype);
     }, []);
 
@@ -21,12 +23,13 @@ export const ArchetypeAction = (props: {
 
         setShowInput(!showInput);
 
-        const selectedArchetype = props.archetypeList.find(x => x.Id == id) as Archetype | undefined
+        const selectedArchetype = archetypeList.find(x => x.Id == id) as Archetype | undefined
 
         if (selectedArchetype !== undefined) {
-            props.character.Archetype = selectedArchetype;
-            props.character.XP = CalculateXpForArchetype(props.character, selectedArchetype);
-            await props.updateCharacter(props.character);
+            const update = character;
+            update.Archetype = selectedArchetype;
+            update.XP = CalculateXpForArchetype(update, selectedArchetype);
+            await updateCharacter(update);
         }
     }
 
@@ -34,7 +37,7 @@ export const ArchetypeAction = (props: {
         ?
         <Grid container>
             <List component="nav">
-                {props.archetypeList.map(x => {
+                {archetypeList.map(x => {
                     return (
                         <ListItem key={x.Id}>
                             <Button onClick={() => onArchetypeSelected(x.Id)}>{x.Name}</Button>
@@ -46,7 +49,7 @@ export const ArchetypeAction = (props: {
         :
         <Grid container>
             <Grid item>
-                {props.character.Archetype.Name}
+                {character.Archetype.Name}
             </Grid>
         </Grid>
 }

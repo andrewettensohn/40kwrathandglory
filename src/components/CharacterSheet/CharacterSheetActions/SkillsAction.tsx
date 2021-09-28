@@ -5,10 +5,12 @@ import { Character } from "../../../interfaces/Character";
 import { AttributesInput } from "./AttributeInput";
 import { SkillInput } from "./SkillInput";
 
-export const SkillsAction = (props: {
+interface SkillsActionProps {
     character: Character,
     updateCharacter: (character: Character) => Promise<void>
-}) => {
+}
+
+export const SkillsAction = ({ character, updateCharacter }: SkillsActionProps) => {
 
     const skillNames = ["Athletics",
         "Awareness",
@@ -27,16 +29,7 @@ export const SkillsAction = (props: {
         "Survival",
         "Tech",
         "Weapon"
-    ] as string[];
-
-    const handleSkillChange = async (skillName: string, newSkillValue: number, oldSkillValue: number): Promise<void> => {
-
-        //calculate XP change before assigning new value
-        props.character.XP = calculateXpForSkillChange(oldSkillValue, newSkillValue, props.character.XP);
-
-        props.character.Skills[skillName] = newSkillValue;
-        await props.updateCharacter(props.character);
-    }
+    ];
 
     return (
         <Grid container justifyContent='space-between' spacing={3}>
@@ -45,8 +38,8 @@ export const SkillsAction = (props: {
                     <Grid item key={x}>
                         <SkillInput
                             skillName={x}
-                            skillValue={props.character.Skills[x] as number}
-                            handleSkillChange={handleSkillChange} />
+                            character={character}
+                            updateCharacter={updateCharacter} />
                     </Grid>
                 )
             })}
