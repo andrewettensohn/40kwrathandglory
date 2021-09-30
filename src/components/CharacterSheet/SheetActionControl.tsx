@@ -12,6 +12,7 @@ import { AttributesAction } from "./CharacterSheetActions/AttributesAction";
 import { CombatAction } from "./CharacterSheetActions/CombatAction";
 import { QuestList } from "./CharacterSheetActions/Quests";
 import { SkillsAction } from "./CharacterSheetActions/SkillsAction";
+import { SkillsCheckAction } from "./CharacterSheetActions/SkillsCheckAction";
 import { TalentAction } from "./CharacterSheetActions/TalentAction";
 import { WeaponAction } from "./CharacterSheetActions/WeaponAction";
 
@@ -64,6 +65,10 @@ export const SheetActionControl = ({ character, actionType, syncModels, updateCh
     } else if (actionType == ActionType.Combat) {
         return (
             <CombatAction character={character} updateCharacter={updateCharacter} />
+        );
+    } else if (actionType == ActionType.Checks) {
+        return (
+            <SkillsCheckAction character={character} />
         );
     } else {
 

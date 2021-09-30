@@ -1,4 +1,5 @@
 import { CombatTraits } from "../Classes/CombatTraits";
+import { SkillChecks } from "../Classes/SkillChecks";
 import { Character } from "../interfaces/Character";
 import { ModelType } from "../interfaces/Enumerations/ModelType";
 import { SyncModel } from "../interfaces/SyncModel";
@@ -30,6 +31,7 @@ export const getCharacterFromSyncModelListForId = (syncModels: SyncModel[], id: 
     }
 
     character.CombatTraits = new CombatTraits(character);
+    character.SkillChecks = new SkillChecks(character);
 
     return character;
 }

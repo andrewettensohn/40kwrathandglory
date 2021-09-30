@@ -1,6 +1,5 @@
 import { Grid, Typography, Divider } from "@material-ui/core"
 import React from "react"
-import { BallisticSkillCheck, WeaponSkillCheck } from "../../../helpers/SkillCheckHelper";
 import { Character } from "../../../interfaces/Character";
 import { Weapon } from "../../../interfaces/Weapon"
 
@@ -11,7 +10,7 @@ interface WeaponStatBlockProps {
 
 export const WeaponStatBlock = ({ weapon, character }: WeaponStatBlockProps) => {
 
-    const hit = weapon.IsMelee ? WeaponSkillCheck(character) : BallisticSkillCheck(character);
+    const hit = weapon.IsMelee ? character.SkillChecks.Weapon : character.SkillChecks.Ballistic;
 
     return (
         <Grid container >
