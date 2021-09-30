@@ -1,5 +1,4 @@
 export interface Ammo {
-    [key: string]: string | number;
     Projectile: number;
     Las: number;
     Flame: number;

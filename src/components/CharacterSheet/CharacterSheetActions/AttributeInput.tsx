@@ -1,31 +1,23 @@
 import { Grid, TextField } from "@material-ui/core";
 import React, { } from "react";
 import { calculateXpForAttributeChange } from "../../../helpers/XPHelper";
+import { Attributes } from "../../../interfaces/Attributes";
 import { Character } from "../../../interfaces/Character";
 
 interface AttributesInputProps {
-    attributeName: string,
-    character: Character,
-    updateCharacter: (character: Character) => Promise<void>
+    attributeName: keyof Attributes,
+    attributeValue: number,
+    onValueChanged: (
+        attributeName: keyof Attributes,
+        oldValue: number,
+        newValue: number) => Promise<void>
 }
 
-export const AttributesInput = ({ attributeName, character, updateCharacter }: AttributesInputProps) => {
-
-    const [attributeValue, setAttribute] = React.useState(character.Attributes[attributeName])
-
-    const onValueChanged = async (event: React.ChangeEvent<{ value: unknown }>) => {
-        const oldValue = attributeValue as number;
-        const newValue = event.target.value as number;
-
-        setAttribute(newValue);
-
-        const update = character;
-        //calculate XP change before assigning new value
-        update.XP = calculateXpForAttributeChange(oldValue, newValue, update.XP);
-
-        update.Attributes[attributeName] = newValue;
-        await updateCharacter(update);
-    }
+export const AttributesInput = ({
+    attributeName,
+    attributeValue,
+    onValueChanged
+}: AttributesInputProps) => {
 
     return (
         <Grid container spacing={3} justifyContent='center'>
@@ -39,7 +31,10 @@ export const AttributesInput = ({ attributeName, character, updateCharacter }: A
                     }}
                     variant="outlined"
                     value={attributeValue}
-                    onChange={onValueChanged}
+                    onChange={(e) => onValueChanged(
+                        attributeName,
+                        attributeValue,
+                        parseFloat(e.target.value))}
                 />
             </Grid>
         </Grid>

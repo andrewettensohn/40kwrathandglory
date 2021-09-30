@@ -1,10 +1,10 @@
 export interface Armor {
-    id: string;
-    name: string;
-    description: string;
-    aR: number;
-    traits: string;
-    value: string;
-    keywords: string;
-    isEquipped: boolean;
+    Id: string;
+    Name: string;
+    Description: string;
+    AR: number;
+    Traits: string;
+    Value: string;
+    Keywords: string;
+    IsEquipped: boolean;
 }

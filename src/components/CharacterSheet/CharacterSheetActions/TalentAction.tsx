@@ -4,7 +4,6 @@ import React from "react";
 import { Character } from "../../../interfaces/Character";
 import { Talent } from "../../../interfaces/Talent";
 import { TalentInfoBlock } from "./TalentInfoBlock";
-import { WeaponStatBlock } from "./WeaponStatBlock";
 
 interface TalentActionProps {
     talentList: Talent[],
@@ -19,19 +18,18 @@ export const TalentAction = ({ talentList, character, updateCharacter }: TalentA
 
     const onAddTalentClicked = async (talent: Talent): Promise<void> => {
 
-        const update = character;
-        update.XP -= talent.XPCost;
-        update.Talents.push(talent);
-        await updateCharacter(update);
-
+        const characterUpdate = JSON.parse(JSON.stringify(character)) as Character;
+        characterUpdate.XP -= talent.XPCost;
+        characterUpdate.Talents.push(talent);
+        await updateCharacter(characterUpdate);
     }
 
     const onRemoveTalentClicked = async (talent: Talent): Promise<void> => {
-        const update = character;
+        const characterUpdate = JSON.parse(JSON.stringify(character)) as Character;
 
-        update.XP += talent.XPCost;
-        update.Talents = update.Talents.filter(x => x.Id != talent.Id);
-        await updateCharacter(update);
+        characterUpdate.XP += talent.XPCost;
+        characterUpdate.Talents = characterUpdate.Talents.filter(x => x.Id != talent.Id);
+        await updateCharacter(characterUpdate);
     }
 
     return showInput

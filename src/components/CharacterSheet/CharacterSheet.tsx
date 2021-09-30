@@ -11,6 +11,7 @@ import { Casino } from "@material-ui/icons";
 import { SheetActionControl } from "./SheetActionControl";
 import { ActionType } from "../../interfaces/Enumerations/ActionType";
 import { CharacterHeader } from "./CharacterHeader";
+import { CombatTraits } from "../../Classes/CombatTraits";
 
 const useStyles = makeStyles({
     sheetHeader: {
@@ -43,12 +44,13 @@ const useStyles = makeStyles({
     },
     mt10: {
         marginTop: 10
+    },
+    mb25: {
+        marginBottom: 25
     }
 });
 
 export const CharacterSheet = () => {
-
-    const [rerender, setRerender] = React.useState(false);
 
     const [isLoading, setIsLoading] = React.useState(true);
     const [isActionModalOpen, setIsActionModalOpen] = React.useState(false);
@@ -69,8 +71,6 @@ export const CharacterSheet = () => {
                 .finally(() => setIsLoading(false))
         }
 
-        setRerender(!rerender);
-
     }, []);
 
     const setCharacterSheetData = async () => {
@@ -82,9 +82,9 @@ export const CharacterSheet = () => {
     }
 
     const setAndUpdateCharacter = async (updatedCharacter: Character) => {
+        updatedCharacter.CombatTraits = new CombatTraits(updatedCharacter);
         setCharacter(updatedCharacter);
         await updateCharacterAtSyncAPI(updatedCharacter);
-        setRerender(!rerender);
     }
 
     const toggleModal = () => setIsActionModalOpen(!isActionModalOpen);
@@ -99,7 +99,7 @@ export const CharacterSheet = () => {
     return !isLoading
         ?
         <div>
-            <Grid container>
+            <Grid container className={classes.mb25}>
                 <Grid item xs={12}>
                     <CharacterHeader character={character} updateCharacter={setAndUpdateCharacter} />
                 </Grid>
@@ -146,6 +146,9 @@ export const CharacterSheet = () => {
                             </ListItem>
                             <ListItem>
                                 <Button onClick={() => handleActionTypeSwitch(ActionType.Quest)}>Quests</Button>
+                            </ListItem>
+                            <ListItem>
+                                <Button onClick={() => handleActionTypeSwitch(ActionType.Combat)}>Combat</Button>
                             </ListItem>
                         </List>
                     </Grid>

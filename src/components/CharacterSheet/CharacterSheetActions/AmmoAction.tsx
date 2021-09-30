@@ -1,5 +1,7 @@
 import { Grid } from "@material-ui/core";
 import React from "react";
+import { isKeyOfAmmo } from "../../../helpers/KeyHelper";
+import { Ammo } from "../../../interfaces/Ammo";
 import { Character } from "../../../interfaces/Character";
 import { Weapon } from "../../../interfaces/Weapon";
 import { AmmoInput } from "./AmmoInput";
@@ -11,26 +13,29 @@ interface AmmoActionProps {
 
 export const AmmoAction = ({ character, updateCharacter }: AmmoActionProps): JSX.Element => {
 
-    const ammoNames = [
-        "Projectile",
-        "Las",
-        "Flame",
-        "Bolt",
-        "Plasma",
-        "Melta",
-        "Shuriken",
-        "Grenade",
-        "Missle",
-    ] as string[];
+    const onValueChanged = async (
+        ammoName: keyof Ammo,
+        newValue: number,
+    ) => {
+        await updateCharacter({
+            ...character,
+            Ammo: {
+                ...character.Ammo,
+                [ammoName]: newValue
+            }
+        });
+    }
 
     return (
         <Grid container spacing={6}>
-            {ammoNames.map(x => {
-                return (
-                    <Grid item xs={6} key={x}>
-                        <AmmoInput ammoName={x} character={character} updateCharacter={updateCharacter} />
-                    </Grid>
-                )
+            {Object.entries(character.Ammo).map(([key, value]) => {
+                if (isKeyOfAmmo(key, character.Ammo)) {
+                    return (
+                        <Grid item xs={6} key={key}>
+                            <AmmoInput ammoName={key} ammoValue={value} onValueChanged={onValueChanged} />
+                        </Grid>
+                    )
+                }
             })}
         </Grid>
     );

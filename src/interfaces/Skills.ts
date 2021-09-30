@@ -1,5 +1,4 @@
 export interface Skills {
-    [key: string]: string | number;
     Athletics: number;
     Awareness: number;
     Ballistic: number;

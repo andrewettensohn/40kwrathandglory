@@ -19,25 +19,25 @@ export const WeaponAction = ({ weaponsList, character, updateCharacter }: Weapon
 
     const onAddToInventoryClicked = async (weapon: Weapon): Promise<void> => {
 
-        const update = character;
-        update.Weapons.push(weapon);
-        await updateCharacter(update);
-
+        const characterUpdate = JSON.parse(JSON.stringify(character)) as Character;
+        characterUpdate.Weapons.push(weapon);
+        await updateCharacter(characterUpdate);
     }
 
     const onRemoveFromInventoryClicked = async (weapon: Weapon): Promise<void> => {
-        const update = character;
-        update.Weapons = update.Weapons.filter(x => x.Id != weapon.Id);
-        await updateCharacter(update);
+
+        const characterUpdate = JSON.parse(JSON.stringify(character)) as Character;
+        characterUpdate.Weapons = characterUpdate.Weapons.filter(x => x.Id != weapon.Id);
+        await updateCharacter(characterUpdate);
     }
 
     const onEquipChangeClicked = async (weapon: Weapon, isEquipped: boolean): Promise<void> => {
-        const update = character;
-        const weaponToEquip = update.Weapons.find(x => x.Id == weapon.Id);
+        const characterUpdate = JSON.parse(JSON.stringify(character)) as Character;
+        const weaponToEquip = characterUpdate.Weapons.find(x => x.Id == weapon.Id);
 
         if (weaponToEquip !== undefined) {
             weaponToEquip.IsEquipped = isEquipped;
-            await updateCharacter(update);
+            await updateCharacter(characterUpdate);
         }
     }
 

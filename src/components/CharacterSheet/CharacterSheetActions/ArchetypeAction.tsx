@@ -1,4 +1,4 @@
-import { Button, Grid, IconButton, List, ListItem, TextField, Typography } from "@material-ui/core";
+import { Button, Divider, Grid, IconButton, List, ListItem, TextField, Typography } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { Character } from "../../../interfaces/Character";
 import { Edit } from "@material-ui/icons";
@@ -48,8 +48,17 @@ export const ArchetypeAction = ({ character, archetypeList, updateCharacter }: A
         </Grid>
         :
         <Grid container>
-            <Grid item>
-                {character.Archetype.Name}
+            <Grid item xs={12}>
+                <Typography>{character.Archetype.Name}</Typography>
+            </Grid>
+            <Grid item xs={12}>
+                <Typography>Keywords: {character.Archetype.Keywords}</Typography>
+            </Grid>
+            <Grid item xs={12}>
+                <Divider />
+            </Grid>
+            <Grid item xs={12}>
+                <Typography>{character.Archetype.ArchetypeAbility}</Typography>
             </Grid>
         </Grid>
 }

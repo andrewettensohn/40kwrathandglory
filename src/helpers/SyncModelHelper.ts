@@ -1,3 +1,4 @@
+import { CombatTraits } from "../Classes/CombatTraits";
 import { Character } from "../interfaces/Character";
 import { ModelType } from "../interfaces/Enumerations/ModelType";
 import { SyncModel } from "../interfaces/SyncModel";
@@ -27,6 +28,8 @@ export const getCharacterFromSyncModelListForId = (syncModels: SyncModel[], id: 
     if (characterSyncModel !== undefined) {
         character = JSON.parse(characterSyncModel.json);
     }
+
+    character.CombatTraits = new CombatTraits(character);
 
     return character;
 }

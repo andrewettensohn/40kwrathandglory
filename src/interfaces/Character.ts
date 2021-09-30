@@ -7,6 +7,7 @@ import { Talent } from "./Talent";
 import { Weapon } from "./Weapon";
 import { Gear } from "./Gear";
 import { PyschicPower } from "./PyschicPower";
+import { CombatTraits } from "../Classes/CombatTraits";
 
 export interface Character {
     Id: string;
@@ -29,4 +30,5 @@ export interface Character {
     Weapons: Weapon[];
     CharacterGear: Gear[];
     PsychicPowers: PyschicPower[];
+    CombatTraits: CombatTraits;
 }

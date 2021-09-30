@@ -1,5 +1,7 @@
 import { makeStyles, TextField } from "@material-ui/core";
 import React from "react";
+import { Ammo } from "../../../interfaces/Ammo";
+import { Attributes } from "../../../interfaces/Attributes";
 import { Character } from "../../../interfaces/Character";
 
 const useStyles = makeStyles({
@@ -9,24 +11,20 @@ const useStyles = makeStyles({
 });
 
 interface AmmoInputProps {
-    ammoName: string,
-    character: Character,
-    updateCharacter: (character: Character) => Promise<void>
+    ammoName: keyof Ammo,
+    ammoValue: number,
+    onValueChanged: (
+        ammoName: keyof Ammo,
+        newValue: number) => Promise<void>
 }
 
-export const AmmoInput = ({ ammoName, character, updateCharacter }: AmmoInputProps): JSX.Element => {
+export const AmmoInput = ({
+    ammoName,
+    ammoValue,
+    onValueChanged
+}: AmmoInputProps): JSX.Element => {
 
-    const [value, setValue] = React.useState(character.Ammo[ammoName]);
     const classes = useStyles();
-
-    const onValueChanged = async (event: React.ChangeEvent<{ value: unknown }>) => {
-        const newValue = event.target.value as number;
-        const update = character;
-
-        update.Ammo[ammoName] = newValue;
-        setValue(newValue);
-        await updateCharacter(update);
-    }
 
     return (
         <TextField
@@ -37,8 +35,10 @@ export const AmmoInput = ({ ammoName, character, updateCharacter }: AmmoInputPro
                 shrink: true,
             }}
             variant="outlined"
-            value={value}
-            onChange={onValueChanged}
+            value={ammoValue}
+            onChange={(e) => onValueChanged(
+                ammoName,
+                parseFloat(e.target.value))}
             className={classes.numberInput}
         />
     );

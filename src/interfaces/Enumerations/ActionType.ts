@@ -8,7 +8,7 @@ export enum ActionType {
     Talent,
     Weapon,
     QuickReference,
-    Status,
+    Combat,
     Skills,
     Ammo,
     Checks
