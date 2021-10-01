@@ -1,5 +1,4 @@
-import { List, ListItem, ListItemProps, ListItemText } from "@material-ui/core";
-import React from "react";
+import { ListItem, ListItemProps, ListItemText } from "@material-ui/core";
 import { Character } from "../../interfaces/Character";
 
 function ListItemLink(props: ListItemProps<'a', { button?: true }>) {

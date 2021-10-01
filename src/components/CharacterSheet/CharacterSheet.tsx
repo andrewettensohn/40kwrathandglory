@@ -1,54 +1,17 @@
-import { Button, Fab, Grid, List, ListItem, Modal, Paper, TextField } from "@material-ui/core";
+import { Button, Fab, Grid, Modal, Paper } from "@material-ui/core";
 import React, { useEffect } from "react";
-import { makeStyles } from '@material-ui/core/styles';
 import { updateCharacterAtSyncAPI } from "../../data/SyncModelService";
 import { Character } from "../../interfaces/Character";
 import { getSyncModels } from "../../data/RestService";
 import { SyncModel } from "../../interfaces/SyncModel";
 import { getCharacterFromSyncModelListForId } from "../../helpers/SyncModelHelper";
-import { NameInput } from "./NameInput";
 import { Casino } from "@material-ui/icons";
 import { SheetActionControl } from "./SheetActionControl";
 import { ActionType } from "../../interfaces/Enumerations/ActionType";
 import { CharacterHeader } from "./CharacterHeader";
-import { CombatTraits } from "../../Classes/CombatTraits";
-import { SkillChecks } from "../../Classes/SkillChecks";
-
-const useStyles = makeStyles({
-    sheetHeader: {
-        minHeight: 100,
-        padding: 10
-    },
-    floatingActionButton: {
-        margin: 0,
-        top: 'auto',
-        right: 20,
-        bottom: 20,
-        left: 'auto',
-        position: 'fixed',
-    },
-    actionModal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    actionMenu: {
-        //backgroundColor: "#1d1d1d",
-        margin: 16,
-    },
-    numberInput: {
-        maxWidth: 100
-    },
-    mt5: {
-        marginTop: 5
-    },
-    mt10: {
-        marginTop: 10
-    },
-    mb25: {
-        marginBottom: 25
-    }
-});
+import { CombatTraits } from "../../classes/CombatTraits";
+import { SkillChecks } from "../../classes/SkillChecks";
+import { useStyles } from "../AppStyles";
 
 export const CharacterSheet = () => {
 

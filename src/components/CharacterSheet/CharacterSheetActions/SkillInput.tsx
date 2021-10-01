@@ -1,14 +1,6 @@
-import { Grid, makeStyles, TextField } from "@material-ui/core";
-import React, { } from "react";
-import { calculateXpForSkillChange } from "../../../helpers/XPHelper";
-import { Character } from "../../../interfaces/Character";
+import { TextField } from "@material-ui/core";
 import { Skills } from "../../../interfaces/Skills";
-
-const useStyles = makeStyles({
-    numberInput: {
-        maxWidth: 100
-    },
-});
+import { useStyles } from "../../AppStyles";
 
 interface SkillInputProps {
     skillName: keyof Skills,

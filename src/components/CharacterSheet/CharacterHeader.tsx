@@ -1,25 +1,8 @@
-import classes from "*.module.css";
-import { Grid, makeStyles, Paper, TextField } from "@material-ui/core";
+import { Grid, Paper, TextField } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { Character } from "../../interfaces/Character";
+import { useStyles } from "../AppStyles";
 import { NameInput } from "./NameInput";
-
-
-const useStyles = makeStyles({
-    numberInput: {
-        maxWidth: 100
-    },
-    mt5: {
-        marginTop: 5
-    },
-    mt10: {
-        marginTop: 10
-    },
-    sheetHeader: {
-        minHeight: 100,
-        padding: 10
-    },
-});
 
 interface CharacterHeaderProps {
     character: Character,

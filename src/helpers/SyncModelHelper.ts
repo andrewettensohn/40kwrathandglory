@@ -1,5 +1,5 @@
-import { CombatTraits } from "../Classes/CombatTraits";
-import { SkillChecks } from "../Classes/SkillChecks";
+import { CombatTraits } from "../classes/CombatTraits";
+import { SkillChecks } from "../classes/SkillChecks";
 import { Character } from "../interfaces/Character";
 import { ModelType } from "../interfaces/Enumerations/ModelType";
 import { SyncModel } from "../interfaces/SyncModel";

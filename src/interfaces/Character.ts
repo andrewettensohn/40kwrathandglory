@@ -7,8 +7,8 @@ import { Talent } from "./Talent";
 import { Weapon } from "./Weapon";
 import { Gear } from "./Gear";
 import { PyschicPower } from "./PyschicPower";
-import { CombatTraits } from "../Classes/CombatTraits";
-import { SkillChecks } from "../Classes/SkillChecks";
+import { CombatTraits } from "../classes/CombatTraits";
+import { SkillChecks } from "../classes/SkillChecks";
 
 export interface Character {
     Id: string;

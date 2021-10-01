@@ -1,14 +1,6 @@
-import { makeStyles, TextField } from "@material-ui/core";
-import React from "react";
+import { TextField } from "@material-ui/core";
 import { Ammo } from "../../../interfaces/Ammo";
-import { Attributes } from "../../../interfaces/Attributes";
-import { Character } from "../../../interfaces/Character";
-
-const useStyles = makeStyles({
-    numberInput: {
-        maxWidth: 100
-    },
-});
+import { useStyles } from "../../AppStyles";
 
 interface AmmoInputProps {
     ammoName: keyof Ammo,

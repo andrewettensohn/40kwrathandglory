@@ -1,6 +1,4 @@
-import { Grid, makeStyles, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@material-ui/core";
-import React from "react";
-import { isKeyOfAttributes } from "../../../helpers/KeyHelper";
+import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
 import { Character } from "../../../interfaces/Character";
 
 interface SkillsCheckActionProps {
