@@ -1,9 +1,9 @@
 export interface Gear {
-    id: string;
-    name: string;
-    description: string;
-    effect: string;
-    value: number;
-    rarity: string;
-    keywords: string;
+    Id: string;
+    Name: string;
+    Description: string;
+    Effect: string;
+    Value: number;
+    Rarity: string;
+    Keywords: string;
 }

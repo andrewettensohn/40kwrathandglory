@@ -1,55 +1,37 @@
+import { Character } from "../../../interfaces/Character";
+import { Gear } from "../../../interfaces/Gear";
 import { Grid, List, ListItem, Button } from "@material-ui/core";
 import { ControlCamera } from "@material-ui/icons";
 import React from "react";
-import { Armor } from "../../../interfaces/Armor";
-import { Character } from "../../../interfaces/Character";
-import { ArmorStatBlock } from "./ArmorStatBlock";
+import { GearInfoBlock } from "./GearInfoBlock";
 
-interface ArmorActionProps {
-    armorList: Armor[],
+interface GearActionProps {
+    gearList: Gear[],
     character: Character,
     updateCharacter: (character: Character) => Promise<void>
 }
 
-export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActionProps): JSX.Element => {
-
+export const GearAction = ({ gearList, character, updateCharacter }: GearActionProps) => {
     const [showInput, setShowInput] = React.useState(false);
 
     const onManageArmorClicked = () => setShowInput(!showInput);
 
-    const onAddToInventoryClicked = async (armor: Armor): Promise<void> => {
+    const onAddToInventoryClicked = async (gear: Gear): Promise<void> => {
 
-        const armorList = character.Armor;
-        armorList.push(armor);
+        const gearList = character.CharacterGear;
+        gearList.push(gear);
 
         await updateCharacter({
             ...character,
-            Armor: armorList
+            CharacterGear: gearList
         });
     }
 
-    const onRemoveFromInventoryClicked = async (armor: Armor): Promise<void> => {
+    const onRemoveFromInventoryClicked = async (gear: Gear): Promise<void> => {
 
         await updateCharacter({
             ...character,
-            Armor: character.Armor.filter(x => x.Id != armor.Id)
-        });
-    }
-
-    const onEquipChangeClicked = async (armor: Armor, isEquipped: boolean): Promise<void> => {
-
-        const characterArmor = character.Armor;
-        character.Armor.forEach(x => {
-            if (x.Id == armor.Id) {
-                x.IsEquipped = isEquipped;
-            } else {
-                x.IsEquipped = false;
-            }
-        });
-
-        await updateCharacter({
-            ...character,
-            Armor: characterArmor
+            CharacterGear: character.CharacterGear.filter(x => x.Id != gear.Id)
         });
     }
 
@@ -65,7 +47,7 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
             </Grid>
             <Grid item>
                 <List component="nav">
-                    {armorList.map(x => {
+                    {gearList.map(x => {
                         return character.Armor.some(y => y.Id == x.Id)
                             ?
                             <ListItem key={x.Id}>
@@ -73,7 +55,7 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
                                     <Grid item xs={12}>
                                         <Button variant="contained" onClick={() => onRemoveFromInventoryClicked(x)}>Remove From Inventory</Button>
                                     </Grid>
-                                    <ArmorStatBlock armor={x} />
+                                    <GearInfoBlock gear={x} />
                                 </Grid>
                             </ListItem>
                             :
@@ -82,7 +64,7 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
                                     <Grid item xs={12}>
                                         <Button variant="contained" onClick={() => onAddToInventoryClicked(x)}>Add to Inventory</Button>
                                     </Grid>
-                                    <ArmorStatBlock armor={x} />
+                                    <GearInfoBlock gear={x} />
                                 </Grid>
                             </ListItem>
                     })}
@@ -100,26 +82,14 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
             </Grid>
             <Grid item>
                 <List component="nav">
-                    {character.Armor.map(x => {
-                        return x.IsEquipped
-                            ?
+                    {character.CharacterGear.map(x => {
+                        return (
                             <ListItem key={x.Id}>
                                 <Grid container>
-                                    <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onEquipChangeClicked(x, false)}>Unequip</Button>
-                                    </Grid>
-                                    <ArmorStatBlock armor={x} />
+                                    <GearInfoBlock gear={x} />
                                 </Grid>
                             </ListItem>
-                            :
-                            <ListItem key={x.Id}>
-                                <Grid container>
-                                    <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onEquipChangeClicked(x, true)}>Equip</Button>
-                                    </Grid>
-                                    <ArmorStatBlock armor={x} />
-                                </Grid>
-                            </ListItem>
+                        )
                     })}
                 </List>
             </Grid>

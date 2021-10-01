@@ -158,6 +158,9 @@ export const CharacterSheet = () => {
                                 <Grid item>
                                     <Button variant="contained" onClick={() => handleActionTypeSwitch(ActionType.Armor)}>Armor</Button>
                                 </Grid>
+                                <Grid item>
+                                    <Button variant="contained" onClick={() => handleActionTypeSwitch(ActionType.Gear)}>Gear</Button>
+                                </Grid>
                             </Grid>
                         </Paper>
                     </Grid>
