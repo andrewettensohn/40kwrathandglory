@@ -18,18 +18,22 @@ export const TalentAction = ({ talentList, character, updateCharacter }: TalentA
 
     const onAddTalentClicked = async (talent: Talent): Promise<void> => {
 
-        const characterUpdate = JSON.parse(JSON.stringify(character)) as Character;
-        characterUpdate.XP -= talent.XPCost;
-        characterUpdate.Talents.push(talent);
-        await updateCharacter(characterUpdate);
+        const update = {
+            ...character,
+            XP: character.XP -= talent.XPCost,
+        } as Character;
+
+        update.Talents.push(talent);
+
+        await updateCharacter(update);
     }
 
     const onRemoveTalentClicked = async (talent: Talent): Promise<void> => {
-        const characterUpdate = JSON.parse(JSON.stringify(character)) as Character;
-
-        characterUpdate.XP += talent.XPCost;
-        characterUpdate.Talents = characterUpdate.Talents.filter(x => x.Id != talent.Id);
-        await updateCharacter(characterUpdate);
+        await updateCharacter({
+            ...character,
+            XP: character.XP += talent.XPCost,
+            Talents: character.Talents.filter(x => x.Id != talent.Id)
+        });
     }
 
     return showInput
