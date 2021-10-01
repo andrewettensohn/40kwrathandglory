@@ -19,10 +19,10 @@ export const AppBarHeader = () => {
     const classes = useStyles();
 
     return (
-        <AppBar className={classes.bar}>
+        <AppBar position="static" color="secondary" >
             <Toolbar>
                 <Typography variant="h6"><a href="/" className={classes.link}>Wrath and Glory</a></Typography>
             </Toolbar>
-        </AppBar>
+        </AppBar >
     );
 }

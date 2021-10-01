@@ -1,4 +1,4 @@
-import { Button, Fab, Grid, Modal, Paper } from "@material-ui/core";
+import { Button, Divider, Fab, Grid, Modal, Paper } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { updateCharacterAtSyncAPI } from "../../data/SyncModelService";
 import { Character } from "../../interfaces/Character";
@@ -63,18 +63,16 @@ export const CharacterSheet = () => {
     return !isLoading
         ?
         <div>
-            <Grid container className={classes.mb25}>
+            <Grid container>
                 <Grid item xs={12}>
                     <CharacterHeader character={character} updateCharacter={setAndUpdateCharacter} />
                 </Grid>
-                <Grid item xs={12} className={classes.mt10}>
-                    <Grid item>
-                        <SheetActionControl
-                            character={character}
-                            syncModels={syncModels}
-                            actionType={selectedActionType}
-                            updateCharacter={setAndUpdateCharacter} />
-                    </Grid>
+                <Grid item className={classes.scrollBox} xs={12}>
+                    <SheetActionControl
+                        character={character}
+                        syncModels={syncModels}
+                        actionType={selectedActionType}
+                        updateCharacter={setAndUpdateCharacter} />
                 </Grid>
             </Grid>
             <Fab color="primary" className={classes.floatingActionButton} onClick={toggleModal}>
@@ -87,47 +85,51 @@ export const CharacterSheet = () => {
                 aria-describedby="simple-modal-description"
                 className={classes.actionModal}
             >
-                <Grid justifyContent="center" container className={classes.actionMenu}>
-                    <Grid item>
-                        <Paper>
-                            <Grid container justifyContent="center" spacing={2}>
-                                <Grid item>
-                                    <Button variant="contained" onClick={() => handleActionTypeSwitch(ActionType.Archetype)}>Archetype</Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained" onClick={() => handleActionTypeSwitch(ActionType.Attributes)}>Modify Attributes</Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained" onClick={() => handleActionTypeSwitch(ActionType.Skills)}>Modify Skills</Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained" onClick={() => handleActionTypeSwitch(ActionType.Weapon)}>Weapons</Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained" onClick={() => handleActionTypeSwitch(ActionType.Ammo)}>Ammo</Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained" onClick={() => handleActionTypeSwitch(ActionType.Talent)}>Talents</Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained" onClick={() => handleActionTypeSwitch(ActionType.Quest)}>Quests</Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained" onClick={() => handleActionTypeSwitch(ActionType.Combat)}>Combat</Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained" onClick={() => handleActionTypeSwitch(ActionType.Checks)}>Skill Checks</Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained" onClick={() => handleActionTypeSwitch(ActionType.Armor)}>Armor</Button>
-                                </Grid>
-                                <Grid item>
-                                    <Button variant="contained" onClick={() => handleActionTypeSwitch(ActionType.Gear)}>Gear</Button>
-                                </Grid>
+                <Paper>
+                    <Grid container className={classes.mb25}>
+                        <Grid container justifyContent="center" spacing={1} xs={12} className={classes.mt10}>
+                            <Grid item>
+                                <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Archetype)}>Archetype</Button>
                             </Grid>
-                        </Paper>
+                            <Grid item>
+                                <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Quest)}>Quests</Button>
+                            </Grid>
+                            <Grid item>
+                                <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Checks)}>Checks</Button>
+                            </Grid>
+                        </Grid>
+                        <Grid container justifyContent="center" spacing={1} xs={12} className={classes.mt10}>
+                            <Grid item>
+                                <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Combat)}>Combat</Button>
+                            </Grid>
+                            <Grid item>
+                                <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Weapon)}>Weapons</Button>
+                            </Grid>
+                            <Grid item>
+                                <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Ammo)}>Ammo</Button>
+                            </Grid>
+                        </Grid>
+                        <Grid container justifyContent="center" spacing={1} xs={12} className={classes.mt10}>
+                            <Grid item>
+                                <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Talent)}>Talents</Button>
+                            </Grid>
+                            <Grid item>
+                                <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Attributes)}>Attributes</Button>
+                            </Grid>
+                            <Grid item>
+                                <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Skills)}>Skills</Button>
+                            </Grid>
+                        </Grid>
+                        <Grid container justifyContent="center" spacing={1} xs={12} className={classes.mt10}>
+                            <Grid item>
+                                <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Armor)}>Armor</Button>
+                            </Grid>
+                            <Grid item>
+                                <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Gear)}>Gear</Button>
+                            </Grid>
+                        </Grid>
                     </Grid>
-                </Grid>
+                </Paper>
             </Modal>
         </div>
         :

@@ -28,6 +28,11 @@
   color: #61dafb;
 }
 
+.Scrollbox {
+  overflow-y: scroll;
+  max-height: 80vh;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

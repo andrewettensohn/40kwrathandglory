@@ -3,7 +3,8 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles({
     sheetHeader: {
         minHeight: 100,
-        padding: 10
+        padding: 10,
+        marginBottom: 15
     },
     floatingActionButton: {
         margin: 0,
@@ -17,9 +18,6 @@ export const useStyles = makeStyles({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    actionMenu: {
-        //backgroundColor: "#1d1d1d",
         margin: 16,
     },
     numberInput: {
@@ -34,4 +32,10 @@ export const useStyles = makeStyles({
     mb25: {
         marginBottom: 25
     },
+    scrollBox: {
+        overflowY: "scroll",
+        maxHeight: "65vh",
+        overflowX: "hidden",
+        padding: 5
+    }
 });

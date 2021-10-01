@@ -1,4 +1,4 @@
-import { Box, Container } from '@material-ui/core';
+import { Box, Container, Paper } from '@material-ui/core';
 import { AppBarHeader } from './components/AppBarHeader';
 import { Home } from './components/Home';
 import {
@@ -9,13 +9,27 @@ import {
 import './App.css';
 import React from 'react';
 import { CharacterSheet } from './components/CharacterSheet/CharacterSheet';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import { amber, blueGrey, deepPurple, green, red } from '@material-ui/core/colors';
 
+const theme = createTheme({
+  palette: {
+    type: "dark",
+    primary: amber,
+    secondary: {
+      main: red[700]
+    },
+    background: {
+      paper: "#1d1d1d"
+    }
+  },
+});
 
 export default function App() {
   return (
-    <div className="App">
-      <AppBarHeader />
-      <Box mt={10}>
+    <ThemeProvider theme={theme}>
+      <Paper style={{ height: "100vh" }}>
+        <AppBarHeader />
         <Container>
           <Router>
             <Switch>
@@ -28,7 +42,7 @@ export default function App() {
             </Switch>
           </Router>
         </Container>
-      </Box>
-    </div>
+      </Paper>
+    </ThemeProvider>
   );
 }

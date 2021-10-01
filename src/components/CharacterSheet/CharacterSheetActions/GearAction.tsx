@@ -4,6 +4,7 @@ import { Grid, List, ListItem, Button } from "@material-ui/core";
 import { ControlCamera } from "@material-ui/icons";
 import React from "react";
 import { GearInfoBlock } from "./GearInfoBlock";
+import { useStyles } from "../../AppStyles";
 
 interface GearActionProps {
     gearList: Gear[],
@@ -13,6 +14,7 @@ interface GearActionProps {
 
 export const GearAction = ({ gearList, character, updateCharacter }: GearActionProps) => {
     const [showInput, setShowInput] = React.useState(false);
+    const classes = useStyles();
 
     const onManageArmorClicked = () => setShowInput(!showInput);
 

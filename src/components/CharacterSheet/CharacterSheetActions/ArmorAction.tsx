@@ -3,6 +3,7 @@ import { ControlCamera } from "@material-ui/icons";
 import React from "react";
 import { Armor } from "../../../interfaces/Armor";
 import { Character } from "../../../interfaces/Character";
+import { useStyles } from "../../AppStyles";
 import { ArmorStatBlock } from "./ArmorStatBlock";
 
 interface ArmorActionProps {
@@ -14,6 +15,7 @@ interface ArmorActionProps {
 export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActionProps): JSX.Element => {
 
     const [showInput, setShowInput] = React.useState(false);
+    const classes = useStyles();
 
     const onManageArmorClicked = () => setShowInput(!showInput);
 

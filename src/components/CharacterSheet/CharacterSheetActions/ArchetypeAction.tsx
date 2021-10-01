@@ -4,6 +4,7 @@ import { Character } from "../../../interfaces/Character";
 import { Edit } from "@material-ui/icons";
 import { Archetype } from "../../../interfaces/Archetype";
 import { CalculateXpForArchetype } from "../../../helpers/XPHelper";
+import { useStyles } from "../../AppStyles";
 
 interface ArchetypeActionProps {
     character: Character,
@@ -13,6 +14,7 @@ interface ArchetypeActionProps {
 
 export const ArchetypeAction = ({ character, archetypeList, updateCharacter }: ArchetypeActionProps) => {
     const [showInput, setShowInput] = React.useState(true);
+    const classes = useStyles();
 
     useEffect(() => {
         const characterHasArchetype = character.Archetype?.Id?.length > 0;
@@ -36,7 +38,7 @@ export const ArchetypeAction = ({ character, archetypeList, updateCharacter }: A
     return showInput
         ?
         <Grid container>
-            <List component="nav">
+            <List component="nav" className={classes.scrollBox}>
                 {archetypeList.map(x => {
                     return (
                         <ListItem key={x.Id}>

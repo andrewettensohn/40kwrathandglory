@@ -1,10 +1,8 @@
-import { Grid, makeStyles, TextField } from "@material-ui/core";
-import React, { useEffect } from "react";
+import { Grid } from "@material-ui/core";
 import { isKeyOfSkills } from "../../../helpers/KeyHelper";
-import { calculateXpForAttributeChange, calculateXpForSkillChange } from "../../../helpers/XPHelper";
+import { calculateXpForSkillChange } from "../../../helpers/XPHelper";
 import { Character } from "../../../interfaces/Character";
 import { Skills } from "../../../interfaces/Skills";
-import { AttributesInput } from "./AttributeInput";
 import { SkillInput } from "./SkillInput";
 
 interface SkillsActionProps {

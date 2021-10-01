@@ -1,6 +1,7 @@
 import { Grid, List, ListItem, Button } from "@material-ui/core";
 import React from "react";
 import { Quest } from "../../../interfaces/Quest";
+import { useStyles } from "../../AppStyles";
 import { QuestInfoBlock } from "./QuestInfoBlock";
 import { WeaponStatBlock } from "./WeaponStatBlock";
 
@@ -9,6 +10,7 @@ interface QuestsProps {
 }
 
 export const QuestList = ({ questList }: QuestsProps) => {
+    const classes = useStyles();
 
     return (
         <List component="nav">

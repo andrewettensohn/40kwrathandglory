@@ -10,7 +10,7 @@ export const SkillsCheckAction = ({
 
     return (
         <TableContainer component={Paper}>
-            <Table aria-label="simple table">
+            <Table>
                 <TableHead>
                     <TableRow>
                         <TableCell>Skill Check</TableCell>
