@@ -87,7 +87,7 @@ export const CharacterSheet = () => {
             >
                 <Paper>
                     <Grid container className={classes.mb25}>
-                        <Grid container justifyContent="center" spacing={1} xs={12} className={classes.mt10}>
+                        <Grid container justifyContent="center" spacing={1} className={classes.mt10}>
                             <Grid item>
                                 <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Archetype)}>Archetype</Button>
                             </Grid>
@@ -98,7 +98,7 @@ export const CharacterSheet = () => {
                                 <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Checks)}>Checks</Button>
                             </Grid>
                         </Grid>
-                        <Grid container justifyContent="center" spacing={1} xs={12} className={classes.mt10}>
+                        <Grid container justifyContent="center" spacing={1} className={classes.mt10}>
                             <Grid item>
                                 <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Combat)}>Combat</Button>
                             </Grid>
@@ -109,7 +109,7 @@ export const CharacterSheet = () => {
                                 <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Ammo)}>Ammo</Button>
                             </Grid>
                         </Grid>
-                        <Grid container justifyContent="center" spacing={1} xs={12} className={classes.mt10}>
+                        <Grid container justifyContent="center" spacing={1} className={classes.mt10}>
                             <Grid item>
                                 <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Talent)}>Talents</Button>
                             </Grid>
@@ -120,7 +120,7 @@ export const CharacterSheet = () => {
                                 <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Skills)}>Skills</Button>
                             </Grid>
                         </Grid>
-                        <Grid container justifyContent="center" spacing={1} xs={12} className={classes.mt10}>
+                        <Grid container justifyContent="center" spacing={1} className={classes.mt10}>
                             <Grid item>
                                 <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Armor)}>Armor</Button>
                             </Grid>

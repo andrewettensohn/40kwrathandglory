@@ -21,7 +21,7 @@ export const CalculateXpForArchetype = (character: Character, archetype: Archety
 
 export const calculateXpForAttributeChange = (oldAttributeValue: number, newAttributeValue: number, xp: number): number => {
 
-    if (oldAttributeValue === newAttributeValue) return xp;
+    if (oldAttributeValue == newAttributeValue) return xp;
 
     const isIncrease = newAttributeValue > oldAttributeValue;
 

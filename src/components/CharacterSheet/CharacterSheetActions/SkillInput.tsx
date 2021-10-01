@@ -28,7 +28,7 @@ export const SkillInput = ({
                 shrink: true,
             }}
             variant="outlined"
-            value={skillValue}
+            value={skillValue.toString()}
             onChange={(e) => onValueChanged(
                 skillName,
                 skillValue,

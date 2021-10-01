@@ -1,5 +1,5 @@
 import { Grid, TextField } from "@material-ui/core";
-import React, { } from "react";
+import React, { useEffect } from "react";
 import { calculateXpForAttributeChange } from "../../../helpers/XPHelper";
 import { Attributes } from "../../../interfaces/Attributes";
 import { Character } from "../../../interfaces/Character";
@@ -30,11 +30,11 @@ export const AttributesInput = ({
                         shrink: true,
                     }}
                     variant="outlined"
-                    value={attributeValue}
+                    value={attributeValue.toString()}
                     onChange={(e) => onValueChanged(
                         attributeName,
                         attributeValue,
-                        parseFloat(e.target.value))}
+                        parseInt(e.target.value))}
                 />
             </Grid>
         </Grid>

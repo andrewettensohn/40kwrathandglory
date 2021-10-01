@@ -17,6 +17,9 @@ export const AmmoAction = ({ character, updateCharacter }: AmmoActionProps): JSX
         ammoName: keyof Ammo,
         newValue: number,
     ) => {
+
+        if (isNaN(newValue)) newValue = 0;
+
         await updateCharacter({
             ...character,
             Ammo: {

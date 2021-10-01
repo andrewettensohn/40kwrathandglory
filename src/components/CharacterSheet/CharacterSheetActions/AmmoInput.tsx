@@ -27,7 +27,7 @@ export const AmmoInput = ({
                 shrink: true,
             }}
             variant="outlined"
-            value={ammoValue}
+            value={ammoValue.toString()}
             onChange={(e) => onValueChanged(
                 ammoName,
                 parseFloat(e.target.value))}

@@ -18,6 +18,8 @@ export const SkillsAction = ({ character, updateCharacter }: SkillsActionProps) 
         newValue: number
     ) => {
 
+        if (isNaN(newValue)) newValue = 0;
+
         await updateCharacter({
             ...character,
             XP: calculateXpForSkillChange(

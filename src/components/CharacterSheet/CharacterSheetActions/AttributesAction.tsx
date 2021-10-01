@@ -19,6 +19,8 @@ export const AttributesAction = ({ character, updateCharacter }: AttributesActio
         newValue: number
     ) => {
 
+        if (isNaN(newValue)) newValue = 0;
+
         await updateCharacter({
             ...character,
             XP: calculateXpForAttributeChange(
