@@ -1,5 +1,6 @@
 import { Toolbar, Typography, AppBar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import logo from '../logo.png';
 
 const useStyles = makeStyles({
     bar: {
@@ -21,6 +22,7 @@ export const AppBarHeader = () => {
     return (
         <AppBar position="static" color="secondary" >
             <Toolbar>
+                <img src={logo} />
                 <Typography variant="h6"><a href="/" className={classes.link}>Wrath and Glory</a></Typography>
             </Toolbar>
         </AppBar >
