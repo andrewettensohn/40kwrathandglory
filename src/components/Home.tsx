@@ -2,8 +2,9 @@ import { Button, CircularProgress, FormControl, Grid, InputLabel, MenuItem, Nati
 import React, { useEffect } from "react";
 import { CharacterList } from "./CharacterList/CharacterList";
 import { Character } from "../interfaces/Character";
-import { getCharacterListFromSyncAPI } from "../data/SyncModelService";
+import { getCharacterListFromSyncAPI, updateCharacterAtSyncAPI } from "../data/SyncModelService";
 import { useStyles } from "./AppStyles";
+import { addNewCharacter } from "../data/RestService";
 
 export const Home = () => {
     const [characterList, setCharacterList] = React.useState([] as Character[]);
@@ -17,15 +18,23 @@ export const Home = () => {
     }, []);
 
     const getCharacterListClicked = async () => {
-        setCharacterList(await getCharacterListFromSyncAPI());
-
+        setCharacterList(await getCharacterListFromSyncAPI())
     };
+
+    const newCharacterClicked = async () => {
+        addNewCharacter();
+    }
 
     return !isLoading
         ?
-        <div>
-            <CharacterList characters={characterList} />
-        </div>
+        <Grid container justifyContent="center" className={classes.mt10}>
+            <Grid item xs={12}>
+                <Button color="primary" variant="outlined" onClick={newCharacterClicked}>New Character</Button>
+            </Grid>
+            <Grid item xs={12}>
+                <CharacterList characters={characterList} />
+            </Grid>
+        </Grid>
         :
         <Grid container justifyContent="center">
             <Grid item>

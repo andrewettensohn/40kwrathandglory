@@ -16,5 +16,10 @@ export const updateSyncModels = async (syncModels: SyncModel[]) => {
 
     const action = `syncModels`;
     const result = await axios.post(`${baseApiRoute}${action}`, syncModels);
-    console.log(result.status);
+}
+
+export const addNewCharacter = async () => {
+
+    const action = `characterSyncModel`;
+    const result = await axios.post(`${baseApiRoute}${action}`);
 }

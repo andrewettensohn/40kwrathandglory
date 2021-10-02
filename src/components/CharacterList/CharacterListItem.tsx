@@ -14,7 +14,7 @@ export const CharacterListItem = ({ character }: CharacterListItemProps) => {
     if (character) {
 
         return (
-            <ListItemLink href={`/characterSheet?id=${character.Id}`}>
+            <ListItemLink href={`/characterSheet?id=${character.Id}`} key={character.Id}>
                 <ListItemText primary={character.Name} />
             </ListItemLink>
         );
