@@ -1,7 +1,7 @@
 {
   "name": "40kwrathandglory",
   "version": "0.1.0",
-  "homepage": "https://andrewettensohn.github.io/40kwrathandglory",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.12.3",
