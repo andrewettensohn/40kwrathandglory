@@ -1,5 +1,5 @@
 import { Character } from "../interfaces/Character";
-
+//
 export class SkillChecks {
     Athletics: number;
     Awareness: number;
