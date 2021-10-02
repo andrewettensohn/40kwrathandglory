@@ -1,22 +1,19 @@
-import { Button, FormControl, Grid, InputLabel, MenuItem, NativeSelect, Paper, Select, TextField, Typography } from "@material-ui/core";
+import { Button, CircularProgress, FormControl, Grid, InputLabel, MenuItem, NativeSelect, Paper, Select, TextField, Typography } from "@material-ui/core";
 import React, { useEffect } from "react";
-import { makeStyles } from '@material-ui/core/styles';
 import { CharacterList } from "./CharacterList/CharacterList";
 import { Character } from "../interfaces/Character";
 import { getCharacterListFromSyncAPI } from "../data/SyncModelService";
-
-const useStyles = makeStyles({
-
-});
+import { useStyles } from "./AppStyles";
 
 export const Home = () => {
     const [characterList, setCharacterList] = React.useState([] as Character[]);
+    const [isLoading, setIsLoading] = React.useState(true);
     const classes = useStyles();
 
     useEffect(() => {
         getCharacterListClicked()
             .catch((err) => console.log(err))
-        //.finally(() => setIsLoading(false))
+            .finally(() => setIsLoading(false))
     }, []);
 
     const getCharacterListClicked = async () => {
@@ -24,9 +21,15 @@ export const Home = () => {
 
     };
 
-    return (
+    return !isLoading
+        ?
         <div>
             <CharacterList characters={characterList} />
         </div>
-    );
+        :
+        <Grid container justifyContent="center">
+            <Grid item>
+                <CircularProgress color="secondary" className={classes.centerScreen} />
+            </Grid>
+        </Grid>
 }

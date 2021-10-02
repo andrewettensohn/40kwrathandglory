@@ -25,6 +25,6 @@ export const CharacterList = ({ characters }: CharacterListProps) => {
             </Grid>
         );
     } else {
-        return (<div></div>);
+        return (<div>No characters found.</div>);
     }
 }

@@ -14,7 +14,7 @@ export const useStyles = makeStyles({
         left: 'auto',
         position: 'fixed',
     },
-    actionModal: {
+    centerScreen: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

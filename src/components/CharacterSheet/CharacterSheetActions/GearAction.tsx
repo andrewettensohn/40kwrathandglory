@@ -50,7 +50,7 @@ export const GearAction = ({ gearList, character, updateCharacter }: GearActionP
             <Grid item>
                 <List component="nav">
                     {gearList.map(x => {
-                        return character.Armor.some(y => y.Id == x.Id)
+                        return character.CharacterGear.some(y => y.Id == x.Id)
                             ?
                             <ListItem key={x.Id}>
                                 <Grid container>

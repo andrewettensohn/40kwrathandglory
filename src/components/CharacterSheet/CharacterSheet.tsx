@@ -1,4 +1,4 @@
-import { Button, Divider, Fab, Grid, Modal, Paper } from "@material-ui/core";
+import { Button, CircularProgress, Divider, Fab, Grid, Modal, Paper } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { updateCharacterAtSyncAPI } from "../../data/SyncModelService";
 import { Character } from "../../interfaces/Character";
@@ -58,8 +58,6 @@ export const CharacterSheet = () => {
         toggleModal();
     }
 
-    console.log(character);
-
     return !isLoading
         ?
         <div>
@@ -83,7 +81,7 @@ export const CharacterSheet = () => {
                 onClose={toggleModal}
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
-                className={classes.actionModal}
+                className={classes.centerScreen}
             >
                 <Paper>
                     <Grid container className={classes.mb25}>
@@ -133,7 +131,11 @@ export const CharacterSheet = () => {
             </Modal>
         </div>
         :
-        <div></div>
+        <Grid container justifyContent="center">
+            <Grid item>
+                <CircularProgress color="secondary" className={classes.centerScreen} />
+            </Grid>
+        </Grid>
 
 
 }
