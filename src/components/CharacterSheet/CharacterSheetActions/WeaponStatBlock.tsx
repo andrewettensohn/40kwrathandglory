@@ -30,6 +30,9 @@ export const WeaponStatBlock = ({ weapon, character }: WeaponStatBlockProps) => 
                 <Typography>AP: {weapon.AP}</Typography>
             </Grid>
             <Grid item xs={12}>
+                <Typography>Salvo: {weapon.Salvo}</Typography>
+            </Grid>
+            <Grid item xs={12}>
                 <Typography>Range: {weapon.Range}</Typography>
             </Grid>
             <Grid item xs={12}>
