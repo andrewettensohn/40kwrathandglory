@@ -1,4 +1,5 @@
-import { TextField } from "@material-ui/core";
+import { Grid, TextField } from "@material-ui/core";
+import React from "react";
 import { Ammo } from "../../../interfaces/Ammo";
 import { useStyles } from "../../AppStyles";
 
@@ -16,22 +17,23 @@ export const AmmoInput = ({
     onValueChanged
 }: AmmoInputProps): JSX.Element => {
 
-    const classes = useStyles();
-
     return (
-        <TextField
-            id="outlined-number"
-            label={ammoName}
-            type="number"
-            InputLabelProps={{
-                shrink: true,
-            }}
-            variant="outlined"
-            value={ammoValue.toString()}
-            onChange={(e) => onValueChanged(
-                ammoName,
-                parseFloat(e.target.value))}
-            className={classes.numberInput}
-        />
+        <Grid container justifyContent="center">
+            <Grid item>
+                <TextField
+                    id="outlined-number"
+                    label={ammoName}
+                    type="number"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
+                    variant="outlined"
+                    value={ammoValue.toString()}
+                    onChange={(e) => onValueChanged(
+                        ammoName,
+                        parseFloat(e.target.value))}
+                />
+            </Grid>
+        </Grid>
     );
 }

@@ -22,8 +22,8 @@ export const AppBarHeader = () => {
     return (
         <AppBar position="static" color="secondary" >
             <Toolbar>
+                <Typography variant="h4"><a href="/" className={classes.link}>Wrath &#38; Glory</a></Typography>
                 <img src={logo} />
-                <Typography variant="h6"><a href="/" className={classes.link}>Wrath and Glory</a></Typography>
             </Toolbar>
         </AppBar >
     );

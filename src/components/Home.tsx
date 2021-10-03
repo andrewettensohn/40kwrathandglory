@@ -23,6 +23,7 @@ export const Home = () => {
 
     const newCharacterClicked = async () => {
         addNewCharacter();
+        await getCharacterListClicked();
     }
 
     return !isLoading

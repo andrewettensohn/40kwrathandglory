@@ -47,7 +47,7 @@ export const DiceRoller = () => {
             <Grid item>
             </Grid>
             <Grid item>
-                <Button onClick={OnRoll}>Roll</Button>
+                <Button onClick={OnRoll} variant="outlined">Roll</Button>
             </Grid>
             <Grid item xs={12}>
                 <Grid container spacing={1}>

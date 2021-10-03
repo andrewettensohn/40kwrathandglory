@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import { isKeyOfSkills } from "../../../helpers/KeyHelper";
 import { calculateXpForSkillChange } from "../../../helpers/XPHelper";
 import { Character } from "../../../interfaces/Character";
@@ -34,19 +34,26 @@ export const SkillsAction = ({ character, updateCharacter }: SkillsActionProps) 
     }
 
     return (
-        <Grid container justifyContent='space-between' spacing={3}>
-            {Object.entries(character.Skills).map(([key, value]) => {
-                if (isKeyOfSkills(key, character.Skills)) {
-                    return (
-                        <Grid item key={key}>
-                            <SkillInput
-                                skillName={key}
-                                skillValue={value}
-                                onValueChanged={onValueChanged} />
-                        </Grid>
-                    )
-                }
-            })}
+        <Grid container>
+            <Grid item>
+                <Typography></Typography>
+            </Grid>
+            <Grid item>
+                <Grid container justifyContent='space-between' spacing={3}>
+                    {Object.entries(character.Skills).map(([key, value]) => {
+                        if (isKeyOfSkills(key, character.Skills)) {
+                            return (
+                                <Grid item key={key}>
+                                    <SkillInput
+                                        skillName={key}
+                                        skillValue={value}
+                                        onValueChanged={onValueChanged} />
+                                </Grid>
+                            )
+                        }
+                    })}
+                </Grid>
+            </Grid>
         </Grid>
     );
 }

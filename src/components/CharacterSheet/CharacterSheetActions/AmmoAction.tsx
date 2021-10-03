@@ -30,11 +30,11 @@ export const AmmoAction = ({ character, updateCharacter }: AmmoActionProps): JSX
     }
 
     return (
-        <Grid container spacing={6}>
+        <Grid container justifyContent="center" spacing={3}>
             {Object.entries(character.Ammo).map(([key, value]) => {
                 if (isKeyOfAmmo(key, character.Ammo)) {
                     return (
-                        <Grid item xs={6} key={key}>
+                        <Grid item xs={12} key={key}>
                             <AmmoInput ammoName={key} ammoValue={value} onValueChanged={onValueChanged} />
                         </Grid>
                     )
