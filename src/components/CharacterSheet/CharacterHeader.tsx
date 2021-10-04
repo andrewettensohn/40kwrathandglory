@@ -52,13 +52,13 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
     }, [character.XP]);
 
     return (
-        <Paper className={classes.sheetHeader}>
+        <Paper className={classes.sheetHeader} elevation={5}>
             <Grid container>
                 <Grid item>
                     <NameInput character={character} updateCharacter={updateCharacter} />
                 </Grid>
             </Grid>
-            <Grid justifyContent="flex-start" container spacing={1} className={classes.mt5}>
+            <Grid justifyContent="flex-start" container spacing={1}>
                 <Grid item>
                     <TextField
                         id="outlined-number"
@@ -102,7 +102,7 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
                     />
                 </Grid>
             </Grid>
-            <Grid justifyContent="flex-start" container spacing={3} className={classes.mt5}>
+            <Grid justifyContent="flex-start" container spacing={3}>
                 <Grid item>
                     <DiceRoller />
                 </Grid>

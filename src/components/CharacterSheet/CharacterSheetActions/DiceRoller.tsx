@@ -19,15 +19,18 @@ export const DiceRoller = () => {
         setIconSummary(`= ${totalIcons} icons`);
     }
     const OnNumberOfDiceChanged = (dice: number) => {
-        if (dice > 16) {
-            dice = 16;
-        }
-
+        if (dice > 16) { dice = 16; }
         setNumberOfDice(dice);
     }
 
-    const onIncreaseNumberOfDice = () => setNumberOfDice(numberOfDice + 1)
-    const onDecreaseNumberOfDice = () => setNumberOfDice(numberOfDice - 1)
+    const onIncreaseNumberOfDice = () => {
+        if (numberOfDice < 16) {
+            setNumberOfDice(numberOfDice + 1);
+        }
+    }
+    const onDecreaseNumberOfDice = () => {
+        setNumberOfDice(numberOfDice - 1);
+    }
 
     return (
         <Grid container spacing={2}>

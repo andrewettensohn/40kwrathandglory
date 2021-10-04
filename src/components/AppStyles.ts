@@ -3,8 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles({
     sheetHeader: {
         minHeight: 100,
-        padding: 10,
-        marginBottom: 15,
+        padding: 5,
+        marginLeft: 15,
+        marginRight: 15,
+        marginTop: 10,
+        marginBottom: 5,
     },
     floatingActionButton: {
         margin: 0,
@@ -36,6 +39,7 @@ export const useStyles = makeStyles({
         overflowY: "scroll",
         height: "45vh",
         overflowX: "hidden",
-        padding: 5
+        marginLeft: 16,
+        marginRight: 16
     }
 });
