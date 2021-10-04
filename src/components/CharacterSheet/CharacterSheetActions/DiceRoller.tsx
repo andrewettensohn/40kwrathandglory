@@ -7,9 +7,17 @@ export const DiceRoller = () => {
 
     const [numberOfDice, setNumberOfDice] = React.useState(0);
     const [rollResults, setRollResults] = React.useState([] as number[]);
+    const [iconSummary, setIconSummary] = React.useState("");
     const classes = useStyles();
 
-    const OnRoll = () => setRollResults(Array.from({ length: numberOfDice }, () => Math.floor((Math.random() * 6) + 1)));
+    const OnRoll = () => {
+        const results = Array.from({ length: numberOfDice }, () => Math.floor((Math.random() * 6) + 1));
+        setRollResults(results);
+
+        const exaltedIcons = results.filter(x => x == 6).length * 2;
+        const totalIcons = exaltedIcons + results.filter(x => x == 4 || x == 5).length;
+        setIconSummary(`= ${totalIcons} icons`);
+    }
     const OnNumberOfDiceChanged = (dice: number) => {
         if (dice > 16) {
             dice = 16;
@@ -66,6 +74,9 @@ export const DiceRoller = () => {
                                 </Card>
                             </Grid>
                     })}
+                    <Grid item>
+                        <Typography>{iconSummary}</Typography>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
