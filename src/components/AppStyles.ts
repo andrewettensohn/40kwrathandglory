@@ -4,7 +4,7 @@ export const useStyles = makeStyles({
     sheetHeader: {
         minHeight: 100,
         padding: 10,
-        marginBottom: 15
+        marginBottom: 15,
     },
     floatingActionButton: {
         margin: 0,
@@ -34,7 +34,7 @@ export const useStyles = makeStyles({
     },
     scrollBox: {
         overflowY: "scroll",
-        maxHeight: "65vh",
+        height: "45vh",
         overflowX: "hidden",
         padding: 5
     }

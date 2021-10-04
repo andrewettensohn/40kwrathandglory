@@ -28,20 +28,18 @@ const theme = createTheme({
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Paper style={{ height: "100vh" }}>
+      <Paper style={{ height: "115vh" }}>
         <AppBarHeader />
-        <Container>
-          <Router>
-            <Switch>
-              <Route exact path="/">
-                <Home />
-              </Route>
-              <Route path="/characterSheet">
-                <CharacterSheet />
-              </Route>
-            </Switch>
-          </Router>
-        </Container>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/characterSheet">
+              <CharacterSheet />
+            </Route>
+          </Switch>
+        </Router>
       </Paper>
     </ThemeProvider>
   );

@@ -61,16 +61,19 @@ export const CharacterSheet = () => {
     return !isLoading
         ?
         <div>
-            <Grid container>
+            <Grid container spacing={1}>
                 <Grid item xs={12}>
                     <CharacterHeader character={character} updateCharacter={setAndUpdateCharacter} />
                 </Grid>
-                <Grid item className={classes.scrollBox} xs={12}>
+                <Grid item xs={12} className={classes.scrollBox}>
                     <SheetActionControl
                         character={character}
                         syncModels={syncModels}
                         actionType={selectedActionType}
                         updateCharacter={setAndUpdateCharacter} />
+                </Grid>
+                <Grid item xs={12}>
+                    <Divider className={classes.mt10} />
                 </Grid>
             </Grid>
             <Fab color="primary" className={classes.floatingActionButton} onClick={toggleModal}>

@@ -2,6 +2,7 @@ import { Grid, Paper, TextField } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { Character } from "../../interfaces/Character";
 import { useStyles } from "../AppStyles";
+import { DiceRoller } from "./CharacterSheetActions/DiceRoller";
 import { NameInput } from "./NameInput";
 
 interface CharacterHeaderProps {
@@ -52,10 +53,12 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
 
     return (
         <Paper className={classes.sheetHeader}>
-            <Grid justifyContent="space-between" container>
+            <Grid container>
                 <Grid item>
                     <NameInput character={character} updateCharacter={updateCharacter} />
                 </Grid>
+            </Grid>
+            <Grid justifyContent="flex-start" container spacing={1} className={classes.mt5}>
                 <Grid item>
                     <TextField
                         id="outlined-number"
@@ -68,22 +71,6 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
                         variant="outlined"
                         value={rank}
                         onChange={onRankChange}
-                    />
-                </Grid>
-            </Grid>
-            <Grid justifyContent="space-between" container spacing={3} className={classes.mt5}>
-                <Grid item>
-                    <TextField
-                        id="outlined-number"
-                        label="XP"
-                        type="number"
-                        className={classes.numberInput}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        variant="outlined"
-                        value={xp}
-                        onChange={onXpChange}
                     />
                 </Grid>
                 <Grid item>
@@ -99,6 +86,25 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
                         value={tier}
                         onChange={onTierChange}
                     />
+                </Grid>
+                <Grid item>
+                    <TextField
+                        id="outlined-number"
+                        label="XP"
+                        type="number"
+                        className={classes.numberInput}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                        variant="outlined"
+                        value={xp}
+                        onChange={onXpChange}
+                    />
+                </Grid>
+            </Grid>
+            <Grid justifyContent="flex-start" container spacing={3} className={classes.mt5}>
+                <Grid item>
+                    <DiceRoller />
                 </Grid>
             </Grid>
         </Paper>

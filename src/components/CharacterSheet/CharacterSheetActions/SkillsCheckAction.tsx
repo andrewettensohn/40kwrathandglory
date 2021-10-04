@@ -12,9 +12,6 @@ export const SkillsCheckAction = ({
 
     return (
         <Grid container>
-            <Grid item>
-                <DiceRoller />
-            </Grid>
             <Grid item xs={12}>
                 <TableContainer component={Paper}>
                     <Table>

@@ -6,7 +6,7 @@ const useStyles = makeStyles({
     bar: {
         backgroundColor: '#1d1d1d',
         display: 'flex',
-        maxHeight: 100,
+        maxHeight: 50,
         fontSize: 'calc(10px + 2vmin)'
     },
     link: {
