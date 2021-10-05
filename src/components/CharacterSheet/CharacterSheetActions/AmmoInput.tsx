@@ -16,6 +16,7 @@ export const AmmoInput = ({
     ammoValue,
     onValueChanged
 }: AmmoInputProps): JSX.Element => {
+    const classes = useStyles();
 
     return (
         <Grid container justifyContent="center">
@@ -28,6 +29,7 @@ export const AmmoInput = ({
                         shrink: true,
                     }}
                     variant="outlined"
+                    className={classes.numberInput}
                     value={ammoValue.toString()}
                     onChange={(e) => onValueChanged(
                         ammoName,

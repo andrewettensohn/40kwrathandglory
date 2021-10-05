@@ -38,7 +38,7 @@ export const ArchetypeAction = ({ character, archetypeList, updateCharacter }: A
     return showInput
         ?
         <Grid container>
-            <List component="nav" className={classes.scrollBox}>
+            <List component="nav">
                 {archetypeList.map(x => {
                     return (
                         <ListItem key={x.Id}>

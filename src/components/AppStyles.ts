@@ -7,7 +7,6 @@ export const useStyles = makeStyles({
         marginLeft: 15,
         marginRight: 15,
         marginTop: 10,
-        marginBottom: 5,
     },
     floatingActionButton: {
         margin: 0,

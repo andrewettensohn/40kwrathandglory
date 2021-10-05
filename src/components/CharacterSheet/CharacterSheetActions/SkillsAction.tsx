@@ -34,12 +34,9 @@ export const SkillsAction = ({ character, updateCharacter }: SkillsActionProps) 
     }
 
     return (
-        <Grid container>
-            <Grid item>
-                <Typography></Typography>
-            </Grid>
-            <Grid item>
-                <Grid container justifyContent='space-between' spacing={3}>
+        <Grid container justifyContent='center'>
+            <Grid item xs={12} md={8} lg={8}>
+                <Grid container justifyContent='center' spacing={3}>
                     {Object.entries(character.Skills).map(([key, value]) => {
                         if (isKeyOfSkills(key, character.Skills)) {
                             return (

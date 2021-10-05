@@ -4,6 +4,7 @@ import { isKeyOfAmmo } from "../../../helpers/KeyHelper";
 import { Ammo } from "../../../interfaces/Ammo";
 import { Character } from "../../../interfaces/Character";
 import { Weapon } from "../../../interfaces/Weapon";
+import { useStyles } from "../../AppStyles";
 import { AmmoInput } from "./AmmoInput";
 
 interface AmmoActionProps {
@@ -30,16 +31,20 @@ export const AmmoAction = ({ character, updateCharacter }: AmmoActionProps): JSX
     }
 
     return (
-        <Grid container justifyContent="center" spacing={3}>
-            {Object.entries(character.Ammo).map(([key, value]) => {
-                if (isKeyOfAmmo(key, character.Ammo)) {
-                    return (
-                        <Grid item xs={12} key={key}>
-                            <AmmoInput ammoName={key} ammoValue={value} onValueChanged={onValueChanged} />
-                        </Grid>
-                    )
-                }
-            })}
+        <Grid container justifyContent='center'>
+            <Grid item xs={12} md={8} lg={8}>
+                <Grid container spacing={3} justifyContent="center">
+                    {Object.entries(character.Ammo).map(([key, value]) => {
+                        if (isKeyOfAmmo(key, character.Ammo)) {
+                            return (
+                                <Grid item key={key}>
+                                    <AmmoInput ammoName={key} ammoValue={value} onValueChanged={onValueChanged} />
+                                </Grid>
+                            )
+                        }
+                    })}
+                </Grid>
+            </Grid>
         </Grid>
     );
 }

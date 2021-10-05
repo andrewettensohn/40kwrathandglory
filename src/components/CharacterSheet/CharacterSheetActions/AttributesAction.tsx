@@ -35,19 +35,23 @@ export const AttributesAction = ({ character, updateCharacter }: AttributesActio
     }
 
     return (
-        <Grid container spacing={3} justifyContent='center'>
-            {Object.entries(character.Attributes).map(([key, value]) => {
-                if (isKeyOfAttributes(key, character.Attributes)) {
-                    return (
-                        <Grid item key={key}>
-                            <AttributesInput
-                                attributeName={key}
-                                attributeValue={value}
-                                onValueChanged={onValueChanged} />
-                        </Grid>
-                    );
-                }
-            })}
+        <Grid container justifyContent='center'>
+            <Grid item xs={12} md={8} lg={8}>
+                <Grid container spacing={3} justifyContent="center">
+                    {Object.entries(character.Attributes).map(([key, value]) => {
+                        if (isKeyOfAttributes(key, character.Attributes)) {
+                            return (
+                                <Grid item key={key}>
+                                    <AttributesInput
+                                        attributeName={key}
+                                        attributeValue={value}
+                                        onValueChanged={onValueChanged} />
+                                </Grid>
+                            );
+                        }
+                    })}
+                </Grid>
+            </Grid>
         </Grid>
     );
 }

@@ -67,7 +67,7 @@ export const SheetActionControl = ({ character, actionType, syncModels, updateCh
         );
     } else if (actionType == ActionType.Checks) {
         return (
-            <SkillsCheckAction character={character} />
+            <SkillsCheckAction updateCharacter={updateCharacter} character={character} />
         );
     } else if (actionType == ActionType.Armor) {
         return (

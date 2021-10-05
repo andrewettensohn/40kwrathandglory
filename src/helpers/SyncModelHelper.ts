@@ -30,8 +30,8 @@ export const getCharacterFromSyncModelListForId = (syncModels: SyncModel[], id: 
         character = JSON.parse(characterSyncModel.json);
     }
 
-    character.CombatTraits = new CombatTraits(character);
-    character.SkillChecks = new SkillChecks(character);
+    character.CombatTraits = new CombatTraits({ ...character });
+    character.SkillChecks = new SkillChecks({ ...character });
 
     return character;
 }

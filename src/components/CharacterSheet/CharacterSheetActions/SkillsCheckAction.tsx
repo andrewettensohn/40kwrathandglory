@@ -1,17 +1,71 @@
-import { Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core";
+import { Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@material-ui/core";
 import React from "react";
 import { Character } from "../../../interfaces/Character";
+import { useStyles } from "../../AppStyles";
 import { DiceRoller } from "./DiceRoller";
 
 interface SkillsCheckActionProps {
     character: Character,
+    updateCharacter: (character: Character) => Promise<void>
 }
 
-export const SkillsCheckAction = ({
-    character }: SkillsCheckActionProps) => {
+export const SkillsCheckAction = ({ character, updateCharacter }: SkillsCheckActionProps) => {
+    const classes = useStyles();
+
+    const onWrathChanged = async (value: number) => {
+
+        if (isNaN(value)) value = 0;
+
+        await updateCharacter({
+            ...character,
+            Wrath: value
+        });
+    }
+
+    const onGloryChanged = async (value: number) => {
+
+        if (isNaN(value)) value = 0;
+
+        await updateCharacter({
+            ...character,
+            Glory: value
+        });
+    }
 
     return (
         <Grid container>
+            <Grid item xs={12}>
+                <Grid container justifyContent="space-between" className={classes.mt5}>
+                    <Grid item>
+                        <TextField
+                            id="outlined-number"
+                            label="Wrath"
+                            type="number"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            variant="outlined"
+                            value={character.Wrath}
+                            onChange={(e) => onWrathChanged(parseFloat(e.target.value))}
+                            className={classes.numberInput}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            id="outlined-number"
+                            label="Glory"
+                            type="number"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            variant="outlined"
+                            value={character.Glory}
+                            onChange={(e) => onGloryChanged(parseFloat(e.target.value))}
+                            className={classes.numberInput}
+                        />
+                    </Grid>
+                </Grid>
+            </Grid>
             <Grid item xs={12}>
                 <TableContainer component={Paper}>
                     <Table>

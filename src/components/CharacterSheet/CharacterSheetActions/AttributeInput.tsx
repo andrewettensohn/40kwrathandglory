@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { calculateXpForAttributeChange } from "../../../helpers/XPHelper";
 import { Attributes } from "../../../interfaces/Attributes";
 import { Character } from "../../../interfaces/Character";
+import { useStyles } from "../../AppStyles";
 
 interface AttributesInputProps {
     attributeName: keyof Attributes,
@@ -18,6 +19,7 @@ export const AttributesInput = ({
     attributeValue,
     onValueChanged
 }: AttributesInputProps) => {
+    const classes = useStyles();
 
     return (
         <Grid container spacing={3} justifyContent='center'>
@@ -30,6 +32,7 @@ export const AttributesInput = ({
                         shrink: true,
                     }}
                     variant="outlined"
+                    className={classes.numberInput}
                     value={attributeValue.toString()}
                     onChange={(e) => onValueChanged(
                         attributeName,

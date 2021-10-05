@@ -45,8 +45,8 @@ export const CharacterSheet = () => {
     }
 
     const setAndUpdateCharacter = async (updatedCharacter: Character) => {
-        updatedCharacter.CombatTraits = new CombatTraits(updatedCharacter);
-        updatedCharacter.SkillChecks = new SkillChecks(updatedCharacter);
+        updatedCharacter.CombatTraits = new CombatTraits({ ...character });
+        updatedCharacter.SkillChecks = new SkillChecks({ ...character });
         setCharacter(updatedCharacter);
         await updateCharacterAtSyncAPI(updatedCharacter);
     }
@@ -61,7 +61,7 @@ export const CharacterSheet = () => {
     return !isLoading
         ?
         <div>
-            <Grid container spacing={1}>
+            <Grid container spacing={2}>
                 <Grid item xs={12}>
                     <CharacterHeader character={character} updateCharacter={setAndUpdateCharacter} />
                 </Grid>

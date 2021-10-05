@@ -12,44 +12,35 @@ interface CharacterHeaderProps {
 
 export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderProps) => {
 
-    const [xp, setXp] = React.useState(character.XP);
-    const [tier, setTier] = React.useState(character.Tier);
-    const [rank, setRank] = React.useState(character.Rank);
+    // const [xp, setXp] = React.useState(character.XP);
+    // const [tier, setTier] = React.useState(character.Tier);
+    // const [rank, setRank] = React.useState(character.Rank);
     const classes = useStyles();
 
-    const onXpChange = async (event: React.ChangeEvent<{ value: unknown }>) => {
-        const value = event.target.value as number;
-        const update = character;
-
-        update.XP = value;
-        setXp(value);
-
-        await updateCharacter(update);
+    const onXpChange = async (value: number) => {
+        await updateCharacter({
+            ...character,
+            XP: value
+        });
     }
 
-    const onRankChange = async (event: React.ChangeEvent<{ value: unknown }>) => {
-        const value = event.target.value as number;
-        const update = character;
-
-        update.Rank = value;
-        setRank(value);
-
-        await updateCharacter(update);
+    const onRankChange = async (value: number) => {
+        await updateCharacter({
+            ...character,
+            Rank: value
+        });
     }
 
-    const onTierChange = async (event: React.ChangeEvent<{ value: unknown }>) => {
-        const value = event.target.value as number;
-        const update = character;
-
-        update.Tier = value;
-        setTier(value);
-
-        await updateCharacter(update);
+    const onTierChange = async (value: number) => {
+        await updateCharacter({
+            ...character,
+            Tier: value
+        });
     }
 
-    useEffect(() => {
-        setXp(character.XP);
-    }, [character.XP]);
+    // useEffect(() => {
+    //     setXp(character.XP);
+    // }, [character.XP]);
 
     return (
         <Paper className={classes.sheetHeader} elevation={5}>
@@ -69,8 +60,8 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
                             shrink: true,
                         }}
                         variant="outlined"
-                        value={rank}
-                        onChange={onRankChange}
+                        value={character.Rank.toString()}
+                        onChange={(e) => onRankChange(parseInt(e.target.value))}
                     />
                 </Grid>
                 <Grid item>
@@ -83,8 +74,8 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
                             shrink: true,
                         }}
                         variant="outlined"
-                        value={tier}
-                        onChange={onTierChange}
+                        value={character.Tier.toString()}
+                        onChange={(e) => onTierChange(parseInt(e.target.value))}
                     />
                 </Grid>
                 <Grid item>
@@ -97,8 +88,8 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
                             shrink: true,
                         }}
                         variant="outlined"
-                        value={xp}
-                        onChange={onXpChange}
+                        value={character.XP.toString()}
+                        onChange={(e) => onXpChange(parseInt(e.target.value))}
                     />
                 </Grid>
             </Grid>
