@@ -12,6 +12,17 @@ interface SkillsCheckActionProps {
 export const SkillsCheckAction = ({ character, updateCharacter }: SkillsCheckActionProps) => {
     const classes = useStyles();
 
+    const onValueChange = async (
+        valueName: string,
+        newValue: number) => {
+            if (isNaN(newValue)) newValue = 0;
+
+            await updateCharacter({
+                ...character,
+                [valueName]: newValue
+            })
+    }
+
     const onWrathChanged = async (value: number) => {
 
         if (isNaN(value)) value = 0;
@@ -32,6 +43,7 @@ export const SkillsCheckAction = ({ character, updateCharacter }: SkillsCheckAct
         });
     }
 
+
     return (
         <Grid container>
             <Grid item xs={12}>
@@ -46,7 +58,7 @@ export const SkillsCheckAction = ({ character, updateCharacter }: SkillsCheckAct
                             }}
                             variant="outlined"
                             value={character.Wrath}
-                            onChange={(e) => onWrathChanged(parseFloat(e.target.value))}
+                            onChange={(e) => onValueChange("Wrath", parseFloat(e.target.value))}
                             className={classes.numberInput}
                         />
                     </Grid>
@@ -60,7 +72,7 @@ export const SkillsCheckAction = ({ character, updateCharacter }: SkillsCheckAct
                             }}
                             variant="outlined"
                             value={character.Glory}
-                            onChange={(e) => onGloryChanged(parseFloat(e.target.value))}
+                            onChange={(e) => onValueChange("Glory", parseFloat(e.target.value))}
                             className={classes.numberInput}
                         />
                     </Grid>
