@@ -22,28 +22,7 @@ export const SkillsCheckAction = ({ character, updateCharacter }: SkillsCheckAct
                 [valueName]: newValue
             })
     }
-
-    const onWrathChanged = async (value: number) => {
-
-        if (isNaN(value)) value = 0;
-
-        await updateCharacter({
-            ...character,
-            Wrath: value
-        });
-    }
-
-    const onGloryChanged = async (value: number) => {
-
-        if (isNaN(value)) value = 0;
-
-        await updateCharacter({
-            ...character,
-            Glory: value
-        });
-    }
-
-
+    
     return (
         <Grid container>
             <Grid item xs={12}>
