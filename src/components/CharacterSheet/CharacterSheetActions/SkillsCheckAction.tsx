@@ -3,6 +3,7 @@ import React from "react";
 import { Character } from "../../../interfaces/Character";
 import { useStyles } from "../../AppStyles";
 import { DiceRoller } from "./DiceRoller";
+import { AttributesInput } from "./AttributeInput";
 
 interface SkillsCheckActionProps {
     character: Character,
@@ -14,6 +15,7 @@ export const SkillsCheckAction = ({ character, updateCharacter }: SkillsCheckAct
 
     const onValueChange = async (
         valueName: string,
+        oldValue: number,
         newValue: number) => {
             if (isNaN(newValue)) newValue = 0;
 
@@ -28,32 +30,20 @@ export const SkillsCheckAction = ({ character, updateCharacter }: SkillsCheckAct
             <Grid item xs={12}>
                 <Grid container justifyContent="space-between" className={classes.mt5}>
                     <Grid item>
-                        <TextField
-                            id="outlined-number"
-                            label="Wrath"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            variant="outlined"
-                            value={character.Wrath}
-                            onChange={(e) => onValueChange("Wrath", parseFloat(e.target.value))}
-                            className={classes.numberInput}
-                        />
+                        <AttributesInput
+                            attributeName="Wrath"
+                            attributeValue={character.Wrath}
+                            onValueChanged={onValueChanged}
+                        >
+                        </AttributesInput>
                     </Grid>
                     <Grid item>
-                        <TextField
-                            id="outlined-number"
-                            label="Glory"
-                            type="number"
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                            variant="outlined"
-                            value={character.Glory}
-                            onChange={(e) => onValueChange("Glory", parseFloat(e.target.value))}
-                            className={classes.numberInput}
-                        />
+                    <AttributesInput
+                            attributeName="Glory"
+                            attributeValue={character.Glory}
+                            onValueChanged={onValueChanged}
+                        >
+                        </AttributesInput>
                     </Grid>
                 </Grid>
             </Grid>
