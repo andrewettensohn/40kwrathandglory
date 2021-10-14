@@ -12,9 +12,6 @@ interface CharacterHeaderProps {
 
 export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderProps) => {
 
-    // const [xp, setXp] = React.useState(character.XP);
-    // const [tier, setTier] = React.useState(character.Tier);
-    // const [rank, setRank] = React.useState(character.Rank);
     const classes = useStyles();
 
     const onXpChange = async (value: number) => {
@@ -37,10 +34,6 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
             Tier: value
         });
     }
-
-    // useEffect(() => {
-    //     setXp(character.XP);
-    // }, [character.XP]);
 
     return (
         <Paper className={classes.sheetHeader} elevation={5}>

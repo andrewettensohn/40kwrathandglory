@@ -15,7 +15,6 @@ interface ArmorActionProps {
 export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActionProps): JSX.Element => {
 
     const [showInput, setShowInput] = React.useState(false);
-    const classes = useStyles();
 
     const onManageArmorClicked = () => setShowInput(!showInput);
 
@@ -40,18 +39,15 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
 
     const onEquipChangeClicked = async (armor: Armor, isEquipped: boolean): Promise<void> => {
 
-        const characterArmor = character.Armor;
         character.Armor.forEach(x => {
             if (x.Id == armor.Id) {
                 x.IsEquipped = isEquipped;
-            } else {
-                x.IsEquipped = false;
             }
         });
 
         await updateCharacter({
             ...character,
-            Armor: characterArmor
+            Armor: character.Armor
         });
     }
 
@@ -67,7 +63,7 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
             </Grid>
             <Grid item>
                 <List component="nav">
-                    {armorList.map(x => {
+                    {armorList.sort((x, y) => x.Name.localeCompare(y.Name)).map(x => {
                         return character.Armor.some(y => y.Id == x.Id)
                             ?
                             <ListItem key={x.Id}>
@@ -102,7 +98,7 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
             </Grid>
             <Grid item>
                 <List component="nav">
-                    {character.Armor.map(x => {
+                    {character.Armor.sort((x, y) => x.Name.localeCompare(y.Name)).map(x => {
                         return x.IsEquipped
                             ?
                             <ListItem key={x.Id}>

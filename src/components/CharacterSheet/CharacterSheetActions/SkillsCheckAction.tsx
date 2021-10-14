@@ -45,7 +45,7 @@ export const SkillsCheckAction = ({ character, updateCharacter }: SkillsCheckAct
                                 shrink: true,
                             }}
                             variant="outlined"
-                            value={character.Wrath}
+                            value={character.Wrath.toString()}
                             onChange={(e) => onWrathChanged(parseFloat(e.target.value))}
                             className={classes.numberInput}
                         />
@@ -59,7 +59,7 @@ export const SkillsCheckAction = ({ character, updateCharacter }: SkillsCheckAct
                                 shrink: true,
                             }}
                             variant="outlined"
-                            value={character.Glory}
+                            value={character.Glory.toString()}
                             onChange={(e) => onGloryChanged(parseFloat(e.target.value))}
                             className={classes.numberInput}
                         />
