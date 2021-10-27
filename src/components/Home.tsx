@@ -29,10 +29,10 @@ export const Home = () => {
     return !isLoading
         ?
         <Grid container justifyContent="center" className={classes.mt10}>
-            <Grid item xs={12}>
+            <Grid item>
                 <Button color="primary" variant="outlined" onClick={newCharacterClicked}>New Character</Button>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item>
                 <CharacterList characters={characterList} />
             </Grid>
         </Grid>

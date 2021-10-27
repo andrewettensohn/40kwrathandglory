@@ -17,7 +17,7 @@ export const CharacterList = ({ characters }: CharacterListProps) => {
                     <List component="nav">
                         {characters.map(character => {
                             return (
-                                <CharacterListItem character={character} />
+                                <CharacterListItem key={character.Id} character={character} />
                             )
                         })}
                     </List>
