@@ -2,7 +2,7 @@ import { Button, CircularProgress, FormControl, Grid, InputLabel, MenuItem, Nati
 import React, { useEffect } from "react";
 import { CharacterList } from "./CharacterList/CharacterList";
 import { Character } from "../interfaces/Character";
-import { getCharacterListFromSyncAPI, updateCharacterAtSyncAPI } from "../data/SyncModelService";
+import { getCharacterListFromSyncAPI } from "../data/SyncModelService";
 import { useStyles } from "./AppStyles";
 import { addNewCharacter } from "../data/RestService";
 

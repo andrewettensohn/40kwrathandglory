@@ -28,7 +28,7 @@ const theme = createTheme({
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Paper style={{ height: "115vh" }}>
+      <Paper style={{ height: "100vh" }}>
         <AppBarHeader />
         <Router>
           <Switch>
