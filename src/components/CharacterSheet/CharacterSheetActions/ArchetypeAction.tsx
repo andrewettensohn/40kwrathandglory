@@ -4,7 +4,7 @@ import { Character } from "../../../interfaces/Character";
 import { Edit } from "@material-ui/icons";
 import { Archetype } from "../../../interfaces/Archetype";
 import { CalculateXpForArchetype } from "../../../helpers/XPHelper";
-import { useStyles } from "../../AppStyles";
+import { useAppStyles } from "../../AppStyles";
 
 interface ArchetypeActionProps {
     character: Character,
@@ -14,7 +14,7 @@ interface ArchetypeActionProps {
 
 export const ArchetypeAction = ({ character, archetypeList, updateCharacter }: ArchetypeActionProps) => {
     const [showInput, setShowInput] = React.useState(true);
-    const classes = useStyles();
+    const classes = useAppStyles();
 
     useEffect(() => {
         const characterHasArchetype = character.Archetype?.Id?.length > 0;

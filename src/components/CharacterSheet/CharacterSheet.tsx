@@ -11,7 +11,7 @@ import { ActionType } from "../../interfaces/Enumerations/ActionType";
 import { CharacterHeader } from "./CharacterHeader";
 import { CombatTraits } from "../../classes/CombatTraits";
 import { SkillChecks } from "../../classes/SkillChecks";
-import { useStyles } from "../AppStyles";
+import { useAppStyles } from "../AppStyles";
 
 export const CharacterSheet = () => {
 
@@ -21,7 +21,7 @@ export const CharacterSheet = () => {
 
     const [syncModels, setSyncModels] = React.useState([] as SyncModel[]);
     const [character, setCharacter] = React.useState({} as Character);
-    const classes = useStyles();
+    const classes = useAppStyles();
 
     let params = new URLSearchParams(document.location.search.substring(1));
     let id = params.get("id") as string;
@@ -82,8 +82,6 @@ export const CharacterSheet = () => {
             <Modal
                 open={isActionModalOpen}
                 onClose={toggleModal}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
                 className={classes.centerScreen}
             >
                 <Paper>

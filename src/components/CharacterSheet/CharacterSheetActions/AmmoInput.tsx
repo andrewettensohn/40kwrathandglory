@@ -1,7 +1,7 @@
 import { Grid, TextField } from "@material-ui/core";
 import React from "react";
 import { Ammo } from "../../../interfaces/Ammo";
-import { useStyles } from "../../AppStyles";
+import { useAppStyles } from "../../AppStyles";
 
 interface AmmoInputProps {
     ammoName: keyof Ammo,
@@ -16,7 +16,7 @@ export const AmmoInput = ({
     ammoValue,
     onValueChanged
 }: AmmoInputProps): JSX.Element => {
-    const classes = useStyles();
+    const classes = useAppStyles();
 
     return (
         <Grid container justifyContent="center">

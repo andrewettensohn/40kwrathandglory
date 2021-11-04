@@ -15,11 +15,17 @@ export const getSyncModels = async (): Promise<SyncModel[]> => {
 export const updateSyncModels = async (syncModels: SyncModel[]) => {
 
     const action = `syncModels`;
-    const result = await axios.post(`${baseApiRoute}${action}`, syncModels);
+    await axios.post(`${baseApiRoute}${action}`, syncModels);
 }
 
 export const addNewCharacter = async () => {
 
     const action = `characterSyncModel`;
-    const result = await axios.post(`${baseApiRoute}${action}`);
+    await axios.post(`${baseApiRoute}${action}`);
+}
+
+export const deleteCharacter = async (id : string) => {
+
+    const action = `syncModels/${id}`;
+    await axios.delete(`${baseApiRoute}${action}`);
 }

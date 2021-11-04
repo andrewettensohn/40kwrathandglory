@@ -3,7 +3,7 @@ import { ControlCamera } from "@material-ui/icons";
 import React from "react";
 import { Character } from "../../../interfaces/Character";
 import { Talent } from "../../../interfaces/Talent";
-import { useStyles } from "../../AppStyles";
+import { useAppStyles } from "../../AppStyles";
 import { TalentInfoBlock } from "./TalentInfoBlock";
 
 interface TalentActionProps {
@@ -14,7 +14,7 @@ interface TalentActionProps {
 
 export const TalentAction = ({ talentList, character, updateCharacter }: TalentActionProps) => {
     const [showInput, setShowInput] = React.useState(false);
-    const classes = useStyles();
+    const classes = useAppStyles();
 
     const onManageTalentsClicked = () => setShowInput(!showInput);
 

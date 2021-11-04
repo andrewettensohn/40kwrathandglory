@@ -1,7 +1,7 @@
 import { Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@material-ui/core";
 import React from "react";
 import { Character } from "../../../interfaces/Character";
-import { useStyles } from "../../AppStyles";
+import { useAppStyles } from "../../AppStyles";
 import { DiceRoller } from "./DiceRoller";
 
 interface SkillsCheckActionProps {
@@ -10,7 +10,7 @@ interface SkillsCheckActionProps {
 }
 
 export const SkillsCheckAction = ({ character, updateCharacter }: SkillsCheckActionProps) => {
-    const classes = useStyles();
+    const classes = useAppStyles();
 
     const onWrathChanged = async (value: number) => {
 

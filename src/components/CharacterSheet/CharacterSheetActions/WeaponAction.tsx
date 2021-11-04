@@ -3,7 +3,7 @@ import { ControlCamera } from "@material-ui/icons";
 import React from "react";
 import { Character } from "../../../interfaces/Character";
 import { Weapon } from "../../../interfaces/Weapon";
-import { useStyles } from "../../AppStyles";
+import { useAppStyles } from "../../AppStyles";
 import { WeaponStatBlock } from "./WeaponStatBlock";
 
 interface WeaponActionProps {
@@ -15,7 +15,7 @@ interface WeaponActionProps {
 export const WeaponAction = ({ weaponsList, character, updateCharacter }: WeaponActionProps): JSX.Element => {
 
     const [showInput, setShowInput] = React.useState(false);
-    const classes = useStyles();
+    const classes = useAppStyles();
 
     const onManageWeaponsClicked = () => setShowInput(!showInput);
 
