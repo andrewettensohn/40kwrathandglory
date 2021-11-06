@@ -1,5 +1,6 @@
 import { Grid, List, makeStyles } from "@material-ui/core";
 import React from "react";
+import { deleteCharacter } from "../../data/RestService";
 import { Character } from "../../interfaces/Character";
 import { CharacterListItem } from "./CharacterListItem";
 
@@ -18,18 +19,29 @@ interface CharacterListProps {
 }
 
 export const CharacterList = ({ characters }: CharacterListProps) => {
+    const [characterList, setCharacterList] = React.useState(characters);
     const classes = useStyles();
 
-    if (characters.length > 0) {
+    const removeCharacterFromList = async (id : string) => {
+        await deleteCharacter(id);
+
+        let newCharacterList = [...characterList];
+        
+        newCharacterList = newCharacterList.filter(x => x.Id != id);
+
+        setCharacterList(newCharacterList);
+    }
+
+    if (characterList.length > 0) {
 
         return (
             <div className={classes.scrollBox}>
                 <Grid container justifyContent="center">
                     <Grid item>
                         <List component="nav">
-                            {characters.map(character => {
+                            {characterList.map(character => {
                                 return (
-                                    <CharacterListItem key={character.Id} character={character} />
+                                    <CharacterListItem key={character.Id} character={character} onDelete={removeCharacterFromList} />
                                 )
                             })}
                         </List>

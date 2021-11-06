@@ -3,7 +3,7 @@ import { ControlCamera } from "@material-ui/icons";
 import React from "react";
 import { Armor } from "../../../interfaces/Armor";
 import { Character } from "../../../interfaces/Character";
-import { useStyles } from "../../AppStyles";
+import { useAppStyles } from "../../AppStyles";
 import { ArmorStatBlock } from "./ArmorStatBlock";
 
 interface ArmorActionProps {

@@ -4,7 +4,7 @@ import { isKeyOfAmmo } from "../../../helpers/KeyHelper";
 import { Ammo } from "../../../interfaces/Ammo";
 import { Character } from "../../../interfaces/Character";
 import { Weapon } from "../../../interfaces/Weapon";
-import { useStyles } from "../../AppStyles";
+import { useAppStyles } from "../../AppStyles";
 import { AmmoInput } from "./AmmoInput";
 
 interface AmmoActionProps {

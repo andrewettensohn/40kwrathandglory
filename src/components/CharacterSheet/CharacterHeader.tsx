@@ -1,7 +1,7 @@
 import { Grid, Paper, TextField } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { Character } from "../../interfaces/Character";
-import { useStyles } from "../AppStyles";
+import { useAppStyles } from "../AppStyles";
 import { DiceRoller } from "./CharacterSheetActions/DiceRoller";
 import { NameInput } from "./NameInput";
 
@@ -12,7 +12,7 @@ interface CharacterHeaderProps {
 
 export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderProps) => {
 
-    const classes = useStyles();
+    const classes = useAppStyles();
 
     const onXpChange = async (value: number) => {
         await updateCharacter({

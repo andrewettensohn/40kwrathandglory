@@ -3,13 +3,13 @@ import React, { useEffect } from "react";
 import { CharacterList } from "./CharacterList/CharacterList";
 import { Character } from "../interfaces/Character";
 import { getCharacterListFromSyncAPI } from "../data/SyncModelService";
-import { useStyles } from "./AppStyles";
+import { useAppStyles } from "./AppStyles";
 import { addNewCharacter } from "../data/RestService";
 
 export const Home = () => {
     const [characterList, setCharacterList] = React.useState([] as Character[]);
     const [isLoading, setIsLoading] = React.useState(true);
-    const classes = useStyles();
+    const classes = useAppStyles();
 
     useEffect(() => {
         getCharacterListClicked()
@@ -22,7 +22,7 @@ export const Home = () => {
     };
 
     const newCharacterClicked = async () => {
-        addNewCharacter();
+        await addNewCharacter();
         await getCharacterListClicked();
     }
 

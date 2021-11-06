@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles({
+export const useAppStyles = makeStyles({
     sheetHeader: {
         minHeight: 100,
         padding: 5,

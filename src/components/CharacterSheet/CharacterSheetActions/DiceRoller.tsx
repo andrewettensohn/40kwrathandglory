@@ -1,14 +1,14 @@
 import { Button, Card, Grid, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@material-ui/core";
 import React from "react";
 import { Character } from "../../../interfaces/Character";
-import { useStyles } from "../../AppStyles";
+import { useAppStyles } from "../../AppStyles";
 
 export const DiceRoller = () => {
 
     const [numberOfDice, setNumberOfDice] = React.useState(0);
     const [rollResults, setRollResults] = React.useState([] as number[]);
     const [iconSummary, setIconSummary] = React.useState("");
-    const classes = useStyles();
+    const classes = useAppStyles();
 
     const OnRoll = () => {
         const results = Array.from({ length: numberOfDice }, () => Math.floor((Math.random() * 6) + 1));

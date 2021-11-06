@@ -1,6 +1,6 @@
 import { TextField } from "@material-ui/core";
 import { Skills } from "../../../interfaces/Skills";
-import { useStyles } from "../../AppStyles";
+import { useAppStyles } from "../../AppStyles";
 
 interface SkillInputProps {
     skillName: keyof Skills,
@@ -17,7 +17,7 @@ export const SkillInput = ({
     onValueChanged
 }: SkillInputProps) => {
 
-    const classes = useStyles();
+    const classes = useAppStyles();
 
     return (
         <TextField
