@@ -11,6 +11,7 @@ interface WeaponStatBlockProps {
 export const WeaponStatBlock = ({ weapon, character }: WeaponStatBlockProps) => {
 
     const hit = weapon.IsMelee ? character.SkillChecks.Weapon : character.SkillChecks.Ballistic;
+    const damage = weapon.IsMelee ? character.Attributes.Strength + weapon.Damage : weapon.Damage;
 
     return (
         <Grid container >
@@ -21,7 +22,7 @@ export const WeaponStatBlock = ({ weapon, character }: WeaponStatBlockProps) => 
                 <Typography>Hit: {hit}</Typography>
             </Grid>
             <Grid item xs={12}>
-                <Typography>Damage: {weapon.Damage}</Typography>
+                <Typography>Damage: {damage}</Typography>
             </Grid>
             <Grid item xs={12}>
                 <Typography>ED: {weapon.ED}</Typography>
