@@ -11,6 +11,7 @@ import React from 'react';
 import { CharacterSheet } from './components/CharacterSheet/CharacterSheet';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { amber, blueGrey, deepPurple, green, red } from '@material-ui/core/colors';
+import { ContentInput } from './components/ContentInput/ContentInput';
 
 const theme = createTheme({
   palette: {
@@ -37,6 +38,9 @@ export default function App() {
             </Route>
             <Route path="/characterSheet">
               <CharacterSheet />
+            </Route>
+            <Route path="/contentInput">
+              <ContentInput />
             </Route>
           </Switch>
         </Router>
