@@ -6,6 +6,7 @@ import { ActionType } from "../../interfaces/Enumerations/ActionType";
 import { ModelType } from "../../interfaces/Enumerations/ModelType";
 import { SyncModel } from "../../interfaces/SyncModel";
 import { useAppStyles } from "../AppStyles";
+import { ContentActionControl } from "./ContentActionControl";
 
 export const ContentInput = () => {
     const [isLoading, setIsLoading] = React.useState(true);
@@ -44,19 +45,28 @@ export const ContentInput = () => {
 
     return !isLoading
         ?
-        <Grid container justifyContent="center">
-            <Grid item>
-                <FormControl>
-                    <Select
-                        native
-                        value={selectedModelType}
-                        onChange={(e) => handleChange(e)}
-                    >
-                        <option value={0}>Archetype</option>
-                        <option value={1}>Armor</option>
-                        <option value={3}>Gear</option>
-                    </Select>
-                </FormControl>
+        <Grid container spacing={3}>
+            <Grid item xs={12} lg={12} md={12}>
+                <Grid container justifyContent="center">
+                    <Grid item>
+                        <FormControl>
+                            <Select
+                                native
+                                value={selectedModelType}
+                                onChange={(e) => handleChange(e)}
+                            >
+                                <option value={0}>Archetype</option>
+                                <option value={1}>Armor</option>
+                                <option value={3}>Gear</option>
+                                <option value={6}>Talent</option>
+                                <option value={7}>Weapon</option>
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid item xs={12} lg={12} md={12} className={classes.scrollBoxLong}>
+                <ContentActionControl modelType={selectedModelType} syncModels={syncModels} isCreateMode={true} />
             </Grid>
         </Grid>
         :

@@ -40,5 +40,15 @@ export const useAppStyles = makeStyles({
         overflowX: "hidden",
         marginLeft: 16,
         marginRight: 16
+    },
+    scrollBoxLong: {
+        overflowY: "scroll",
+        height: "70vh",
+        overflowX: "hidden",
+        marginLeft: 16,
+        marginRight: 16
+    },
+    textAreaInput: {
+        width: '25ch'
     }
 });

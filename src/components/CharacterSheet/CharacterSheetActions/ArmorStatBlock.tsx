@@ -19,9 +19,6 @@ export const ArmorStatBlock = ({ armor }: ArmorStatBlockProps) => {
                 <Typography>Armor Rating (AR): {armor.AR}</Typography>
             </Grid>
             <Grid item xs={12}>
-                <Typography>Traits: {armor.Traits}</Typography>
-            </Grid>
-            <Grid item xs={12}>
                 <Typography>Keywords: {armor.Keywords}</Typography>
             </Grid>
             <Grid item xs={12}>

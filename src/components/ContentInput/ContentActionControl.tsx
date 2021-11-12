@@ -3,48 +3,51 @@ import { Character } from "../../interfaces/Character";
 import { ActionType } from "../../interfaces/Enumerations/ActionType";
 import { ModelType } from "../../interfaces/Enumerations/ModelType";
 import { SyncModel } from "../../interfaces/SyncModel";
+import { ArchetypeInput } from "./InputControls/ArchetypeInput";
+import { GearInput } from "./InputControls/GearInput";
+import { ArmorInput } from "./InputControls/ArmorInput";
+import { WeaponInput } from "./InputControls/WeaponInput";
+import { TalentInput } from "./InputControls/TalentInput";
 
-interface SheetActionControlProps {
-    character: Character,
-    actionType: ActionType,
+interface ContentActionControlProps {
+    modelType: ModelType,
     syncModels: SyncModel[],
-    updateCharacter: (character: Character) => Promise<void>
+    isCreateMode: boolean
 }
 
-export const ContentActionControl = ({ character, actionType, syncModels, updateCharacter }: SheetActionControlProps) => {
+export const ContentActionControl = ({ modelType, syncModels, isCreateMode }: ContentActionControlProps) => {
 
-    if (actionType == ActionType.Archetype) {
-        return (
-            <ArchetypeAction
-                character={character}
-                updateCharacter={updateCharacter}
-                archetypeList={getDeserializedModelsForModelType(syncModels, ModelType.Archetype)} />
-        );
-        // } else if (actionType == ActionType.Weapon) {
-        //     return (
-        //         <WeaponAction
-        //             weaponsList={getDeserializedModelsForModelType(syncModels, ModelType.Weapon)}
-        //             character={character}
-        //             updateCharacter={updateCharacter} />
-        //     );
-        // } else if (actionType == ActionType.Talent) {
-        //     return (
-        //         <TalentAction character={character} updateCharacter={updateCharacter} talentList={getDeserializedModelsForModelType(syncModels, ModelType.Talent)} />
-        //     );
-        // } else if (actionType == ActionType.Quest) {
-        //     return (
-        //         <QuestList questList={getDeserializedModelsForModelType(syncModels, ModelType.Quest)} />
-        //     );
-        // } else if (actionType == ActionType.Armor) {
-        //     return (
-        //         <ArmorAction armorList={getDeserializedModelsForModelType(syncModels, ModelType.Armor)} updateCharacter={updateCharacter} character={character} />
-        //     );
-    } else if (actionType == ActionType.Gear) {
-        return (
-            <GearAction gearList={getDeserializedModelsForModelType(syncModels, ModelType.Gear)} updateCharacter={updateCharacter} character={character} />
-        );
+    if (modelType == ModelType.Archetype) {
+        return isCreateMode
+            ?
+            <ArchetypeInput />
+            :
+            <div></div>
+    } else if (modelType == ModelType.Gear) {
+        return isCreateMode
+            ?
+            <GearInput />
+            :
+            <div></div>
+    } else if (modelType == ModelType.Armor) {
+        return isCreateMode
+            ?
+            <ArmorInput />
+            :
+            <div></div>
+    } else if (modelType == ModelType.Talent) {
+        return isCreateMode
+            ?
+            <TalentInput />
+            :
+            <div></div>
+    } else if (modelType == ModelType.Weapon) {
+        return isCreateMode
+            ?
+            <WeaponInput />
+            :
+            <div></div>
     } else {
-
         return (<div></div>)
     }
 }
