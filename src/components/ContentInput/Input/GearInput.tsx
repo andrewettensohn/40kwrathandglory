@@ -9,9 +9,10 @@ interface GearInputProps {
     selectedGear?: Gear,
     updateGearList?(gear: Gear): void
     isModify: boolean,
+    toggleSaveSuccessSnackBar(value: boolean): void,
 }
 
-export const GearInput = ({ isModify, selectedGear, updateGearList }: GearInputProps) => {
+export const GearInput = ({ isModify, selectedGear, updateGearList, toggleSaveSuccessSnackBar }: GearInputProps) => {
 
     const setInitalGearValues = (): Gear => {
 
@@ -38,6 +39,7 @@ export const GearInput = ({ isModify, selectedGear, updateGearList }: GearInputP
     const submitArchetype = async () => {
 
         await addOrUpdateModelAtSyncAPI(Gear, ModelType.Gear);
+        toggleSaveSuccessSnackBar(true);
 
         if (!isModify) {
             setGear(setInitalGearValues());

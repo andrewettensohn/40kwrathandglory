@@ -10,9 +10,10 @@ interface ArmorInputProps {
     selectedArmor?: Armor,
     updateArmorList?(Armor: Armor): void
     isModify: boolean,
+    toggleSaveSuccessSnackBar(value: boolean): void,
 }
 
-export const ArmorInput = ({ isModify, selectedArmor, updateArmorList }: ArmorInputProps) => {
+export const ArmorInput = ({ isModify, selectedArmor, updateArmorList, toggleSaveSuccessSnackBar }: ArmorInputProps) => {
 
     const setInitalArmorValues = (): Armor => {
 
@@ -52,6 +53,8 @@ export const ArmorInput = ({ isModify, selectedArmor, updateArmorList }: ArmorIn
     const classes = useAppStyles();
 
     const submitArmor = async () => {
+        await addOrUpdateModelAtSyncAPI(Armor, ModelType.Armor);
+        toggleSaveSuccessSnackBar(true);
 
         if (!isModify) {
             setArmor(setInitalArmorValues());

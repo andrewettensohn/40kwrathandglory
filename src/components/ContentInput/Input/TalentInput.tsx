@@ -9,9 +9,10 @@ interface TalentInputProps {
     selectedTalent?: Talent,
     updateTalentList?(Talent: Talent): void
     isModify: boolean,
+    toggleSaveSuccessSnackBar(value: boolean): void,
 }
 
-export const TalentInput = ({ isModify, selectedTalent, updateTalentList }: TalentInputProps) => {
+export const TalentInput = ({ isModify, selectedTalent, updateTalentList, toggleSaveSuccessSnackBar }: TalentInputProps) => {
 
     const setInitalTalentValues = (): Talent => {
 
@@ -36,6 +37,7 @@ export const TalentInput = ({ isModify, selectedTalent, updateTalentList }: Tale
     const submitArchetype = async () => {
 
         await addOrUpdateModelAtSyncAPI(Talent, ModelType.Talent);
+        toggleSaveSuccessSnackBar(true);
 
         if (!isModify) {
             setTalent(setInitalTalentValues());

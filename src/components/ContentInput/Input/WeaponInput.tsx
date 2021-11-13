@@ -10,9 +10,10 @@ interface WeaponInputProps {
     selectedWeapon?: Weapon,
     updateWeaponList?(Weapon: Weapon): void
     isModify: boolean,
+    toggleSaveSuccessSnackBar(value: boolean): void,
 }
 
-export const WeaponInput = ({ isModify, selectedWeapon, updateWeaponList }: WeaponInputProps) => {
+export const WeaponInput = ({ isModify, selectedWeapon, updateWeaponList, toggleSaveSuccessSnackBar }: WeaponInputProps) => {
 
     const setInitalWeaponValues = (): Weapon => {
 
@@ -69,6 +70,8 @@ export const WeaponInput = ({ isModify, selectedWeapon, updateWeaponList }: Weap
 
     const submitWeapon = async () => {
         await addOrUpdateModelAtSyncAPI(Weapon, ModelType.Weapon);
+        toggleSaveSuccessSnackBar(true);
+
         if (!isModify) {
             setWeapon(setInitalWeaponValues());
         } else if (updateWeaponList !== undefined) {

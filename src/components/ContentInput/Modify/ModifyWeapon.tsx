@@ -6,9 +6,10 @@ import { WeaponInput } from "../Input/WeaponInput";
 
 interface ModifyWeaponProps {
     WeaponList: Weapon[],
+    toggleSaveSuccessSnackBar(value: boolean): void,
 }
 
-export const ModifyWeapon = ({ WeaponList }: ModifyWeaponProps) => {
+export const ModifyWeapon = ({ WeaponList, toggleSaveSuccessSnackBar }: ModifyWeaponProps) => {
     const [selectedWeapon, setSelectedWeapon] = React.useState(WeaponList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
 
@@ -45,7 +46,7 @@ export const ModifyWeapon = ({ WeaponList }: ModifyWeaponProps) => {
                 </Accordion>
             </Grid>
             <Grid item>
-                <WeaponInput selectedWeapon={selectedWeapon} isModify={true} key={selectedWeapon.Id} updateWeaponList={updateWeaponList} />
+                <WeaponInput selectedWeapon={selectedWeapon} isModify={true} key={selectedWeapon.Id} updateWeaponList={updateWeaponList} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
             </Grid>
         </Grid>
     );

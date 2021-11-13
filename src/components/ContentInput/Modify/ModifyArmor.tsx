@@ -6,9 +6,10 @@ import { ArmorInput } from "../Input/ArmorInput";
 
 interface ModifyArmorProps {
     ArmorList: Armor[],
+    toggleSaveSuccessSnackBar(value: boolean): void
 }
 
-export const ModifyArmor = ({ ArmorList }: ModifyArmorProps) => {
+export const ModifyArmor = ({ ArmorList, toggleSaveSuccessSnackBar }: ModifyArmorProps) => {
     const [selectedArmor, setSelectedArmor] = React.useState(ArmorList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
 
@@ -45,7 +46,7 @@ export const ModifyArmor = ({ ArmorList }: ModifyArmorProps) => {
                 </Accordion>
             </Grid>
             <Grid item>
-                <ArmorInput selectedArmor={selectedArmor} isModify={true} key={selectedArmor.Id} updateArmorList={updateArmorList} />
+                <ArmorInput selectedArmor={selectedArmor} isModify={true} key={selectedArmor.Id} updateArmorList={updateArmorList} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
             </Grid>
         </Grid>
     );

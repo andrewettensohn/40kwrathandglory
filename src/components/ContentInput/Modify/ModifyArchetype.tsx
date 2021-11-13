@@ -6,9 +6,10 @@ import { ArchetypeInput } from "../Input/ArchetypeInput";
 
 interface ModifyArchetypeProps {
     ArchetypeList: Archetype[],
+    toggleSaveSuccessSnackBar(value: boolean): void
 }
 
-export const ModifyArchetype = ({ ArchetypeList }: ModifyArchetypeProps) => {
+export const ModifyArchetype = ({ ArchetypeList, toggleSaveSuccessSnackBar }: ModifyArchetypeProps) => {
     const [selectedArchetype, setSelectedArchetype] = React.useState(ArchetypeList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
 
@@ -45,7 +46,7 @@ export const ModifyArchetype = ({ ArchetypeList }: ModifyArchetypeProps) => {
                 </Accordion>
             </Grid>
             <Grid item>
-                <ArchetypeInput selectedArchetype={selectedArchetype} isModify={true} key={selectedArchetype.Id} updateArchetypeList={updateArchetypeList} />
+                <ArchetypeInput selectedArchetype={selectedArchetype} isModify={true} key={selectedArchetype.Id} updateArchetypeList={updateArchetypeList} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
             </Grid>
         </Grid>
     );

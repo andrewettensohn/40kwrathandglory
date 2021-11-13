@@ -1,8 +1,7 @@
-import { Button, Card, CardActions, CardContent, CircularProgress, FormControl, Grid, InputLabel, ListItem, ListItemProps, ListItemText, makeStyles, Modal, Select, Switch, Typography } from "@material-ui/core";
+import { CircularProgress, FormControl, Grid, Select, Snackbar, Switch, Typography, } from "@material-ui/core";
+import { Alert } from "@material-ui/lab";
 import React, { useEffect } from "react";
-import { deleteCharacter, getSyncModels } from "../../data/RestService";
-import { Character } from "../../interfaces/Character";
-import { ActionType } from "../../interfaces/Enumerations/ActionType";
+import { getSyncModels } from "../../data/RestService";
 import { ModelType } from "../../interfaces/Enumerations/ModelType";
 import { SyncModel } from "../../interfaces/SyncModel";
 import { useAppStyles } from "../AppStyles";
@@ -10,6 +9,7 @@ import { ContentActionControl } from "./ContentActionControl";
 
 export const ContentInput = () => {
     const [isLoading, setIsLoading] = React.useState(true);
+    const [isSnackbarDisplayed, setIsSnackbarDisplayed] = React.useState(false);
     const [isCreateMode, setIsCreateMode] = React.useState(false);
     const [selectedModelType, setSelectedModelType] = React.useState(ModelType.Gear);
     const [syncModels, setSyncModels] = React.useState([] as SyncModel[]);
@@ -44,11 +44,17 @@ export const ContentInput = () => {
         }
     }
 
+    const toggleSnackbarDisplayed = (value: boolean) => setIsSnackbarDisplayed(value);
+
     return !isLoading
         ?
         <Grid container spacing={3}>
             <Grid item xs={12} lg={12} md={12}>
-                <Grid container justifyContent="center">
+                <Grid container justifyContent="center" spacing={3}>
+                    <Grid item>
+                        <Typography>Create</Typography>
+                        <Switch checked={isCreateMode} color="secondary" onChange={(e) => setIsCreateMode(e.target.checked)} />
+                    </Grid>
                     <Grid item>
                         <FormControl>
                             <Select
@@ -65,17 +71,16 @@ export const ContentInput = () => {
                         </FormControl>
                     </Grid>
                 </Grid>
-                <Grid item xs={12} lg={12} md={12}>
-                    <Grid container justifyContent="center">
-                        <Grid item>
-                            <Typography>Create</Typography>
-                            <Switch checked={isCreateMode} color="secondary" onChange={(e) => setIsCreateMode(e.target.checked)} />
-                        </Grid>
-                    </Grid>
-                </Grid>
             </Grid>
             <Grid item xs={12} lg={12} md={12} className={classes.scrollBoxLong}>
-                <ContentActionControl modelType={selectedModelType} syncModels={syncModels} isCreateMode={isCreateMode} />
+                <ContentActionControl modelType={selectedModelType} syncModels={syncModels} isCreateMode={isCreateMode} toggleSaveSuccessSnackBar={toggleSnackbarDisplayed} />
+            </Grid>
+            <Grid>
+                <Snackbar open={isSnackbarDisplayed} autoHideDuration={3000} onClose={() => toggleSnackbarDisplayed(false)}>
+                    <Alert onClose={() => toggleSnackbarDisplayed(false)} severity="success">
+                        Content modifed successfully!
+                    </Alert>
+                </Snackbar>
             </Grid>
         </Grid>
         :

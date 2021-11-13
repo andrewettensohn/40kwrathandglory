@@ -9,9 +9,10 @@ interface ArchetypeInputProps {
     selectedArchetype?: Archetype,
     updateArchetypeList?(Archetype: Archetype): void
     isModify: boolean,
+    toggleSaveSuccessSnackBar(value: boolean): void,
 }
 
-export const ArchetypeInput = ({ isModify, selectedArchetype, updateArchetypeList }: ArchetypeInputProps) => {
+export const ArchetypeInput = ({ isModify, selectedArchetype, updateArchetypeList, toggleSaveSuccessSnackBar }: ArchetypeInputProps) => {
 
     const setInitalArchetypeValues = (): Archetype => {
 
@@ -41,6 +42,7 @@ export const ArchetypeInput = ({ isModify, selectedArchetype, updateArchetypeLis
     const submitArchetype = async () => {
 
         await addOrUpdateModelAtSyncAPI(Archetype, ModelType.Archetype);
+        toggleSaveSuccessSnackBar(true);
 
         if (!isModify) {
             setArchetype(setInitalArchetypeValues());

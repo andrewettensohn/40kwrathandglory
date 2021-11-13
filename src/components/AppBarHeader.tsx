@@ -22,7 +22,7 @@ export const AppBarHeader = () => {
     return (
         <AppBar position="static" color="default" elevation={6} >
             <Toolbar>
-                <Typography variant="h4"><a href="/" className={classes.link}>Wrath &#38; Glory</a></Typography>
+                <Typography variant="h6"><a href="/" className={classes.link}>Wrath &#38; Glory</a></Typography>
                 <img src={logo} />
             </Toolbar>
         </AppBar >

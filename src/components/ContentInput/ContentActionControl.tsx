@@ -17,41 +17,42 @@ import { ModifyArmor } from "./Modify/ModifyArmor";
 interface ContentActionControlProps {
     modelType: ModelType,
     syncModels: SyncModel[],
-    isCreateMode: boolean
+    isCreateMode: boolean,
+    toggleSaveSuccessSnackBar(value: boolean): void,
 }
 
-export const ContentActionControl = ({ modelType, syncModels, isCreateMode }: ContentActionControlProps) => {
+export const ContentActionControl = ({ modelType, syncModels, isCreateMode, toggleSaveSuccessSnackBar }: ContentActionControlProps) => {
 
     if (modelType == ModelType.Archetype) {
         return isCreateMode
             ?
-            <ArchetypeInput isModify={false} />
+            <ArchetypeInput isModify={false} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
             :
-            <ModifyArchetype ArchetypeList={getDeserializedModelsForModelType(syncModels, ModelType.Archetype)} />
+            <ModifyArchetype ArchetypeList={getDeserializedModelsForModelType(syncModels, ModelType.Archetype)} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
     } else if (modelType == ModelType.Gear) {
         return isCreateMode
             ?
-            <GearInput isModify={false} />
+            <GearInput isModify={false} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
             :
-            <ModifyGear gearList={getDeserializedModelsForModelType(syncModels, ModelType.Gear)} />
+            <ModifyGear gearList={getDeserializedModelsForModelType(syncModels, ModelType.Gear)} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
     } else if (modelType == ModelType.Armor) {
         return isCreateMode
             ?
-            <ArmorInput isModify={false} />
+            <ArmorInput isModify={false} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
             :
-            <ModifyArmor ArmorList={getDeserializedModelsForModelType(syncModels, ModelType.Armor)} />
+            <ModifyArmor ArmorList={getDeserializedModelsForModelType(syncModels, ModelType.Armor)} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
     } else if (modelType == ModelType.Talent) {
         return isCreateMode
             ?
-            <TalentInput isModify={false} />
+            <TalentInput isModify={false} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
             :
-            <ModifyTalent TalentList={getDeserializedModelsForModelType(syncModels, ModelType.Talent)} />
+            <ModifyTalent TalentList={getDeserializedModelsForModelType(syncModels, ModelType.Talent)} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
     } else if (modelType == ModelType.Weapon) {
         return isCreateMode
             ?
-            <WeaponInput isModify={false} />
+            <WeaponInput isModify={false} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
             :
-            <ModifyWeapon WeaponList={getDeserializedModelsForModelType(syncModels, ModelType.Weapon)} />
+            <ModifyWeapon WeaponList={getDeserializedModelsForModelType(syncModels, ModelType.Weapon)} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
     } else {
         return (<div></div>)
     }

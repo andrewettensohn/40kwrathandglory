@@ -6,9 +6,10 @@ import { GearInput } from "../Input/GearInput";
 
 interface ModifyGearProps {
     gearList: Gear[],
+    toggleSaveSuccessSnackBar(value: boolean): void
 }
 
-export const ModifyGear = ({ gearList }: ModifyGearProps) => {
+export const ModifyGear = ({ gearList, toggleSaveSuccessSnackBar }: ModifyGearProps) => {
     const [selectedGear, setSelectedGear] = React.useState(gearList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
 
@@ -45,7 +46,7 @@ export const ModifyGear = ({ gearList }: ModifyGearProps) => {
                 </Accordion>
             </Grid>
             <Grid item>
-                <GearInput selectedGear={selectedGear} isModify={true} key={selectedGear.Id} updateGearList={updateGearList} />
+                <GearInput selectedGear={selectedGear} isModify={true} key={selectedGear.Id} updateGearList={updateGearList} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
             </Grid>
         </Grid>
     );

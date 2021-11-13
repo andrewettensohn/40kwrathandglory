@@ -6,9 +6,10 @@ import { TalentInput } from "../Input/TalentInput";
 
 interface ModifyTalentProps {
     TalentList: Talent[],
+    toggleSaveSuccessSnackBar(value: boolean): void,
 }
 
-export const ModifyTalent = ({ TalentList }: ModifyTalentProps) => {
+export const ModifyTalent = ({ TalentList, toggleSaveSuccessSnackBar }: ModifyTalentProps) => {
     const [selectedTalent, setSelectedTalent] = React.useState(TalentList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
 
@@ -45,7 +46,7 @@ export const ModifyTalent = ({ TalentList }: ModifyTalentProps) => {
                 </Accordion>
             </Grid>
             <Grid item>
-                <TalentInput selectedTalent={selectedTalent} isModify={true} key={selectedTalent.Id} updateTalentList={updateTalentList} />
+                <TalentInput selectedTalent={selectedTalent} isModify={true} key={selectedTalent.Id} updateTalentList={updateTalentList} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
             </Grid>
         </Grid>
     );
