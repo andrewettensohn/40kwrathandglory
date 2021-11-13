@@ -1,5 +1,6 @@
-import { Grid, Typography, Divider, Chip } from "@material-ui/core"
+import { Grid, Typography, Divider, Chip, Tooltip } from "@material-ui/core"
 import React from "react"
+import { BulkTooltip, PoweredTooltip } from "../../../data/Tooltips";
 import { Armor } from "../../../interfaces/Armor";
 import { ArmorTraits } from "../../../interfaces/ArmorTraits";
 import { Character } from "../../../interfaces/Character";
@@ -16,10 +17,12 @@ export const ArmorTraitsList = ({ traits }: ArmorTraitsProps) => {
         <Grid container >
             {traits.Bulk &&
                 <Grid item xs={12}>
-                    <Chip
-                        label="Bulk"
-                        variant="outlined"
-                    />
+                    <Tooltip title={BulkTooltip}>
+                        <Chip
+                            label="Bulk"
+                            variant="outlined"
+                        />
+                    </Tooltip>
                 </Grid>}
             {traits.Cumbersome &&
                 <Grid item xs={12}>
@@ -44,10 +47,11 @@ export const ArmorTraitsList = ({ traits }: ArmorTraitsProps) => {
                 </Grid>}
             {traits.Powered > 0 &&
                 <Grid item xs={12}>
-                    <Chip
-                        label={`Powered(${traits.Powered})`}
-                        variant="outlined"
-                    />
+                    <Tooltip title={PoweredTooltip}>
+                        <Chip
+                            label={`Powered(${traits.Powered})`}
+                            variant="outlined"
+                        /></Tooltip>
                 </Grid>}
             {traits.Shield &&
                 <Grid item xs={12}>

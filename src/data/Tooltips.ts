@@ -1,0 +1,2 @@
+export const BulkTooltip: string = "Heavy and restrictive armour possesses the Bulk trait. Bulk reduces the Speed of the wearer by a number of metres equal to its rating";
+export const PoweredTooltip: string = "This armour is designed to augment the wearer’s might through the marvels of mechanisation. Whilst wearing armour with this Trait you gain a Strength bonus equal to the rating. Additionally, you are not knocked Prone when you roll a Complication while firing an unsecured Heavy weapon.";
