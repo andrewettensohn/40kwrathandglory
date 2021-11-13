@@ -5,11 +5,17 @@ import { Archetype } from "../../../interfaces/Archetype";
 import { ModelType } from "../../../interfaces/Enumerations/ModelType";
 import { useAppStyles } from "../../AppStyles";
 
-export const ArchetypeInput = () => {
+interface ArchetypeInputProps {
+    selectedArchetype?: Archetype,
+    updateArchetypeList?(Archetype: Archetype): void
+    isModify: boolean,
+}
+
+export const ArchetypeInput = ({ isModify, selectedArchetype, updateArchetypeList }: ArchetypeInputProps) => {
 
     const setInitalArchetypeValues = (): Archetype => {
 
-        const initialArchetype: Archetype = {
+        let initialArchetype: Archetype = {
             Id: "",
             Name: "",
             Keywords: "",
@@ -21,8 +27,13 @@ export const ArchetypeInput = () => {
             Influence: 0
         };
 
+        if (isModify && selectedArchetype !== undefined && selectedArchetype !== null) {
+            initialArchetype = { ...selectedArchetype };
+        }
+
+
         return initialArchetype;
-    }
+    };
 
     const [Archetype, setArchetype] = React.useState(setInitalArchetypeValues());
     const classes = useAppStyles();
@@ -31,15 +42,19 @@ export const ArchetypeInput = () => {
 
         await addOrUpdateModelAtSyncAPI(Archetype, ModelType.Archetype);
 
-        setArchetype(setInitalArchetypeValues());
-    }
+        if (!isModify) {
+            setArchetype(setInitalArchetypeValues());
+        } else if (updateArchetypeList !== undefined) {
+            updateArchetypeList(Archetype);
+        }
+    };
 
     const onChangeString = (propertyName: string, value: string) => {
         setArchetype({
             ...Archetype,
             [propertyName]: value
         });
-    }
+    };
 
     const onChangeNumber = (propertyName: string, value: number) => {
 
@@ -49,7 +64,11 @@ export const ArchetypeInput = () => {
             ...Archetype,
             [propertyName]: value
         });
-    }
+    };
+
+    if (isModify && (selectedArchetype === null || selectedArchetype === undefined)) {
+        return (<div>Select a Archetype to Modify.</div>);
+    };
 
     return (
         <div>
@@ -63,16 +82,16 @@ export const ArchetypeInput = () => {
                             <TextField value={Archetype.Keywords} onChange={(e) => onChangeString("Keywords", e.target.value.toString())} label="Keywords" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Archetype.Tier.toString()} onChange={(e) => onChangeNumber("Tier", parseFloat(e.target.value))} type="number" label="Tier" variant="outlined" />
+                            <TextField value={Archetype.Tier?.toString()} onChange={(e) => onChangeNumber("Tier", parseFloat(e.target.value))} type="number" label="Tier" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Archetype.XPCost.toString()} onChange={(e) => onChangeNumber("XPCost", parseFloat(e.target.value))} type="number" label="XP Cost" variant="outlined" />
+                            <TextField value={Archetype.XPCost?.toString()} onChange={(e) => onChangeNumber("XPCost", parseFloat(e.target.value))} type="number" label="XP Cost" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Archetype.AttributeBonus.toString()} onChange={(e) => onChangeNumber("AttributeBonus", parseFloat(e.target.value))} type="number" label="Attribute Bonus" variant="outlined" />
+                            <TextField value={Archetype.AttributeBonus?.toString()} onChange={(e) => onChangeNumber("AttributeBonus", parseFloat(e.target.value))} type="number" label="Attribute Bonus" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Archetype.SkillBonus.toString()} onChange={(e) => onChangeNumber("SkillBonus", parseFloat(e.target.value))} type="number" label="Skill Bonus" variant="outlined" />
+                            <TextField value={Archetype.SkillBonus?.toString()} onChange={(e) => onChangeNumber("SkillBonus", parseFloat(e.target.value))} type="number" label="Skill Bonus" variant="outlined" />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth>
@@ -93,8 +112,4 @@ export const ArchetypeInput = () => {
             </Grid>
         </div>
     )
-}
-
-function addArchetypeAtSyncAPI(Archetype: Archetype) {
-    throw Error("Function not implemented.");
 }

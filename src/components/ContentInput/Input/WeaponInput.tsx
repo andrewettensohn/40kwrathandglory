@@ -6,7 +6,13 @@ import { Weapon } from "../../../interfaces/Weapon";
 import { WeaponTraits } from "../../../interfaces/WeaponTraits";
 import { useAppStyles } from "../../AppStyles";
 
-export const WeaponInput = () => {
+interface WeaponInputProps {
+    selectedWeapon?: Weapon,
+    updateWeaponList?(Weapon: Weapon): void
+    isModify: boolean,
+}
+
+export const WeaponInput = ({ isModify, selectedWeapon, updateWeaponList }: WeaponInputProps) => {
 
     const setInitalWeaponValues = (): Weapon => {
 
@@ -37,7 +43,7 @@ export const WeaponInput = () => {
             Warp: false,
         };
 
-        const initialWeapon: Weapon = {
+        let initialWeapon: Weapon = {
             Id: "",
             Name: "",
             Description: "",
@@ -51,6 +57,10 @@ export const WeaponInput = () => {
             Traits: initalTraits
         };
 
+        if (isModify && selectedWeapon !== undefined && selectedWeapon !== null) {
+            initialWeapon = { ...selectedWeapon };
+        }
+
         return initialWeapon;
     }
 
@@ -58,10 +68,12 @@ export const WeaponInput = () => {
     const classes = useAppStyles();
 
     const submitWeapon = async () => {
-
-        console.log(Weapon);
         await addOrUpdateModelAtSyncAPI(Weapon, ModelType.Weapon);
-        setWeapon(setInitalWeaponValues());
+        if (!isModify) {
+            setWeapon(setInitalWeaponValues());
+        } else if (updateWeaponList !== undefined) {
+            updateWeaponList(Weapon);
+        }
     }
 
     const onChangeWeaponString = (propertyName: string, value: string) => {
@@ -123,6 +135,10 @@ export const WeaponInput = () => {
         });
     }
 
+    if (isModify && (selectedWeapon === null || selectedWeapon === undefined)) {
+        return (<div>Select a Weapon to Modify.</div>);
+    };
+
     return (
         <div>
             <Grid container justifyContent="center" className={classes.mb25}>
@@ -136,35 +152,35 @@ export const WeaponInput = () => {
                             } onChange={(e) => onChangeWeaponString("Salvo", e.target.value.toString())} label="Salvo" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Damage.toString()} onChange={(e) => onChangeWeaponNumber("Damage", parseFloat(e.target.value))} type="number" label="Damage" variant="outlined" />
+                            <TextField value={Weapon.Damage?.toString()} onChange={(e) => onChangeWeaponNumber("Damage", parseFloat(e.target.value))} type="number" label="Damage" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.ED.toString()} onChange={(e) => onChangeWeaponNumber("ED", parseFloat(e.target.value))} type="number" label="ED" variant="outlined" />
+                            <TextField value={Weapon.ED?.toString()} onChange={(e) => onChangeWeaponNumber("ED", parseFloat(e.target.value))} type="number" label="ED" variant="outlined" />
                         </Grid>
 
                         <Grid item>
-                            <TextField value={Weapon.AP.toString()} onChange={(e) => onChangeWeaponNumber("AP", parseFloat(e.target.value))} type="number" label="AP" variant="outlined" />
+                            <TextField value={Weapon.AP?.toString()} onChange={(e) => onChangeWeaponNumber("AP", parseFloat(e.target.value))} type="number" label="AP" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Traits.Arc.toString()} onChange={(e) => onChangeTraitsNumber("Arc", parseFloat(e.target.value))} type="number" label="Arc" variant="outlined" />
+                            <TextField value={Weapon.Traits.Arc?.toString()} onChange={(e) => onChangeTraitsNumber("Arc", parseFloat(e.target.value))} type="number" label="Arc" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Traits.Blast.toString()} onChange={(e) => onChangeTraitsNumber("Blast", parseFloat(e.target.value))} type="number" label="Blast" variant="outlined" />
+                            <TextField value={Weapon.Traits.Blast?.toString()} onChange={(e) => onChangeTraitsNumber("Blast", parseFloat(e.target.value))} type="number" label="Blast" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Traits.Heavy.toString()} onChange={(e) => onChangeTraitsNumber("Heavy", parseFloat(e.target.value))} type="number" label="Heavy" variant="outlined" />
+                            <TextField value={Weapon.Traits.Heavy?.toString()} onChange={(e) => onChangeTraitsNumber("Heavy", parseFloat(e.target.value))} type="number" label="Heavy" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Traits.Rad.toString()} onChange={(e) => onChangeTraitsNumber("Rad", parseFloat(e.target.value))} type="number" label="Rad" variant="outlined" />
+                            <TextField value={Weapon.Traits.Rad?.toString()} onChange={(e) => onChangeTraitsNumber("Rad", parseFloat(e.target.value))} type="number" label="Rad" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Traits.RapidFire.toString()} onChange={(e) => onChangeTraitsNumber("RapidFire", parseFloat(e.target.value))} type="number" label="Rapid Fire" variant="outlined" />
+                            <TextField value={Weapon.Traits.RapidFire?.toString()} onChange={(e) => onChangeTraitsNumber("RapidFire", parseFloat(e.target.value))} type="number" label="Rapid Fire" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Traits.Rending.toString()} onChange={(e) => onChangeTraitsNumber("Rending", parseFloat(e.target.value))} type="number" label="Rending" variant="outlined" />
+                            <TextField value={Weapon.Traits.Rending?.toString()} onChange={(e) => onChangeTraitsNumber("Rending", parseFloat(e.target.value))} type="number" label="Rending" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Traits.Unwieldy.toString()} onChange={(e) => onChangeTraitsNumber("Unwieldy", parseFloat(e.target.value))} type="number" label="Unwieldy" variant="outlined" />
+                            <TextField value={Weapon.Traits.Unwieldy?.toString()} onChange={(e) => onChangeTraitsNumber("Unwieldy", parseFloat(e.target.value))} type="number" label="Unwieldy" variant="outlined" />
                         </Grid>
                         <Grid item>
                             <TextField value={Weapon.Traits.Inflict} onChange={(e) => onChangeTraitsString("Inflict", e.target.value.toString())} label="Inflict" variant="outlined" />

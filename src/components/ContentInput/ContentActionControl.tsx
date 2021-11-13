@@ -9,6 +9,10 @@ import { ArmorInput } from "./Input/ArmorInput";
 import { WeaponInput } from "./Input/WeaponInput";
 import { TalentInput } from "./Input/TalentInput";
 import { ModifyGear } from "./Modify/ModifyGear";
+import { ModifyTalent } from "./Modify/ModifyTalent";
+import { ModifyWeapon } from "./Modify/ModifyWeapon";
+import { ModifyArchetype } from "./Modify/ModifyArchetype";
+import { ModifyArmor } from "./Modify/ModifyArmor";
 
 interface ContentActionControlProps {
     modelType: ModelType,
@@ -21,9 +25,9 @@ export const ContentActionControl = ({ modelType, syncModels, isCreateMode }: Co
     if (modelType == ModelType.Archetype) {
         return isCreateMode
             ?
-            <ArchetypeInput />
+            <ArchetypeInput isModify={false} />
             :
-            <div></div>
+            <ModifyArchetype ArchetypeList={getDeserializedModelsForModelType(syncModels, ModelType.Archetype)} />
     } else if (modelType == ModelType.Gear) {
         return isCreateMode
             ?
@@ -33,21 +37,21 @@ export const ContentActionControl = ({ modelType, syncModels, isCreateMode }: Co
     } else if (modelType == ModelType.Armor) {
         return isCreateMode
             ?
-            <ArmorInput />
+            <ArmorInput isModify={false} />
             :
-            <div></div>
+            <ModifyArmor ArmorList={getDeserializedModelsForModelType(syncModels, ModelType.Armor)} />
     } else if (modelType == ModelType.Talent) {
         return isCreateMode
             ?
-            <TalentInput />
+            <TalentInput isModify={false} />
             :
-            <div></div>
+            <ModifyTalent TalentList={getDeserializedModelsForModelType(syncModels, ModelType.Talent)} />
     } else if (modelType == ModelType.Weapon) {
         return isCreateMode
             ?
-            <WeaponInput />
+            <WeaponInput isModify={false} />
             :
-            <div></div>
+            <ModifyWeapon WeaponList={getDeserializedModelsForModelType(syncModels, ModelType.Weapon)} />
     } else {
         return (<div></div>)
     }

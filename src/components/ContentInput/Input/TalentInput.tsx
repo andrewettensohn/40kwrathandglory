@@ -5,17 +5,27 @@ import { ModelType } from "../../../interfaces/Enumerations/ModelType";
 import { Talent } from "../../../interfaces/Talent";
 import { useAppStyles } from "../../AppStyles";
 
-export const TalentInput = () => {
+interface TalentInputProps {
+    selectedTalent?: Talent,
+    updateTalentList?(Talent: Talent): void
+    isModify: boolean,
+}
+
+export const TalentInput = ({ isModify, selectedTalent, updateTalentList }: TalentInputProps) => {
 
     const setInitalTalentValues = (): Talent => {
 
-        const initialTalent: Talent = {
+        let initialTalent: Talent = {
             Id: "",
             Name: "",
             Description: "",
             Requirements: "",
             XPCost: 0,
         };
+
+        if (isModify && selectedTalent !== undefined && selectedTalent !== null) {
+            initialTalent = { ...selectedTalent };
+        }
 
         return initialTalent;
     }
@@ -26,7 +36,12 @@ export const TalentInput = () => {
     const submitArchetype = async () => {
 
         await addOrUpdateModelAtSyncAPI(Talent, ModelType.Talent);
-        setTalent(setInitalTalentValues());
+
+        if (!isModify) {
+            setTalent(setInitalTalentValues());
+        } else if (updateTalentList !== undefined) {
+            updateTalentList(Talent);
+        }
     }
 
     const onChangeString = (propertyName: string, value: string) => {
@@ -46,6 +61,10 @@ export const TalentInput = () => {
         });
     }
 
+    if (isModify && (selectedTalent === null || selectedTalent === undefined)) {
+        return (<div>Select a Talent to Modify.</div>);
+    };
+
     return (
         <div>
             <Grid container justifyContent="center" className={classes.mb25}>
@@ -58,7 +77,7 @@ export const TalentInput = () => {
                             <TextField value={Talent.Requirements} onChange={(e) => onChangeString("Requirements", e.target.value.toString())} label="Requirements" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Talent.XPCost.toString()} onChange={(e) => onChangeNumber("XPCost", parseFloat(e.target.value))} type="number" label="XP Cost" variant="outlined" />
+                            <TextField value={Talent.XPCost?.toString()} onChange={(e) => onChangeNumber("XPCost", parseFloat(e.target.value))} type="number" label="XP Cost" variant="outlined" />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth>
