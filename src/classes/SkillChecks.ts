@@ -19,9 +19,24 @@ export class SkillChecks {
     Survival: number;
     Tech: number;
     Weapon: number;
+    Movement: number;
 
     constructor(Character: Character) {
-        const Athletics = Character.Skills.Athletics - 1;
+
+        let powerArmorRating = 0;
+        let bulkRating = 0;
+
+        if (Character.Armor.some(x => x.IsEquipped)) {
+            Character.Armor.forEach(x => {
+                if (x.ArmorTraits.Powered != 0) {
+                    powerArmorRating += x.ArmorTraits.Powered;
+                } else if (x.ArmorTraits.Bulk != 0) {
+                    bulkRating += x.ArmorTraits.Bulk * 5;
+                }
+            });
+        }
+
+        const Athletics = Character.Skills.Athletics + Character.Attributes.Strength + powerArmorRating - 1;
         const Awareness = Character.Skills.Awareness + Character.Attributes.Intellect;
         const Ballistic = Character.Skills.Ballistic + Character.Attributes.Agility;
         const Cunning = Character.Skills.Cunning + Character.Attributes.Fellowship;
@@ -39,7 +54,9 @@ export class SkillChecks {
         const Survival = Character.Skills.Athletics - 1;
         const Tech = Character.Skills.Tech + Character.Attributes.Intellect;
         const Weapon = Character.Skills.Weapon + Character.Attributes.Initiative;
+        this.Movement = 30 - bulkRating;
 
+        //A check should never be less than 1
         this.Athletics = Athletics <= 0 ? 1 : Athletics;
         this.Awareness = Awareness <= 0 ? 1 : Awareness;
         this.Ballistic = Ballistic <= 0 ? 1 : Ballistic;

@@ -17,7 +17,7 @@ export const WeaponInput = ({ isModify, selectedWeapon, updateWeaponList, toggle
 
     const setInitalWeaponValues = (): Weapon => {
 
-        const initalTraits: WeaponTraits = {
+        const initalWeaponTraits: WeaponTraits = {
             Agonising: false,
             Arc: 0,
             Assualt: false,
@@ -55,7 +55,8 @@ export const WeaponInput = ({ isModify, selectedWeapon, updateWeaponList, toggle
             Range: "",
             IsMelee: false,
             IsEquipped: false,
-            Traits: initalTraits
+            Traits: "",
+            WeaponTraits: initalWeaponTraits
         };
 
         if (isModify && selectedWeapon !== undefined && selectedWeapon !== null) {
@@ -104,35 +105,35 @@ export const WeaponInput = ({ isModify, selectedWeapon, updateWeaponList, toggle
         });
     }
 
-    const onChangeTraitsString = (propertyName: string, value: string) => {
+    const onChangeWeaponTraitsString = (propertyName: string, value: string) => {
         setWeapon({
             ...Weapon,
-            ["Traits"]: {
-                ...Weapon.Traits,
+            ["WeaponTraits"]: {
+                ...Weapon.WeaponTraits,
                 [propertyName]: value
             }
         });
     }
 
-    const onChangeTraitsNumber = (propertyName: string, value: number) => {
+    const onChangeWeaponTraitsNumber = (propertyName: string, value: number) => {
 
         if (isNaN(value)) value = 0;
 
         setWeapon({
             ...Weapon,
-            ["Traits"]: {
-                ...Weapon.Traits,
+            ["WeaponTraits"]: {
+                ...Weapon.WeaponTraits,
                 [propertyName]: value
             }
         });
     }
 
-    const onChangeTraitsBool = (propertyName: string, value: boolean) => {
+    const onChangeWeaponTraitsBool = (propertyName: string, value: boolean) => {
 
         setWeapon({
             ...Weapon,
-            ["Traits"]: {
-                ...Weapon.Traits,
+            ["WeaponTraits"]: {
+                ...Weapon.WeaponTraits,
                 [propertyName]: value
             }
         });
@@ -165,28 +166,28 @@ export const WeaponInput = ({ isModify, selectedWeapon, updateWeaponList, toggle
                             <TextField value={Weapon.AP?.toString()} onChange={(e) => onChangeWeaponNumber("AP", parseFloat(e.target.value))} type="number" label="AP" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Traits.Arc?.toString()} onChange={(e) => onChangeTraitsNumber("Arc", parseFloat(e.target.value))} type="number" label="Arc" variant="outlined" />
+                            <TextField value={Weapon.WeaponTraits.Arc?.toString()} onChange={(e) => onChangeWeaponTraitsNumber("Arc", parseFloat(e.target.value))} type="number" label="Arc" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Traits.Blast?.toString()} onChange={(e) => onChangeTraitsNumber("Blast", parseFloat(e.target.value))} type="number" label="Blast" variant="outlined" />
+                            <TextField value={Weapon.WeaponTraits.Blast?.toString()} onChange={(e) => onChangeWeaponTraitsNumber("Blast", parseFloat(e.target.value))} type="number" label="Blast" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Traits.Heavy?.toString()} onChange={(e) => onChangeTraitsNumber("Heavy", parseFloat(e.target.value))} type="number" label="Heavy" variant="outlined" />
+                            <TextField value={Weapon.WeaponTraits.Heavy?.toString()} onChange={(e) => onChangeWeaponTraitsNumber("Heavy", parseFloat(e.target.value))} type="number" label="Heavy" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Traits.Rad?.toString()} onChange={(e) => onChangeTraitsNumber("Rad", parseFloat(e.target.value))} type="number" label="Rad" variant="outlined" />
+                            <TextField value={Weapon.WeaponTraits.Rad?.toString()} onChange={(e) => onChangeWeaponTraitsNumber("Rad", parseFloat(e.target.value))} type="number" label="Rad" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Traits.RapidFire?.toString()} onChange={(e) => onChangeTraitsNumber("RapidFire", parseFloat(e.target.value))} type="number" label="Rapid Fire" variant="outlined" />
+                            <TextField value={Weapon.WeaponTraits.RapidFire?.toString()} onChange={(e) => onChangeWeaponTraitsNumber("RapidFire", parseFloat(e.target.value))} type="number" label="Rapid Fire" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Traits.Rending?.toString()} onChange={(e) => onChangeTraitsNumber("Rending", parseFloat(e.target.value))} type="number" label="Rending" variant="outlined" />
+                            <TextField value={Weapon.WeaponTraits.Rending?.toString()} onChange={(e) => onChangeWeaponTraitsNumber("Rending", parseFloat(e.target.value))} type="number" label="Rending" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Traits.Unwieldy?.toString()} onChange={(e) => onChangeTraitsNumber("Unwieldy", parseFloat(e.target.value))} type="number" label="Unwieldy" variant="outlined" />
+                            <TextField value={Weapon.WeaponTraits.Unwieldy?.toString()} onChange={(e) => onChangeWeaponTraitsNumber("Unwieldy", parseFloat(e.target.value))} type="number" label="Unwieldy" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Weapon.Traits.Inflict} onChange={(e) => onChangeTraitsString("Inflict", e.target.value.toString())} label="Inflict" variant="outlined" />
+                            <TextField value={Weapon.WeaponTraits.Inflict} onChange={(e) => onChangeWeaponTraitsString("Inflict", e.target.value.toString())} label="Inflict" variant="outlined" />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth>
@@ -203,59 +204,59 @@ export const WeaponInput = ({ isModify, selectedWeapon, updateWeaponList, toggle
                         </Grid>
                         <Grid item>
                             <Typography>Agonising</Typography>
-                            <Switch checked={Weapon.Traits.Agonising} color="primary" onChange={(e) => onChangeTraitsBool("Agonising", e.target.checked)} />
+                            <Switch checked={Weapon.WeaponTraits.Agonising} color="primary" onChange={(e) => onChangeWeaponTraitsBool("Agonising", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>Assualt</Typography>
-                            <Switch checked={Weapon.Traits.Assualt} color="primary" onChange={(e) => onChangeTraitsBool("Assualt", e.target.checked)} />
+                            <Switch checked={Weapon.WeaponTraits.Assualt} color="primary" onChange={(e) => onChangeWeaponTraitsBool("Assualt", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>Brutal</Typography>
-                            <Switch checked={Weapon.Traits.Brutal} color="primary" onChange={(e) => onChangeTraitsBool("Brutal", e.target.checked)} />
+                            <Switch checked={Weapon.WeaponTraits.Brutal} color="primary" onChange={(e) => onChangeWeaponTraitsBool("Brutal", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>Force</Typography>
-                            <Switch checked={Weapon.Traits.Force} color="primary" onChange={(e) => onChangeTraitsBool("Force", e.target.checked)} />
+                            <Switch checked={Weapon.WeaponTraits.Force} color="primary" onChange={(e) => onChangeWeaponTraitsBool("Force", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>Flamer</Typography>
-                            <Switch checked={Weapon.Traits.Flamer} color="primary" onChange={(e) => onChangeTraitsBool("Flamer", e.target.checked)} />
+                            <Switch checked={Weapon.WeaponTraits.Flamer} color="primary" onChange={(e) => onChangeWeaponTraitsBool("Flamer", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>Melta</Typography>
-                            <Switch checked={Weapon.Traits.Melta} color="primary" onChange={(e) => onChangeTraitsBool("Melta", e.target.checked)} />
+                            <Switch checked={Weapon.WeaponTraits.Melta} color="primary" onChange={(e) => onChangeWeaponTraitsBool("Melta", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>Parry</Typography>
-                            <Switch checked={Weapon.Traits.Parry} color="primary" onChange={(e) => onChangeTraitsBool("Parry", e.target.checked)} />
+                            <Switch checked={Weapon.WeaponTraits.Parry} color="primary" onChange={(e) => onChangeWeaponTraitsBool("Parry", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>Pistol</Typography>
-                            <Switch checked={Weapon.Traits.Pistol} color="primary" onChange={(e) => onChangeTraitsBool("Pistol", e.target.checked)} />
+                            <Switch checked={Weapon.WeaponTraits.Pistol} color="primary" onChange={(e) => onChangeWeaponTraitsBool("Pistol", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>Reliable</Typography>
-                            <Switch checked={Weapon.Traits.Reliable} color="primary" onChange={(e) => onChangeTraitsBool("Reliable", e.target.checked)} />
+                            <Switch checked={Weapon.WeaponTraits.Reliable} color="primary" onChange={(e) => onChangeWeaponTraitsBool("Reliable", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>Silent</Typography>
-                            <Switch checked={Weapon.Traits.Silent} color="primary" onChange={(e) => onChangeTraitsBool("Silent", e.target.checked)} />
+                            <Switch checked={Weapon.WeaponTraits.Silent} color="primary" onChange={(e) => onChangeWeaponTraitsBool("Silent", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>Spread</Typography>
-                            <Switch checked={Weapon.Traits.Spread} color="primary" onChange={(e) => onChangeTraitsBool("Spread", e.target.checked)} />
+                            <Switch checked={Weapon.WeaponTraits.Spread} color="primary" onChange={(e) => onChangeWeaponTraitsBool("Spread", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>Supercharge</Typography>
-                            <Switch checked={Weapon.Traits.Supercharge} color="primary" onChange={(e) => onChangeTraitsBool("Supercharge", e.target.checked)} />
+                            <Switch checked={Weapon.WeaponTraits.Supercharge} color="primary" onChange={(e) => onChangeWeaponTraitsBool("Supercharge", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>Waaagh</Typography>
-                            <Switch checked={Weapon.Traits.Waaagh} color="primary" onChange={(e) => onChangeTraitsBool("Waaagh", e.target.checked)} />
+                            <Switch checked={Weapon.WeaponTraits.Waaagh} color="primary" onChange={(e) => onChangeWeaponTraitsBool("Waaagh", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>Warp</Typography>
-                            <Switch checked={Weapon.Traits.Warp} color="primary" onChange={(e) => onChangeTraitsBool("Warp", e.target.checked)} />
+                            <Switch checked={Weapon.WeaponTraits.Warp} color="primary" onChange={(e) => onChangeWeaponTraitsBool("Warp", e.target.checked)} />
                         </Grid>
                     </Grid>
                 </Grid>

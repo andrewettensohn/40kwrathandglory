@@ -17,7 +17,7 @@ export const ArmorInput = ({ isModify, selectedArmor, updateArmorList, toggleSav
 
     const setInitalArmorValues = (): Armor => {
 
-        const initalTraits: ArmorTraits = {
+        const initalArmorTraits: ArmorTraits = {
             Bulk: 0,
             Cumbersome: false,
             EreWeGo: false,
@@ -34,14 +34,15 @@ export const ArmorInput = ({ isModify, selectedArmor, updateArmorList, toggleSav
             Value: "",
             Keywords: "",
             IsEquipped: false,
-            Traits: initalTraits
+            Traits: "",
+            ArmorTraits: initalArmorTraits
         };
 
         if (isModify && selectedArmor !== undefined && selectedArmor !== null) {
             initialArmor = { ...selectedArmor };
 
-            if (initialArmor.Traits === undefined || initialArmor.Traits === undefined) {
-                initialArmor = { ...initialArmor, Traits: initalTraits }
+            if (initialArmor.ArmorTraits === undefined || initialArmor.ArmorTraits === undefined) {
+                initialArmor = { ...initialArmor, ArmorTraits: initalArmorTraits }
             }
 
         }
@@ -80,25 +81,25 @@ export const ArmorInput = ({ isModify, selectedArmor, updateArmorList, toggleSav
         });
     }
 
-    const onChangeTraitsNumber = (propertyName: string, value: number) => {
+    const onChangeArmorTraitsNumber = (propertyName: string, value: number) => {
 
         if (isNaN(value)) value = 0;
 
         setArmor({
             ...Armor,
-            ["Traits"]: {
-                ...Armor.Traits,
+            ["ArmorTraits"]: {
+                ...Armor.ArmorTraits,
                 [propertyName]: value
             }
         });
     }
 
-    const onChangeTraitsBool = (propertyName: string, value: boolean) => {
+    const onChangeArmorTraitsBool = (propertyName: string, value: boolean) => {
 
         setArmor({
             ...Armor,
-            ["Traits"]: {
-                ...Armor.Traits,
+            ["ArmorTraits"]: {
+                ...Armor.ArmorTraits,
                 [propertyName]: value
             }
         });
@@ -127,10 +128,10 @@ export const ArmorInput = ({ isModify, selectedArmor, updateArmorList, toggleSav
                             <TextField value={Armor.Value?.toString()} onChange={(e) => onChanArmormorNumber("Value", parseFloat(e.target.value))} type="number" label="Value" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Armor.Traits?.Bulk?.toString()} onChange={(e) => onChangeTraitsNumber("Bulk", parseFloat(e.target.value))} type="number" label="Bulk" variant="outlined" />
+                            <TextField value={Armor.ArmorTraits?.Bulk?.toString()} onChange={(e) => onChangeArmorTraitsNumber("Bulk", parseFloat(e.target.value))} type="number" label="Bulk" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Armor.Traits?.Powered?.toString()} onChange={(e) => onChangeTraitsNumber("Powered", parseFloat(e.target.value))} type="number" label="Powered" variant="outlined" />
+                            <TextField value={Armor.ArmorTraits?.Powered?.toString()} onChange={(e) => onChangeArmorTraitsNumber("Powered", parseFloat(e.target.value))} type="number" label="Powered" variant="outlined" />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth>
@@ -143,19 +144,19 @@ export const ArmorInput = ({ isModify, selectedArmor, updateArmorList, toggleSav
                         </Grid>
                         <Grid item>
                             <Typography>Cumbersome</Typography>
-                            <Switch checked={Armor.Traits?.Cumbersome} color="primary" onChange={(e) => onChangeTraitsBool("Cumbersome", e.target.checked)} />
+                            <Switch checked={Armor.ArmorTraits?.Cumbersome} color="primary" onChange={(e) => onChangeArmorTraitsBool("Cumbersome", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>EreWeGo</Typography>
-                            <Switch checked={Armor.Traits?.EreWeGo} color="primary" onChange={(e) => onChangeTraitsBool("EreWeGo", e.target.checked)} />
+                            <Switch checked={Armor.ArmorTraits?.EreWeGo} color="primary" onChange={(e) => onChangeArmorTraitsBool("EreWeGo", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>Field</Typography>
-                            <Switch checked={Armor.Traits?.Field} color="primary" onChange={(e) => onChangeTraitsBool("Field", e.target.checked)} />
+                            <Switch checked={Armor.ArmorTraits?.Field} color="primary" onChange={(e) => onChangeArmorTraitsBool("Field", e.target.checked)} />
                         </Grid>
                         <Grid item>
                             <Typography>Shield</Typography>
-                            <Switch checked={Armor.Traits?.Shield} color="primary" onChange={(e) => onChangeTraitsBool("Shield", e.target.checked)} />
+                            <Switch checked={Armor.ArmorTraits?.Shield} color="primary" onChange={(e) => onChangeArmorTraitsBool("Shield", e.target.checked)} />
                         </Grid>
                     </Grid>
                 </Grid>

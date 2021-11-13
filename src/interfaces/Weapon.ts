@@ -11,5 +11,6 @@ export interface Weapon {
     Range: string;
     IsMelee: boolean;
     IsEquipped: boolean;
-    Traits: WeaponTraits;
+    Traits: string;
+    WeaponTraits: WeaponTraits;
 }

@@ -1,7 +1,9 @@
 import { Accordion, AccordionDetails, AccordionSummary, Grid, List, ListItem, Typography } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import React, { useEffect } from "react";
+import { validateCharacterModels } from "../../../data/RestService";
 import { Archetype } from "../../../interfaces/Archetype";
+import { ModelType } from "../../../interfaces/Enumerations/ModelType";
 import { ArchetypeInput } from "../Input/ArchetypeInput";
 
 interface ModifyArchetypeProps {
@@ -13,10 +15,12 @@ export const ModifyArchetype = ({ ArchetypeList, toggleSaveSuccessSnackBar }: Mo
     const [selectedArchetype, setSelectedArchetype] = React.useState(ArchetypeList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
 
-    const updateArchetypeList = (Archetype: Archetype) => {
+    const updateArchetypeList = async (Archetype: Archetype) => {
 
         let ArchetypeToUpdateIndex = ArchetypeList.findIndex(x => x.Id == Archetype.Id);
         ArchetypeList[ArchetypeToUpdateIndex] = Archetype;
+
+        await validateCharacterModels(Archetype.Id, ModelType.Archetype);
     }
 
     const onArchetypeSelected = (Archetype: Archetype) => {

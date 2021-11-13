@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ModelType } from "../interfaces/Enumerations/ModelType";
 import { SyncModel } from "../interfaces/SyncModel";
 
 const baseApiRoute = "https://localhost:5001/syncModel/";
@@ -28,4 +29,9 @@ export const deleteCharacter = async (id: string) => {
 
     const action = `delete/${id}`;
     await axios.delete(`${baseApiRoute}${action}`);
+}
+
+export const validateCharacterModels = async (id: string, modelType: ModelType) => {
+    const action = `validateCharacterModels/${id}/${modelType}`;
+    await axios.post(`${baseApiRoute}${action}`);
 }

@@ -1,7 +1,9 @@
 import { Accordion, AccordionDetails, AccordionSummary, Grid, List, ListItem, Typography } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import React, { useEffect } from "react";
+import { validateCharacterModels } from "../../../data/RestService";
 import { Armor } from "../../../interfaces/Armor";
+import { ModelType } from "../../../interfaces/Enumerations/ModelType";
 import { ArmorInput } from "../Input/ArmorInput";
 
 interface ModifyArmorProps {
@@ -13,10 +15,12 @@ export const ModifyArmor = ({ ArmorList, toggleSaveSuccessSnackBar }: ModifyArmo
     const [selectedArmor, setSelectedArmor] = React.useState(ArmorList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
 
-    const updateArmorList = (Armor: Armor) => {
+    const updateArmorList = async (Armor: Armor) => {
 
         let ArmorToUpdateIndex = ArmorList.findIndex(x => x.Id == Armor.Id);
         ArmorList[ArmorToUpdateIndex] = Armor;
+
+        await validateCharacterModels(Armor.Id, ModelType.Armor);
     }
 
     const onArmorSelected = (Armor: Armor) => {

@@ -1,6 +1,8 @@
 import { Accordion, AccordionDetails, AccordionSummary, Grid, List, ListItem, Typography } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import React, { useEffect } from "react";
+import { validateCharacterModels } from "../../../data/RestService";
+import { ModelType } from "../../../interfaces/Enumerations/ModelType";
 import { Gear } from "../../../interfaces/Gear";
 import { GearInput } from "../Input/GearInput";
 
@@ -13,10 +15,12 @@ export const ModifyGear = ({ gearList, toggleSaveSuccessSnackBar }: ModifyGearPr
     const [selectedGear, setSelectedGear] = React.useState(gearList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
 
-    const updateGearList = (gear: Gear) => {
+    const updateGearList = async (gear: Gear) => {
 
         let gearToUpdateIndex = gearList.findIndex(x => x.Id == gear.Id);
         gearList[gearToUpdateIndex] = gear;
+
+        await validateCharacterModels(gear.Id, ModelType.Gear);
     }
 
     const onGearSelected = (gear: Gear) => {

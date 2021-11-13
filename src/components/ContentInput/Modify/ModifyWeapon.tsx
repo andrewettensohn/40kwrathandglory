@@ -1,6 +1,8 @@
 import { Accordion, AccordionDetails, AccordionSummary, Grid, List, ListItem, Typography } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import React, { useEffect } from "react";
+import { validateCharacterModels } from "../../../data/RestService";
+import { ModelType } from "../../../interfaces/Enumerations/ModelType";
 import { Weapon } from "../../../interfaces/Weapon";
 import { WeaponInput } from "../Input/WeaponInput";
 
@@ -13,10 +15,12 @@ export const ModifyWeapon = ({ WeaponList, toggleSaveSuccessSnackBar }: ModifyWe
     const [selectedWeapon, setSelectedWeapon] = React.useState(WeaponList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
 
-    const updateWeaponList = (Weapon: Weapon) => {
+    const updateWeaponList = async (Weapon: Weapon) => {
 
         let WeaponToUpdateIndex = WeaponList.findIndex(x => x.Id == Weapon.Id);
         WeaponList[WeaponToUpdateIndex] = Weapon;
+
+        await validateCharacterModels(Weapon.Id, ModelType.Weapon);
     }
 
     const onWeaponSelected = (Weapon: Weapon) => {

@@ -1,6 +1,8 @@
 import { Accordion, AccordionDetails, AccordionSummary, Grid, List, ListItem, Typography } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
 import React from "react";
+import { validateCharacterModels } from "../../../data/RestService";
+import { ModelType } from "../../../interfaces/Enumerations/ModelType";
 import { Talent } from "../../../interfaces/Talent";
 import { TalentInput } from "../Input/TalentInput";
 
@@ -13,10 +15,12 @@ export const ModifyTalent = ({ TalentList, toggleSaveSuccessSnackBar }: ModifyTa
     const [selectedTalent, setSelectedTalent] = React.useState(TalentList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
 
-    const updateTalentList = (Talent: Talent) => {
+    const updateTalentList = async (Talent: Talent) => {
 
         let TalentToUpdateIndex = TalentList.findIndex(x => x.Id == Talent.Id);
         TalentList[TalentToUpdateIndex] = Talent;
+
+        await validateCharacterModels(Talent.Id, ModelType.Talent);
     }
 
     const onTalentSelected = (Talent: Talent) => {

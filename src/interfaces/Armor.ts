@@ -8,5 +8,6 @@ export interface Armor {
     Value: string;
     Keywords: string;
     IsEquipped: boolean;
-    Traits: ArmorTraits;
+    Traits: string,
+    ArmorTraits: ArmorTraits;
 }
