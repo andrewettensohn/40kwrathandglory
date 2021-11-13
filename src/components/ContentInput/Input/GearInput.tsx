@@ -1,15 +1,21 @@
 import { Button, FormControl, Grid, TextField } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import { addOrUpdateModelAtSyncAPI } from "../../../data/SyncModelService";
 import { ModelType } from "../../../interfaces/Enumerations/ModelType";
 import { Gear } from "../../../interfaces/Gear";
 import { useAppStyles } from "../../AppStyles";
 
-export const GearInput = () => {
+interface GearInputProps {
+    selectedGear?: Gear,
+    updateGearList?(gear: Gear): void
+    isModify: boolean,
+}
+
+export const GearInput = ({ isModify, selectedGear, updateGearList }: GearInputProps) => {
 
     const setInitalGearValues = (): Gear => {
 
-        const initialGear: Gear = {
+        let initialGear: Gear = {
             Id: "",
             Name: "",
             Keywords: "",
@@ -19,8 +25,12 @@ export const GearInput = () => {
             Rarity: "",
         };
 
+        if (isModify && selectedGear !== undefined && selectedGear !== null) {
+            initialGear = { ...selectedGear };
+        }
+
         return initialGear;
-    }
+    };
 
     const [Gear, setGear] = React.useState(setInitalGearValues());
     const classes = useAppStyles();
@@ -28,15 +38,20 @@ export const GearInput = () => {
     const submitArchetype = async () => {
 
         await addOrUpdateModelAtSyncAPI(Gear, ModelType.Gear);
-        setGear(setInitalGearValues());
-    }
+
+        if (!isModify) {
+            setGear(setInitalGearValues());
+        } else if (updateGearList !== undefined) {
+            updateGearList(Gear);
+        }
+    };
 
     const onChangeString = (propertyName: string, value: string) => {
         setGear({
             ...Gear,
             [propertyName]: value
         });
-    }
+    };
 
     const onChangeNumber = (propertyName: string, value: number) => {
 
@@ -46,7 +61,11 @@ export const GearInput = () => {
             ...Gear,
             [propertyName]: value
         });
-    }
+    };
+
+    if (isModify && (selectedGear === null || selectedGear === undefined)) {
+        return (<div>Select a Gear to Modify.</div>);
+    };
 
     return (
         <div>
@@ -54,20 +73,20 @@ export const GearInput = () => {
                 <Grid item xs={12} md={8} lg={8}>
                     <Grid container justifyContent="center" spacing={3}>
                         <Grid item>
-                            <TextField value={Gear.Name} onChange={(e) => onChangeString("Name", e.target.value.toString())} label="Name" variant="outlined" />
+                            <TextField value={Gear.Name?.toString()} onChange={(e) => onChangeString("Name", e.target.value.toString())} label="Name" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Gear.Keywords} onChange={(e) => onChangeString("Keywords", e.target.value.toString())} label="Keywords" variant="outlined" />
+                            <TextField value={Gear.Keywords?.toString()} onChange={(e) => onChangeString("Keywords", e.target.value.toString())} label="Keywords" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Gear.Rarity} onChange={(e) => onChangeString("Rarity", e.target.value.toString())} label="Rarity" variant="outlined" />
+                            <TextField value={Gear.Rarity?.toString()} onChange={(e) => onChangeString("Rarity", e.target.value.toString())} label="Rarity" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <TextField value={Gear.Value.toString()} onChange={(e) => onChangeNumber("Value", parseFloat(e.target.value))} type="number" label="Value" variant="outlined" />
+                            <TextField value={Gear.Value?.toString()} onChange={(e) => onChangeNumber("Value", parseFloat(e.target.value))} type="number" label="Value" variant="outlined" />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth>
-                                <TextField value={Gear.Effect}
+                                <TextField value={Gear.Effect?.toString()}
                                     label="Effect"
                                     onChange={(e) => onChangeString("Effect", e.target.value.toString())}
                                     multiline
@@ -76,7 +95,7 @@ export const GearInput = () => {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth>
-                                <TextField value={Gear.Description}
+                                <TextField value={Gear.Description?.toString()}
                                     label="Description"
                                     onChange={(e) => onChangeString("Description", e.target.value.toString())}
                                     multiline
@@ -93,4 +112,4 @@ export const GearInput = () => {
             </Grid>
         </div>
     )
-}
+};

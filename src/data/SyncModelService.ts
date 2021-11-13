@@ -32,7 +32,11 @@ export const updateCharacterAtSyncAPI = async (character: Character) => {
 }
 
 export const addOrUpdateModelAtSyncAPI = async (model: any, modelType: ModelType) => {
-    model.Id = emptyGuid;
+
+    if (model["Id"].length == 0) {
+        model.Id = emptyGuid;
+    }
+
     const syncModel: SyncModel = {
         id: model.Id,
         json: JSON.stringify(model),
