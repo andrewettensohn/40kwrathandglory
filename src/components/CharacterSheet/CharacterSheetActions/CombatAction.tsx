@@ -75,6 +75,10 @@ export const CombatAction = ({
                     </TableHead>
                     <TableBody>
                         <TableRow>
+                            <TableCell align="left">Movment</TableCell>
+                            <TableCell align="left">{character.SkillChecks.Movement}</TableCell>
+                        </TableRow>
+                        <TableRow>
                             <TableCell align="left">Defense</TableCell>
                             <TableCell align="left">{character.CombatTraits.defense}</TableCell>
                         </TableRow>
