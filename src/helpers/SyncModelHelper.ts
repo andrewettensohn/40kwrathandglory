@@ -26,12 +26,14 @@ export const getCharacterFromSyncModelListForId = (syncModels: SyncModel[], id: 
 
     characterSyncModel = syncModels.find(x => x.id === id);
 
-    if (characterSyncModel !== undefined) {
-        character = JSON.parse(characterSyncModel.json);
-    }
+    console.log(id);
 
-    character.CombatTraits = new CombatTraits({ ...character });
-    character.SkillChecks = new SkillChecks({ ...character });
+    if (characterSyncModel !== undefined && characterSyncModel !== null) {
+        character = JSON.parse(characterSyncModel.json);
+
+        character.CombatTraits = new CombatTraits({ ...character });
+        character.SkillChecks = new SkillChecks({ ...character });
+    }
 
     return character;
 }

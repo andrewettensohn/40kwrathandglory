@@ -14,24 +14,13 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
 
     const classes = useAppStyles();
 
-    const onXpChange = async (value: number) => {
-        await updateCharacter({
-            ...character,
-            XP: value
-        });
-    }
+    const onNumberChanged = async (propertyName: string, value: number) => {
 
-    const onRankChange = async (value: number) => {
-        await updateCharacter({
-            ...character,
-            Rank: value
-        });
-    }
+        if (isNaN(value)) value = 0;
 
-    const onTierChange = async (value: number) => {
         await updateCharacter({
             ...character,
-            Tier: value
+            [propertyName]: value
         });
     }
 
@@ -45,7 +34,6 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
             <Grid justifyContent="flex-start" container spacing={1}>
                 <Grid item>
                     <TextField
-                        id="outlined-number"
                         label="Rank"
                         type="number"
                         className={classes.numberInput}
@@ -53,13 +41,12 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
                             shrink: true,
                         }}
                         variant="outlined"
-                        value={character.Rank.toString()}
-                        onChange={(e) => onRankChange(parseInt(e.target.value))}
+                        value={character.Rank?.toString()}
+                        onChange={(e) => onNumberChanged("Rank", parseInt(e.target.value))}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
-                        id="outlined-number"
                         label="Tier"
                         type="number"
                         className={classes.numberInput}
@@ -67,13 +54,12 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
                             shrink: true,
                         }}
                         variant="outlined"
-                        value={character.Tier.toString()}
-                        onChange={(e) => onTierChange(parseInt(e.target.value))}
+                        value={character.Tier?.toString()}
+                        onChange={(e) => onNumberChanged("Tier", parseInt(e.target.value))}
                     />
                 </Grid>
                 <Grid item>
                     <TextField
-                        id="outlined-number"
                         label="XP"
                         type="number"
                         className={classes.numberInput}
@@ -81,14 +67,14 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
                             shrink: true,
                         }}
                         variant="outlined"
-                        value={character.XP.toString()}
-                        onChange={(e) => onXpChange(parseInt(e.target.value))}
+                        value={character.XP?.toString()}
+                        onChange={(e) => onNumberChanged("XP", parseInt(e.target.value))}
                     />
                 </Grid>
             </Grid>
             <Grid justifyContent="flex-start" container spacing={3}>
                 <Grid item>
-                    <DiceRoller />
+                    <DiceRoller initalDiceValue={0} />
                 </Grid>
             </Grid>
         </Paper>

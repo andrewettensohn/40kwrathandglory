@@ -1,3 +1,5 @@
+import { WeaponTraits } from "./WeaponTraits";
+
 export interface Weapon {
     Id: string;
     Name: string;
@@ -7,7 +9,8 @@ export interface Weapon {
     AP: number;
     Salvo: string;
     Range: string;
-    Traits: string;
     IsMelee: boolean;
     IsEquipped: boolean;
+    Traits: string;
+    WeaponTraits: WeaponTraits;
 }

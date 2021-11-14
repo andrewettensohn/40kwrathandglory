@@ -1,9 +1,11 @@
-import { Grid, List, ListItem, Button, Typography, Divider, IconButton } from "@material-ui/core";
+import { Grid, List, ListItem, Button, Typography, Divider, IconButton, Modal, Paper, Box } from "@material-ui/core";
 import { ControlCamera } from "@material-ui/icons";
 import React from "react";
+import { HitCheck } from "../../../helpers/CheckHelper";
 import { Character } from "../../../interfaces/Character";
 import { Weapon } from "../../../interfaces/Weapon";
 import { useAppStyles } from "../../AppStyles";
+import { DiceRoller } from "./DiceRoller";
 import { WeaponStatBlock } from "./WeaponStatBlock";
 
 interface WeaponActionProps {
@@ -61,18 +63,18 @@ export const WeaponAction = ({ weaponsList, character, updateCharacter }: Weapon
                             <ListItem key={x.Id}>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onRemoveFromInventoryClicked(x)}>Remove From Inventory</Button>
+                                        <Button variant="outlined" onClick={() => onRemoveFromInventoryClicked(x)}>Remove From Inventory</Button>
                                     </Grid>
-                                    <WeaponStatBlock weapon={x} character={character} />
+                                    <WeaponStatBlock weapon={x} character={character} displayAttackButton={false} />
                                 </Grid>
                             </ListItem>
                             :
                             <ListItem key={x.Id}>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onAddToInventoryClicked(x)}>Add to Inventory</Button>
+                                        <Button variant="outlined" onClick={() => onAddToInventoryClicked(x)}>Add to Inventory</Button>
                                     </Grid>
-                                    <WeaponStatBlock weapon={x} character={character} />
+                                    <WeaponStatBlock weapon={x} character={character} displayAttackButton={false} />
                                 </Grid>
                             </ListItem>
                     })}
@@ -80,38 +82,44 @@ export const WeaponAction = ({ weaponsList, character, updateCharacter }: Weapon
             </Grid>
         </Grid>
         :
-        <Grid container justifyContent="flex-start">
-            <Grid item>
-                <Button
-                    startIcon={<ControlCamera />}
-                    color="primary"
-                    variant="contained"
-                    onClick={onManageWeaponsClicked}>Manage</Button>
-            </Grid>
-            <Grid item>
-                <List component="nav">
-                    {character.Weapons.map(x => {
-                        return x.IsEquipped
-                            ?
-                            <ListItem key={x.Id}>
-                                <Grid container>
-                                    <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onEquipChangeClicked(x, false)}>Unequip</Button>
+        <div>
+            <Grid container justifyContent="flex-start">
+                <Grid item>
+                    <Button
+                        startIcon={<ControlCamera />}
+                        color="primary"
+                        variant="outlined"
+                        onClick={onManageWeaponsClicked}>Manage</Button>
+                </Grid>
+                <Grid item>
+                    <List component="nav">
+                        {character.Weapons.map(x => {
+                            return x.IsEquipped
+                                ?
+                                <ListItem key={x.Id}>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12}>
+                                            <Button variant="outlined" onClick={() => onEquipChangeClicked(x, false)}>Unequip</Button>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <WeaponStatBlock weapon={x} character={character} displayAttackButton={true} />
+                                        </Grid>
                                     </Grid>
-                                    <WeaponStatBlock weapon={x} character={character} />
-                                </Grid>
-                            </ListItem>
-                            :
-                            <ListItem key={x.Id}>
-                                <Grid container>
-                                    <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onEquipChangeClicked(x, true)}>Equip</Button>
+                                </ListItem>
+                                :
+                                <ListItem key={x.Id}>
+                                    <Grid container spacing={2}>
+                                        <Grid item xs={12}>
+                                            <Button variant="outlined" onClick={() => onEquipChangeClicked(x, true)}>Equip</Button>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <WeaponStatBlock weapon={x} character={character} displayAttackButton={false} />
+                                        </Grid>
                                     </Grid>
-                                    <WeaponStatBlock weapon={x} character={character} />
-                                </Grid>
-                            </ListItem>
-                    })}
-                </List>
+                                </ListItem>
+                        })}
+                    </List>
+                </Grid>
             </Grid>
-        </Grid>
+        </div>
 }

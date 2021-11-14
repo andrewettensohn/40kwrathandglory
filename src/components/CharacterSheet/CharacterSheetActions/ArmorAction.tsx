@@ -69,7 +69,7 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
                             <ListItem key={x.Id}>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onRemoveFromInventoryClicked(x)}>Remove From Inventory</Button>
+                                        <Button variant="outlined" onClick={() => onRemoveFromInventoryClicked(x)}>Remove From Inventory</Button>
                                     </Grid>
                                     <ArmorStatBlock armor={x} />
                                 </Grid>
@@ -78,7 +78,7 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
                             <ListItem key={x.Id}>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onAddToInventoryClicked(x)}>Add to Inventory</Button>
+                                        <Button variant="outlined" onClick={() => onAddToInventoryClicked(x)}>Add to Inventory</Button>
                                     </Grid>
                                     <ArmorStatBlock armor={x} />
                                 </Grid>
@@ -104,7 +104,7 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
                             <ListItem key={x.Id}>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onEquipChangeClicked(x, false)}>Unequip</Button>
+                                        <Button variant="outlined" onClick={() => onEquipChangeClicked(x, false)}>Unequip</Button>
                                     </Grid>
                                     <ArmorStatBlock armor={x} />
                                 </Grid>
@@ -113,7 +113,7 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
                             <ListItem key={x.Id}>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onEquipChangeClicked(x, true)}>Equip</Button>
+                                        <Button variant="outlined" onClick={() => onEquipChangeClicked(x, true)}>Equip</Button>
                                     </Grid>
                                     <ArmorStatBlock armor={x} />
                                 </Grid>

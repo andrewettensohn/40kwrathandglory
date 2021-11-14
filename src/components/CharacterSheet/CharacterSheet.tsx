@@ -33,7 +33,6 @@ export const CharacterSheet = () => {
                 .catch((err) => console.log(err))
                 .finally(() => setIsLoading(false))
         }
-
     }, []);
 
     const setCharacterSheetData = async () => {
