@@ -34,6 +34,9 @@ export const useAppStyles = makeStyles({
     mb25: {
         marginBottom: 25
     },
+    m3: {
+        margin: 3
+    },
     scrollBox: {
         overflowY: "scroll",
         height: "45vh",

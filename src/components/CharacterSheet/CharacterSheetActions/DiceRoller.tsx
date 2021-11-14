@@ -3,9 +3,13 @@ import React from "react";
 import { Character } from "../../../interfaces/Character";
 import { useAppStyles } from "../../AppStyles";
 
-export const DiceRoller = () => {
+interface DiceRollerProps {
+    initalDiceValue: number
+}
 
-    const [numberOfDice, setNumberOfDice] = React.useState(0);
+export const DiceRoller = ({ initalDiceValue }: DiceRollerProps) => {
+
+    const [numberOfDice, setNumberOfDice] = React.useState(initalDiceValue);
     const [rollResults, setRollResults] = React.useState([] as number[]);
     const [iconSummary, setIconSummary] = React.useState("");
     const classes = useAppStyles();
@@ -18,6 +22,7 @@ export const DiceRoller = () => {
         const totalIcons = exaltedIcons + results.filter(x => x == 4 || x == 5).length;
         setIconSummary(`= ${totalIcons} icons`);
     }
+
     const OnNumberOfDiceChanged = (dice: number) => {
         if (dice > 16) { dice = 16; }
         setNumberOfDice(dice);
@@ -28,6 +33,7 @@ export const DiceRoller = () => {
             setNumberOfDice(numberOfDice + 1);
         }
     }
+
     const onDecreaseNumberOfDice = () => {
         setNumberOfDice(numberOfDice - 1);
     }
@@ -36,7 +42,6 @@ export const DiceRoller = () => {
         <Grid container spacing={2}>
             <Grid item>
                 <TextField
-                    id="outlined-number"
                     label="Dice to Roll"
                     type="number"
                     InputLabelProps={{

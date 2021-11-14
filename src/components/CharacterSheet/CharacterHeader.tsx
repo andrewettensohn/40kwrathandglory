@@ -34,7 +34,6 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
             <Grid justifyContent="flex-start" container spacing={1}>
                 <Grid item>
                     <TextField
-                        id="outlined-number"
                         label="Rank"
                         type="number"
                         className={classes.numberInput}
@@ -75,7 +74,7 @@ export const CharacterHeader = ({ character, updateCharacter }: CharacterHeaderP
             </Grid>
             <Grid justifyContent="flex-start" container spacing={3}>
                 <Grid item>
-                    <DiceRoller />
+                    <DiceRoller initalDiceValue={0} />
                 </Grid>
             </Grid>
         </Paper>

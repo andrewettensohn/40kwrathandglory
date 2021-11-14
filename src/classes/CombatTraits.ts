@@ -11,6 +11,7 @@ export class CombatTraits {
     conviction: number;
 
     constructor(Character: Character) {
+
         const maxWounds = Character.Tier * 2 + Character.Attributes.Toughness;
         const maxShock = Character.Attributes.Willpower + Character.Tier;
         const defense = Character.Attributes.Initiative - 1;

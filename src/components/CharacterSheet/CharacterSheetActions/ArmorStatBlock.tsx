@@ -3,24 +3,19 @@ import React from "react"
 import { Armor } from "../../../interfaces/Armor";
 import { Character } from "../../../interfaces/Character";
 import { Weapon } from "../../../interfaces/Weapon"
+import { useAppStyles } from "../../AppStyles";
 import { ArmorTraitsList } from "./ArmorTraits";
 
 interface ArmorStatBlockProps {
     armor: Armor,
 }
 
-const useStyles = makeStyles({
-    block: {
-        margin: 3
-    },
-});
-
 export const ArmorStatBlock = ({ armor }: ArmorStatBlockProps) => {
-    const classes = useStyles();
+    const classes = useAppStyles();
 
     return (
         <Paper elevation={8}>
-            <Grid container spacing={1} className={classes.block}>
+            <Grid container spacing={1} className={classes.m3}>
                 <Grid item xs={12}>
                     <Typography variant="h6">{armor.Name}</Typography>
                 </Grid>

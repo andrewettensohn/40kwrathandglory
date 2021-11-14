@@ -18,6 +18,7 @@ export interface WeaponTraits {
     Reliable: boolean;
     Rending: number;
     Silent: boolean;
+    Sniper: number;
     Spread: boolean;
     Supercharge: boolean;
     Unwieldy: number;

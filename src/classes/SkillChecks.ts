@@ -28,9 +28,12 @@ export class SkillChecks {
 
         if (Character.Armor.some(x => x.IsEquipped)) {
             Character.Armor.forEach(x => {
+
+                if (x.ArmorTraits === undefined || x.ArmorTraits === null) return;
+
                 if (x.ArmorTraits.Powered != 0) {
                     powerArmorRating += x.ArmorTraits.Powered;
-                } else if (x.ArmorTraits.Bulk != 0) {
+                } else if (x.ArmorTraits?.Bulk != 0) {
                     bulkRating += x.ArmorTraits.Bulk * 5;
                 }
             });
