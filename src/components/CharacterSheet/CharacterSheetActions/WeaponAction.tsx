@@ -52,7 +52,7 @@ export const WeaponAction = ({ weaponsList, character, updateCharacter }: Weapon
                 <Button
                     startIcon={<ControlCamera />}
                     color="primary"
-                    variant="contained"
+                    variant="outlined"
                     onClick={onManageWeaponsClicked}>Close</Button>
             </Grid>
             <Grid item>
@@ -60,18 +60,18 @@ export const WeaponAction = ({ weaponsList, character, updateCharacter }: Weapon
                     {weaponsList.map(x => {
                         return character.Weapons.some(y => y.Id == x.Id)
                             ?
-                            <ListItem key={x.Id}>
+                            <ListItem key={x.Id} divider={true}>
                                 <Grid container>
-                                    <Grid item xs={12}>
+                                    <Grid item>
                                         <Button variant="outlined" onClick={() => onRemoveFromInventoryClicked(x)}>Remove From Inventory</Button>
                                     </Grid>
                                     <WeaponStatBlock weapon={x} character={character} displayAttackButton={false} />
                                 </Grid>
                             </ListItem>
                             :
-                            <ListItem key={x.Id}>
+                            <ListItem key={x.Id} divider={true}>
                                 <Grid container>
-                                    <Grid item xs={12}>
+                                    <Grid item>
                                         <Button variant="outlined" onClick={() => onAddToInventoryClicked(x)}>Add to Inventory</Button>
                                     </Grid>
                                     <WeaponStatBlock weapon={x} character={character} displayAttackButton={false} />
@@ -96,7 +96,7 @@ export const WeaponAction = ({ weaponsList, character, updateCharacter }: Weapon
                         {character.Weapons.map(x => {
                             return x.IsEquipped
                                 ?
-                                <ListItem key={x.Id}>
+                                <ListItem key={x.Id} divider={true}>
                                     <Grid container spacing={2}>
                                         <Grid item xs={12}>
                                             <Button variant="outlined" onClick={() => onEquipChangeClicked(x, false)}>Unequip</Button>
@@ -107,7 +107,7 @@ export const WeaponAction = ({ weaponsList, character, updateCharacter }: Weapon
                                     </Grid>
                                 </ListItem>
                                 :
-                                <ListItem key={x.Id}>
+                                <ListItem key={x.Id} divider={true}>
                                     <Grid container spacing={2}>
                                         <Grid item xs={12}>
                                             <Button variant="outlined" onClick={() => onEquipChangeClicked(x, true)}>Equip</Button>

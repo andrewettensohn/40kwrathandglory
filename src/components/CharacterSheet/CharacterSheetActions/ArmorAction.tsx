@@ -66,7 +66,7 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
                     {armorList.sort((x, y) => x.Name.localeCompare(y.Name)).map(x => {
                         return character.Armor.some(y => y.Id == x.Id)
                             ?
-                            <ListItem key={x.Id}>
+                            <ListItem key={x.Id} divider={true}>
                                 <Grid container>
                                     <Grid item xs={12}>
                                         <Button variant="outlined" onClick={() => onRemoveFromInventoryClicked(x)}>Remove From Inventory</Button>
@@ -75,7 +75,7 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
                                 </Grid>
                             </ListItem>
                             :
-                            <ListItem key={x.Id}>
+                            <ListItem key={x.Id} divider={true}>
                                 <Grid container>
                                     <Grid item xs={12}>
                                         <Button variant="outlined" onClick={() => onAddToInventoryClicked(x)}>Add to Inventory</Button>
@@ -93,7 +93,7 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
                 <Button
                     startIcon={<ControlCamera />}
                     color="primary"
-                    variant="contained"
+                    variant="outlined"
                     onClick={onManageArmorClicked}>Manage</Button>
             </Grid>
             <Grid item>
@@ -101,7 +101,7 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
                     {character.Armor.sort((x, y) => x.Name.localeCompare(y.Name)).map(x => {
                         return x.IsEquipped
                             ?
-                            <ListItem key={x.Id}>
+                            <ListItem key={x.Id} divider={true}>
                                 <Grid container>
                                     <Grid item xs={12}>
                                         <Button variant="outlined" onClick={() => onEquipChangeClicked(x, false)}>Unequip</Button>
@@ -110,7 +110,7 @@ export const ArmorAction = ({ armorList, character, updateCharacter }: ArmorActi
                                 </Grid>
                             </ListItem>
                             :
-                            <ListItem key={x.Id}>
+                            <ListItem key={x.Id} divider={true}>
                                 <Grid container>
                                     <Grid item xs={12}>
                                         <Button variant="outlined" onClick={() => onEquipChangeClicked(x, true)}>Equip</Button>

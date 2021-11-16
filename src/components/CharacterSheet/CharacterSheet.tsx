@@ -90,9 +90,6 @@ export const CharacterSheet = () => {
                                 <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Archetype)}>Archetype</Button>
                             </Grid>
                             <Grid item>
-                                <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Quest)}>Quests</Button>
-                            </Grid>
-                            <Grid item>
                                 <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Checks)}>Checks</Button>
                             </Grid>
                         </Grid>

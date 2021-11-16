@@ -8,7 +8,7 @@ import { Character } from "../../../interfaces/Character";
 interface WeaponTraitsProps {
     traits: WeaponTraits,
 }
-//
+
 export const WeaponTraitsList = ({ traits }: WeaponTraitsProps) => {
 
     return traits !== undefined && traits !== null

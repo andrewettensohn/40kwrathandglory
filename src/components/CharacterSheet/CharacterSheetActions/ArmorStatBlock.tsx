@@ -14,7 +14,7 @@ export const ArmorStatBlock = ({ armor }: ArmorStatBlockProps) => {
     const classes = useAppStyles();
 
     return (
-        <Paper elevation={8}>
+        <div>
             <Grid container spacing={1} className={classes.m3}>
                 <Grid item xs={12}>
                     <Typography variant="h6">{armor.Name}</Typography>
@@ -25,9 +25,6 @@ export const ArmorStatBlock = ({ armor }: ArmorStatBlockProps) => {
                 <Grid item xs={12}>
                     <ArmorTraitsList traits={armor.ArmorTraits} />
                 </Grid>
-                <Grid item xs={10}>
-                    <Divider />
-                </Grid>
                 <Grid item xs={12}>
                     <Typography>{armor.Description}</Typography>
                 </Grid>
@@ -35,7 +32,7 @@ export const ArmorStatBlock = ({ armor }: ArmorStatBlockProps) => {
                     <Typography>Keywords: {armor.Keywords}</Typography>
                 </Grid>
             </Grid>
-        </Paper>
+        </div>
     );
 
 }

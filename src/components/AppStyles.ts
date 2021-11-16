@@ -25,11 +25,17 @@ export const useAppStyles = makeStyles({
     numberInput: {
         maxWidth: 100
     },
+    numberInputMd: {
+        maxWidth: 150
+    },
     mt5: {
         marginTop: 5
     },
     mt10: {
         marginTop: 10
+    },
+    mb5: {
+        marginBottom: 5
     },
     mb25: {
         marginBottom: 25
@@ -50,6 +56,13 @@ export const useAppStyles = makeStyles({
         overflowX: "hidden",
         marginLeft: 16,
         marginRight: 16
+    },
+    scrollBoxLargeScreen: {
+        overflowY: "scroll",
+        height: "45vh",
+        overflowX: "hidden",
+        maxWidth: 850,
+        margin: 16
     },
     textAreaInput: {
         width: '25ch'

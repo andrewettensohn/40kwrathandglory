@@ -11,7 +11,7 @@ export const ArmorTraitsList = ({ traits }: ArmorTraitsProps) => {
     return traits !== undefined && traits !== null
         ?
         <Grid container >
-            {traits.Bulk &&
+            {traits.Bulk > 0 &&
                 <Grid item xs={12}>
                     <Tooltip title={BulkTooltip}>
                         <Chip

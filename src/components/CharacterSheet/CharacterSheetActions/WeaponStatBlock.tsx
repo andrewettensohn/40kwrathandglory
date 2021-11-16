@@ -20,7 +20,7 @@ export const WeaponStatBlock = ({ weapon, character, displayAttackButton }: Weap
     const toggleModal = () => setIsModalOpen(!isModalOpen);
 
     return (
-        <Paper elevation={8}>
+        <div>
             <Grid container className={classes.m3}>
                 {displayAttackButton &&
                     <Grid item>
@@ -51,9 +51,6 @@ export const WeaponStatBlock = ({ weapon, character, displayAttackButton }: Weap
                     <WeaponTraitsList traits={weapon.WeaponTraits} />
                 </Grid>
                 <Grid item xs={12}>
-                    <Divider />
-                </Grid>
-                <Grid item xs={12}>
                     <Typography>{weapon.Description}</Typography>
                 </Grid>
             </Grid>
@@ -73,7 +70,7 @@ export const WeaponStatBlock = ({ weapon, character, displayAttackButton }: Weap
                     </Grid>
                 </Paper>
             </Modal>
-        </Paper>
+        </div>
     );
 
 }

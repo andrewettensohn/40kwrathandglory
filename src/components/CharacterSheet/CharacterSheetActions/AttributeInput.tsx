@@ -25,7 +25,6 @@ export const AttributesInput = ({
         <Grid container spacing={3} justifyContent='center'>
             <Grid item>
                 <TextField
-                    id="outlined-number"
                     label={attributeName}
                     type="number"
                     InputLabelProps={{

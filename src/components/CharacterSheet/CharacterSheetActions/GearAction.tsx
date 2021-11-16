@@ -44,7 +44,7 @@ export const GearAction = ({ gearList, character, updateCharacter }: GearActionP
                 <Button
                     startIcon={<ControlCamera />}
                     color="primary"
-                    variant="contained"
+                    variant="outlined"
                     onClick={onManageArmorClicked}>Close</Button>
             </Grid>
             <Grid item>
@@ -55,7 +55,7 @@ export const GearAction = ({ gearList, character, updateCharacter }: GearActionP
                             <ListItem key={x.Id}>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onRemoveFromInventoryClicked(x)}>Remove From Inventory</Button>
+                                        <Button variant="outlined" onClick={() => onRemoveFromInventoryClicked(x)}>Remove From Inventory</Button>
                                     </Grid>
                                     <GearInfoBlock gear={x} />
                                 </Grid>
@@ -64,7 +64,7 @@ export const GearAction = ({ gearList, character, updateCharacter }: GearActionP
                             <ListItem key={x.Id}>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onAddToInventoryClicked(x)}>Add to Inventory</Button>
+                                        <Button variant="outlined" onClick={() => onAddToInventoryClicked(x)}>Add to Inventory</Button>
                                     </Grid>
                                     <GearInfoBlock gear={x} />
                                 </Grid>
@@ -79,7 +79,7 @@ export const GearAction = ({ gearList, character, updateCharacter }: GearActionP
                 <Button
                     startIcon={<ControlCamera />}
                     color="primary"
-                    variant="contained"
+                    variant="outlined"
                     onClick={onManageArmorClicked}>Manage</Button>
             </Grid>
             <Grid item>

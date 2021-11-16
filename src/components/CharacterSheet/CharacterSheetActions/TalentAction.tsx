@@ -45,7 +45,7 @@ export const TalentAction = ({ talentList, character, updateCharacter }: TalentA
                 <Button
                     startIcon={<ControlCamera />}
                     color="primary"
-                    variant="contained"
+                    variant="outlined"
                     onClick={onManageTalentsClicked}>Close</Button>
             </Grid>
             <Grid item>
@@ -56,7 +56,7 @@ export const TalentAction = ({ talentList, character, updateCharacter }: TalentA
                             <ListItem key={x.Id}>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onRemoveTalentClicked(x)}>Remove</Button>
+                                        <Button variant="outlined" onClick={() => onRemoveTalentClicked(x)}>Remove</Button>
                                     </Grid>
                                     <TalentInfoBlock talent={x} />
                                 </Grid>
@@ -65,7 +65,7 @@ export const TalentAction = ({ talentList, character, updateCharacter }: TalentA
                             <ListItem key={x.Id}>
                                 <Grid container>
                                     <Grid item xs={12}>
-                                        <Button variant="contained" onClick={() => onAddTalentClicked(x)}>Add</Button>
+                                        <Button variant="outlined" onClick={() => onAddTalentClicked(x)}>Add</Button>
                                     </Grid>
                                     <TalentInfoBlock talent={x} />
                                 </Grid>
@@ -80,7 +80,7 @@ export const TalentAction = ({ talentList, character, updateCharacter }: TalentA
                 <Button
                     startIcon={<ControlCamera />}
                     color="primary"
-                    variant="contained"
+                    variant="outlined"
                     onClick={onManageTalentsClicked}>Manage</Button>
             </Grid>
             <Grid item>

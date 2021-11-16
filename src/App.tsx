@@ -1,4 +1,4 @@
-import { Box, Container, Paper } from '@material-ui/core';
+import { Box, Container, Paper, useMediaQuery } from '@material-ui/core';
 import { AppBarHeader } from './components/AppBarHeader';
 import { Home } from './components/Home';
 import {
@@ -12,6 +12,7 @@ import { CharacterSheet } from './components/CharacterSheet/CharacterSheet';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { amber, blueGrey, deepPurple, green, red } from '@material-ui/core/colors';
 import { ContentInput } from './components/ContentInput/ContentInput';
+import { CharacterSheetLarge } from './components/CharacterSheet/CharacterSheetLarge';
 
 const theme = createTheme({
   palette: {
@@ -27,6 +28,7 @@ const theme = createTheme({
 });
 
 export default function App() {
+  const isActive = useMediaQuery('(max-width: 1200px)');
   return (
     <ThemeProvider theme={theme}>
       <Paper style={{ height: "100vh" }}>
@@ -37,7 +39,8 @@ export default function App() {
               <Home />
             </Route>
             <Route path="/characterSheet">
-              <CharacterSheet />
+              {isActive && <CharacterSheet />}
+              {!isActive && <CharacterSheetLarge />}
             </Route>
             <Route path="/contentInput">
               <ContentInput />

@@ -1,3 +1,4 @@
+import classes from "*.module.css";
 import { Grid } from "@material-ui/core";
 import React from "react";
 import { isKeyOfAmmo } from "../../../helpers/KeyHelper";

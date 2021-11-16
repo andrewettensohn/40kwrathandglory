@@ -49,7 +49,7 @@ export const ModifyWeapon = ({ WeaponList, toggleSaveSuccessSnackBar }: ModifyWe
                     </AccordionDetails>
                 </Accordion>
             </Grid>
-            <Grid item>
+            <Grid item xs={12} md={6}>
                 <WeaponInput selectedWeapon={selectedWeapon} isModify={true} key={selectedWeapon.Id} updateWeaponList={updateWeaponList} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
             </Grid>
         </Grid>
