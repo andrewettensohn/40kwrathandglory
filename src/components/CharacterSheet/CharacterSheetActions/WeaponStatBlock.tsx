@@ -1,6 +1,6 @@
 import { Grid, Typography, Divider, Button, Modal, Paper } from "@material-ui/core"
 import React from "react"
-import { HitCheck } from "../../../helpers/CheckHelper";
+import { HitCheck, WeaponDamageCheck } from "../../../helpers/CheckHelper";
 import { Character } from "../../../interfaces/Character";
 import { Weapon } from "../../../interfaces/Weapon"
 import { useAppStyles } from "../../AppStyles";
@@ -33,7 +33,7 @@ export const WeaponStatBlock = ({ weapon, character, displayAttackButton }: Weap
                     <Typography>Hit: {HitCheck(weapon, character)}</Typography>
                 </Grid>
                 <Grid item xs={12}>
-                    <Typography>Damage: {weapon.Damage}</Typography>
+                    <Typography>Damage: {WeaponDamageCheck(weapon, character)}</Typography>
                 </Grid>
                 <Grid item xs={12}>
                     <Typography>ED: {weapon.ED}</Typography>
