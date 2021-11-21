@@ -81,7 +81,7 @@ export const CharacterSheetLarge = () => {
                 </Grid>
             </Grid>
             <Grid container spacing={3} className={classes.mt10}>
-                <Grid item>
+                <Grid item lg={6}>
                     <TabContext value={leftTabSelection}>
                         <AppBar position="static" color="default" className={classes.m3}>
                             <TabList onChange={handleLeftTabSelectionChange} >
@@ -118,7 +118,7 @@ export const CharacterSheetLarge = () => {
                         </TabPanel>
                     </TabContext>
                 </Grid>
-                <Grid item>
+                <Grid item lg={6}>
                     <TabContext value={rightTabSelection}>
                         <AppBar position="static" color="default" className={classes.m3}>
                             <TabList onChange={handleRightTabSelectionChange} >
