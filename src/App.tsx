@@ -13,6 +13,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { amber, blueGrey, deepPurple, green, red } from '@material-ui/core/colors';
 import { ContentInput } from './components/ContentInput/ContentInput';
 import { CharacterSheetLarge } from './components/CharacterSheet/CharacterSheetLarge';
+import { ThreatManager } from './components/ThreatManager/ThreatManager';
 
 const theme = createTheme({
   palette: {
@@ -44,6 +45,9 @@ export default function App() {
             </Route>
             <Route path="/contentInput">
               <ContentInput />
+            </Route>
+            <Route path="/threatManager">
+              <ThreatManager />
             </Route>
           </Switch>
         </Router>

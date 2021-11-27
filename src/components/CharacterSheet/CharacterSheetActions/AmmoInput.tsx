@@ -22,7 +22,6 @@ export const AmmoInput = ({
         <Grid container justifyContent="center">
             <Grid item>
                 <TextField
-                    id="outlined-number"
                     label={ammoName}
                     type="number"
                     InputLabelProps={{

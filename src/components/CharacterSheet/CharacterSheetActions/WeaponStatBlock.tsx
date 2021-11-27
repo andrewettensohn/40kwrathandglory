@@ -59,13 +59,18 @@ export const WeaponStatBlock = ({ weapon, character, displayAttackButton }: Weap
                 onClose={toggleModal}
                 className={classes.centerScreen}
             >
-                <Paper>
-                    <Grid container className={classes.m3} spacing={3}>
+                <Paper className={classes.scrollBox}>
+                    <Grid container spacing={3}>
                         <Grid item>
                             <WeaponStatBlock weapon={weapon} character={character} displayAttackButton={false} />
                         </Grid>
                         <Grid item>
                             <DiceRoller initalDiceValue={HitCheck(weapon, character)} />
+                        </Grid>
+                    </Grid>
+                    <Grid container>
+                        <Grid item>
+                            <img src="images/CriticalHitTable.png" className={classes.imgAction} />
                         </Grid>
                     </Grid>
                 </Paper>

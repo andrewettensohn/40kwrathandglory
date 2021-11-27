@@ -1,4 +1,4 @@
-import { Button, FormControl, Grid, TextField } from "@material-ui/core";
+import { Button, FormControl, Grid, Switch, TextField, Typography } from "@material-ui/core";
 import React from "react";
 import { addOrUpdateModelAtSyncAPI } from "../../../data/SyncModelService";
 import { ModelType } from "../../../interfaces/Enumerations/ModelType";
@@ -22,6 +22,7 @@ export const TalentInput = ({ isModify, selectedTalent, updateTalentList, toggle
             Description: "",
             Requirements: "",
             XPCost: 0,
+            ThreatOnly: false,
         };
 
         if (isModify && selectedTalent !== undefined && selectedTalent !== null) {
@@ -63,6 +64,14 @@ export const TalentInput = ({ isModify, selectedTalent, updateTalentList, toggle
         });
     }
 
+    const onChangeBool = (propertyName: string, value: boolean) => {
+
+        setTalent({
+            ...Talent,
+            [propertyName]: value
+        });
+    }
+
     if (isModify && (selectedTalent === null || selectedTalent === undefined)) {
         return (<div>Select a Talent to Modify.</div>);
     };
@@ -80,6 +89,10 @@ export const TalentInput = ({ isModify, selectedTalent, updateTalentList, toggle
                         </Grid>
                         <Grid item>
                             <TextField value={Talent.XPCost?.toString()} onChange={(e) => onChangeNumber("XPCost", parseFloat(e.target.value))} type="number" label="XP Cost" variant="outlined" />
+                        </Grid>
+                        <Grid item>
+                            <Typography>Threat Only Ability</Typography>
+                            <Switch checked={Talent?.ThreatOnly} color="primary" onChange={(e) => onChangeBool("ThreatOnly", e.target.checked)} />
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth>

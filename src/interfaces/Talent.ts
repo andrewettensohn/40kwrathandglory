@@ -4,4 +4,5 @@ export interface Talent {
     Description: string;
     Requirements: string;
     XPCost: number;
+    ThreatOnly: boolean;
 }

@@ -13,6 +13,8 @@ import { ModifyTalent } from "./Modify/ModifyTalent";
 import { ModifyWeapon } from "./Modify/ModifyWeapon";
 import { ModifyArchetype } from "./Modify/ModifyArchetype";
 import { ModifyArmor } from "./Modify/ModifyArmor";
+import { ThreatInput } from "./Input/ThreatInput";
+import { ModifyThreat } from "./Modify/ModifyThreat";
 
 interface ContentActionControlProps {
     modelType: ModelType,
@@ -53,6 +55,12 @@ export const ContentActionControl = ({ modelType, syncModels, isCreateMode, togg
             <WeaponInput isModify={false} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
             :
             <ModifyWeapon WeaponList={getDeserializedModelsForModelType(syncModels, ModelType.Weapon)} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
+    } else if (modelType == ModelType.Threat) {
+        return isCreateMode
+            ?
+            <ThreatInput isModify={false} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} syncModels={syncModels} />
+            :
+            <ModifyThreat syncModels={syncModels} threatList={getDeserializedModelsForModelType(syncModels, ModelType.Threat)} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
     } else {
         return (<div></div>)
     }

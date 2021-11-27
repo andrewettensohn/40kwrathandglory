@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { validateCharacterModels } from "../../../data/RestService";
 import { ModelType } from "../../../interfaces/Enumerations/ModelType";
 import { Weapon } from "../../../interfaces/Weapon";
+import { useAppStyles } from "../../AppStyles";
 import { WeaponInput } from "../Input/WeaponInput";
 
 interface ModifyWeaponProps {
@@ -14,6 +15,7 @@ interface ModifyWeaponProps {
 export const ModifyWeapon = ({ WeaponList, toggleSaveSuccessSnackBar }: ModifyWeaponProps) => {
     const [selectedWeapon, setSelectedWeapon] = React.useState(WeaponList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
+    const classes = useAppStyles();
 
     const updateWeaponList = async (Weapon: Weapon) => {
 
@@ -36,7 +38,7 @@ export const ModifyWeapon = ({ WeaponList, toggleSaveSuccessSnackBar }: ModifyWe
                         expandIcon={<ExpandMore />}>
                         <Typography>Weapon List</Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails className={classes.scrollBox}>
                         <List component="nav">
                             {WeaponList.map(x => {
                                 return (

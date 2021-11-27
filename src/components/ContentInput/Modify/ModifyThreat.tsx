@@ -1,33 +1,39 @@
 import { Accordion, AccordionDetails, AccordionSummary, Grid, List, ListItem, Typography } from "@material-ui/core";
 import { ExpandMore } from "@material-ui/icons";
-import React, { useEffect } from "react";
+import React from "react";
 import { validateCharacterModels } from "../../../data/RestService";
-import { Armor } from "../../../interfaces/Armor";
 import { ModelType } from "../../../interfaces/Enumerations/ModelType";
+import { SyncModel } from "../../../interfaces/SyncModel";
+import { Threat } from "../../../interfaces/Threat";
 import { useAppStyles } from "../../AppStyles";
-import { ArmorInput } from "../Input/ArmorInput";
+import { ThreatInput } from "../Input/ThreatInput";
 
-interface ModifyArmorProps {
-    ArmorList: Armor[],
-    toggleSaveSuccessSnackBar(value: boolean): void
+interface ModifyThreatProps {
+    syncModels: SyncModel[],
+    threatList: Threat[],
+    toggleSaveSuccessSnackBar(value: boolean): void,
 }
 
-export const ModifyArmor = ({ ArmorList, toggleSaveSuccessSnackBar }: ModifyArmorProps) => {
-    const [selectedArmor, setSelectedArmor] = React.useState(ArmorList[0]);
+export const ModifyThreat = ({ syncModels, threatList, toggleSaveSuccessSnackBar }: ModifyThreatProps) => {
+    const [threats, setThreats] = React.useState(threatList);
+    const [selectedThreat, setSelectedThreat] = React.useState(threatList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
     const classes = useAppStyles();
 
-    const updateArmorList = async (Armor: Armor) => {
+    const updateThreatList = async (threat: Threat) => {
 
-        let ArmorToUpdateIndex = ArmorList.findIndex(x => x.Id == Armor.Id);
-        ArmorList[ArmorToUpdateIndex] = Armor;
+        let newThreatList = [...threats];
+        let threatToUpdateIndex = newThreatList.findIndex(x => x.Id == threat.Id);
+        newThreatList[threatToUpdateIndex] = threat;
 
-        await validateCharacterModels(Armor.Id, ModelType.Armor);
+        setThreats(newThreatList);
+
+        await validateCharacterModels(threat.Id, ModelType.Threat);
     }
 
-    const onArmorSelected = (Armor: Armor) => {
+    const onThreatSelected = (threat: Threat) => {
         setIsAccordionExpanded(false);
-        setSelectedArmor(Armor);
+        setSelectedThreat(threat);
     }
 
     return (
@@ -36,13 +42,13 @@ export const ModifyArmor = ({ ArmorList, toggleSaveSuccessSnackBar }: ModifyArmo
                 <Accordion expanded={isAccordionExpanded} onClick={() => setIsAccordionExpanded(!isAccordionExpanded)}>
                     <AccordionSummary
                         expandIcon={<ExpandMore />}>
-                        <Typography>Armor List</Typography>
+                        <Typography>Threat List</Typography>
                     </AccordionSummary>
                     <AccordionDetails className={classes.scrollBox}>
                         <List component="nav">
-                            {ArmorList.map(x => {
+                            {threats.map(x => {
                                 return (
-                                    <ListItem key={x.Id} button onClick={() => onArmorSelected(x)}>
+                                    <ListItem key={x.Id} button onClick={() => onThreatSelected(x)}>
                                         <Typography>{x.Name}</Typography>
                                     </ListItem>
                                 )
@@ -52,7 +58,7 @@ export const ModifyArmor = ({ ArmorList, toggleSaveSuccessSnackBar }: ModifyArmo
                 </Accordion>
             </Grid>
             <Grid item xs={12} md={6}>
-                <ArmorInput selectedArmor={selectedArmor} isModify={true} key={selectedArmor.Id} updateArmorList={updateArmorList} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
+                <ThreatInput selectedThreat={selectedThreat} isModify={true} updateThreatList={updateThreatList} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} syncModels={syncModels} />
             </Grid>
         </Grid>
     );

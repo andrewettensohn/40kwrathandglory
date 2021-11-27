@@ -36,6 +36,9 @@ export const Home = () => {
                 <Grid item>
                     <Button color="primary" variant="outlined" href={`/contentInput`}>Manage Content</Button>
                 </Grid>
+                <Grid item>
+                    <Button color="primary" variant="outlined" href={`/threatManager`}>Threat Manager</Button>
+                </Grid>
             </Grid>
             <Grid item>
                 <CharacterList characters={characterList} />

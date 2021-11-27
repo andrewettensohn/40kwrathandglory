@@ -4,6 +4,7 @@ import React from "react";
 import { validateCharacterModels } from "../../../data/RestService";
 import { ModelType } from "../../../interfaces/Enumerations/ModelType";
 import { Talent } from "../../../interfaces/Talent";
+import { useAppStyles } from "../../AppStyles";
 import { TalentInput } from "../Input/TalentInput";
 
 interface ModifyTalentProps {
@@ -14,6 +15,7 @@ interface ModifyTalentProps {
 export const ModifyTalent = ({ TalentList, toggleSaveSuccessSnackBar }: ModifyTalentProps) => {
     const [selectedTalent, setSelectedTalent] = React.useState(TalentList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
+    const classes = useAppStyles();
 
     const updateTalentList = async (Talent: Talent) => {
 
@@ -36,7 +38,7 @@ export const ModifyTalent = ({ TalentList, toggleSaveSuccessSnackBar }: ModifyTa
                         expandIcon={<ExpandMore />}>
                         <Typography>Talent List</Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails className={classes.scrollBox}>
                         <List component="nav">
                             {TalentList.map(x => {
                                 return (

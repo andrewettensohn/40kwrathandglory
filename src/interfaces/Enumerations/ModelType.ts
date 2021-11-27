@@ -6,5 +6,6 @@ export enum ModelType {
     Pyschic,
     Quest,
     Talent,
-    Weapon
+    Weapon,
+    Threat
 }
