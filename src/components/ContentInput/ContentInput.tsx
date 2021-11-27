@@ -67,6 +67,7 @@ export const ContentInput = () => {
                                 <option value={3}>Gear</option>
                                 <option value={6}>Talent</option>
                                 <option value={7}>Weapon</option>
+                                <option value={8}>Threat</option>
                             </Select>
                         </FormControl>
                     </Grid>

@@ -1,15 +1,15 @@
 export interface PyschicPower {
-    id: string;
-    name: string;
-    discipline: string;
-    dN: number;
-    activation: string;
-    duration: string;
-    range: string;
-    effect: string;
-    multiTarget: boolean;
-    keywords: string;
-    potency: string;
-    requirements: string;
-    xPCost: number;
+    Id: string;
+    Name: string;
+    Discipline: string;
+    DN: number;
+    Activation: string;
+    Duration: string;
+    Range: string;
+    Effect: string;
+    MultiTarget: boolean;
+    Keywords: string;
+    Potency: string;
+    Requirements: string;
+    XPCost: number;
 }

@@ -2,7 +2,8 @@ import axios from "axios";
 import { ModelType } from "../interfaces/Enumerations/ModelType";
 import { SyncModel } from "../interfaces/SyncModel";
 
-const baseApiRoute = "https://wrathandglorysyncapi.azurewebsites.net/syncModel/";
+const baseApiRoute = "https://localhost:5001/syncModel/";
+//"https://wrathandglorysyncapi.azurewebsites.net/syncModel/";
 
 export const getSyncModels = async (): Promise<SyncModel[]> => {
 
