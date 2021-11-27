@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { validateCharacterModels } from "../../../data/RestService";
 import { Archetype } from "../../../interfaces/Archetype";
 import { ModelType } from "../../../interfaces/Enumerations/ModelType";
+import { useAppStyles } from "../../AppStyles";
 import { ArchetypeInput } from "../Input/ArchetypeInput";
 
 interface ModifyArchetypeProps {
@@ -14,6 +15,7 @@ interface ModifyArchetypeProps {
 export const ModifyArchetype = ({ ArchetypeList, toggleSaveSuccessSnackBar }: ModifyArchetypeProps) => {
     const [selectedArchetype, setSelectedArchetype] = React.useState(ArchetypeList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
+    const classes = useAppStyles();
 
     const updateArchetypeList = async (Archetype: Archetype) => {
 
@@ -36,7 +38,7 @@ export const ModifyArchetype = ({ ArchetypeList, toggleSaveSuccessSnackBar }: Mo
                         expandIcon={<ExpandMore />}>
                         <Typography>Archetype List</Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails className={classes.scrollBox}>
                         <List component="nav">
                             {ArchetypeList.map(x => {
                                 return (
@@ -49,7 +51,7 @@ export const ModifyArchetype = ({ ArchetypeList, toggleSaveSuccessSnackBar }: Mo
                     </AccordionDetails>
                 </Accordion>
             </Grid>
-            <Grid item>
+            <Grid item xs={12} md={6}>
                 <ArchetypeInput selectedArchetype={selectedArchetype} isModify={true} key={selectedArchetype.Id} updateArchetypeList={updateArchetypeList} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
             </Grid>
         </Grid>

@@ -91,7 +91,7 @@ export const TalentInput = ({ isModify, selectedTalent, updateTalentList, toggle
                             <TextField value={Talent.XPCost?.toString()} onChange={(e) => onChangeNumber("XPCost", parseFloat(e.target.value))} type="number" label="XP Cost" variant="outlined" />
                         </Grid>
                         <Grid item>
-                            <Typography>Shield</Typography>
+                            <Typography>Threat Only Ability</Typography>
                             <Switch checked={Talent?.ThreatOnly} color="primary" onChange={(e) => onChangeBool("ThreatOnly", e.target.checked)} />
                         </Grid>
                         <Grid item xs={12}>

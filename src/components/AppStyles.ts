@@ -50,6 +50,14 @@ export const useAppStyles = makeStyles({
         marginLeft: 16,
         marginRight: 16
     },
+    multiScrollBox: {
+        overflowY: "scroll",
+        height: "25vh",
+        width: 300,
+        overflowX: "scroll",
+        marginLeft: 16,
+        marginRight: 16
+    },
     scrollBoxLong: {
         overflowY: "scroll",
         height: "70vh",

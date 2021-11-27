@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { validateCharacterModels } from "../../../data/RestService";
 import { Armor } from "../../../interfaces/Armor";
 import { ModelType } from "../../../interfaces/Enumerations/ModelType";
+import { useAppStyles } from "../../AppStyles";
 import { ArmorInput } from "../Input/ArmorInput";
 
 interface ModifyArmorProps {
@@ -14,6 +15,7 @@ interface ModifyArmorProps {
 export const ModifyArmor = ({ ArmorList, toggleSaveSuccessSnackBar }: ModifyArmorProps) => {
     const [selectedArmor, setSelectedArmor] = React.useState(ArmorList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
+    const classes = useAppStyles();
 
     const updateArmorList = async (Armor: Armor) => {
 
@@ -36,7 +38,7 @@ export const ModifyArmor = ({ ArmorList, toggleSaveSuccessSnackBar }: ModifyArmo
                         expandIcon={<ExpandMore />}>
                         <Typography>Armor List</Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails className={classes.scrollBox}>
                         <List component="nav">
                             {ArmorList.map(x => {
                                 return (

@@ -67,16 +67,16 @@ export const DiceRoller = ({ initalDiceValue }: DiceRollerProps) => {
             </Grid>
             <Grid item xs={12}>
                 <Grid container spacing={1}>
-                    {rollResults.map(x => {
+                    {rollResults.map((x, key) => {
                         return x > 3
                             ?
-                            <Grid item>
+                            <Grid item key={key}>
                                 <Card elevation={3} variant="outlined">
                                     <Typography color="primary">{x}</Typography>
                                 </Card>
                             </Grid>
                             :
-                            <Grid item>
+                            <Grid item key={key}>
                                 <Card elevation={3} variant="outlined">
                                     <Typography color="error">{x}</Typography>
                                 </Card>
@@ -87,6 +87,6 @@ export const DiceRoller = ({ initalDiceValue }: DiceRollerProps) => {
                     </Grid>
                 </Grid>
             </Grid>
-        </Grid>
+        </Grid >
     );
 }

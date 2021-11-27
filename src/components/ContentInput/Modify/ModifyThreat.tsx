@@ -5,6 +5,7 @@ import { validateCharacterModels } from "../../../data/RestService";
 import { ModelType } from "../../../interfaces/Enumerations/ModelType";
 import { SyncModel } from "../../../interfaces/SyncModel";
 import { Threat } from "../../../interfaces/Threat";
+import { useAppStyles } from "../../AppStyles";
 import { ThreatInput } from "../Input/ThreatInput";
 
 interface ModifyThreatProps {
@@ -17,6 +18,7 @@ export const ModifyThreat = ({ syncModels, threatList, toggleSaveSuccessSnackBar
     const [threats, setThreats] = React.useState(threatList);
     const [selectedThreat, setSelectedThreat] = React.useState(threatList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
+    const classes = useAppStyles();
 
     const updateThreatList = async (threat: Threat) => {
 
@@ -42,7 +44,7 @@ export const ModifyThreat = ({ syncModels, threatList, toggleSaveSuccessSnackBar
                         expandIcon={<ExpandMore />}>
                         <Typography>Threat List</Typography>
                     </AccordionSummary>
-                    <AccordionDetails>
+                    <AccordionDetails className={classes.scrollBox}>
                         <List component="nav">
                             {threats.map(x => {
                                 return (

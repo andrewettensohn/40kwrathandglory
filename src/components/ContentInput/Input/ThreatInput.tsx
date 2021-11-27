@@ -78,7 +78,6 @@ export const ThreatInput = ({ isModify, selectedThreat, updateThreatList, toggle
         };
 
         if (isModify && selectedThreat !== undefined && selectedThreat !== null) {
-            console.log(selectedThreat);
             initialThreat = { ...selectedThreat };
         }
 

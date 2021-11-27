@@ -50,7 +50,7 @@ export const TalentAction = ({ talentList, character, updateCharacter }: TalentA
             </Grid>
             <Grid item>
                 <List component="nav">
-                    {talentList.map(x => {
+                    {talentList.filter(x => x.ThreatOnly == false).map(x => {
                         return character.Talents.some(y => y.Id == x.Id)
                             ?
                             <ListItem key={x.Id}>
