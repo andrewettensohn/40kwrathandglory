@@ -26,8 +26,6 @@ export const getCharacterFromSyncModelListForId = (syncModels: SyncModel[], id: 
 
     characterSyncModel = syncModels.find(x => x.id === id);
 
-    console.log(id);
-
     if (characterSyncModel !== undefined && characterSyncModel !== null) {
         character = JSON.parse(characterSyncModel.json);
 

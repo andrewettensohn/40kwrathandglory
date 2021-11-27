@@ -43,6 +43,10 @@ export const useAppStyles = makeStyles({
     m3: {
         margin: 3
     },
+    imgAction: {
+        width: "100%",
+        height: "auto",
+    },
     scrollBox: {
         overflowY: "scroll",
         height: "45vh",

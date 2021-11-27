@@ -10,6 +10,7 @@ import { AttributesAction } from "./CharacterSheetActions/AttributesAction";
 import { CombatAction } from "./CharacterSheetActions/CombatAction";
 import { GearAction } from "./CharacterSheetActions/GearAction";
 import { QuestList } from "./CharacterSheetActions/Quests";
+import { QuickReference } from "./CharacterSheetActions/QuickReference";
 import { SkillsAction } from "./CharacterSheetActions/SkillsAction";
 import { SkillsCheckAction } from "./CharacterSheetActions/SkillsCheckAction";
 import { TalentAction } from "./CharacterSheetActions/TalentAction";
@@ -76,6 +77,10 @@ export const SheetActionControl = ({ character, actionType, syncModels, updateCh
     } else if (actionType == ActionType.Gear) {
         return (
             <GearAction gearList={getDeserializedModelsForModelType(syncModels, ModelType.Gear)} updateCharacter={updateCharacter} character={character} />
+        );
+    } else if (actionType == ActionType.QuickReference) {
+        return (
+            <QuickReference />
         );
     } else {
 

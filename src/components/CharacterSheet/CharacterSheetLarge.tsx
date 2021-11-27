@@ -21,6 +21,7 @@ import { GearAction } from "./CharacterSheetActions/GearAction";
 import { ArmorAction } from "./CharacterSheetActions/ArmorAction";
 import { TalentAction } from "./CharacterSheetActions/TalentAction";
 import { AmmoAction } from "./CharacterSheetActions/AmmoAction";
+import { QuickReference } from "./CharacterSheetActions/QuickReference";
 
 export const CharacterSheetLarge = () => {
 
@@ -88,6 +89,7 @@ export const CharacterSheetLarge = () => {
                                 <Tab label="Checks" value="1" />
                                 <Tab label="Modify Skills" value="2" />
                                 <Tab label="Modify Attributes" value="3" />
+                                <Tab label="Reference" value="4" />
                             </TabList>
                         </AppBar>
                         <TabPanel value="1">
@@ -113,6 +115,13 @@ export const CharacterSheetLarge = () => {
                                     <AttributesAction
                                         character={character}
                                         updateCharacter={setAndUpdateCharacter} />
+                                </Grid>
+                            </Grid>
+                        </TabPanel>
+                        <TabPanel value="4">
+                            <Grid container className={classes.scrollBoxLargeScreen}>
+                                <Grid item className={classes.mt5}>
+                                    <QuickReference />
                                 </Grid>
                             </Grid>
                         </TabPanel>

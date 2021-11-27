@@ -1,18 +1,8 @@
 import axios from "axios";
 import { ModelType } from "../interfaces/Enumerations/ModelType";
-import { RulesReferenceType } from "../interfaces/Enumerations/RuleReferenceType";
 import { SyncModel } from "../interfaces/SyncModel";
 
-const baseApiRoute = "https://localhost:5001/";
-//"https://wrathandglorysyncapi.azurewebsites.net/syncModel/";
-
-export const getAllRulesReferences = async (): Promise<RulesReferenceType[]> => {
-    const action = `rulesReference/getAll`;
-    const response = await axios.get(`${baseApiRoute}${action}`);
-    const references = response.data as RulesReferenceType[];
-
-    return references;
-}
+const baseApiRoute = "https://wrathandglorysyncapi.azurewebsites.net/";
 
 export const getSyncModels = async (): Promise<SyncModel[]> => {
 

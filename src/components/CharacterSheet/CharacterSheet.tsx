@@ -122,6 +122,9 @@ export const CharacterSheet = () => {
                             <Grid item>
                                 <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Gear)}>Gear</Button>
                             </Grid>
+                            <Grid item>
+                                <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.QuickReference)}>Quick Reference</Button>
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Paper>
