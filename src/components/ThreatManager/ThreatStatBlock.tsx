@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, Button, Card, CardActions, CardContent, CardHeader, Grid, IconButton, List, ListItem, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@material-ui/core";
+import { Accordion, AccordionDetails, AccordionSummary, Button, Card, CardActions, CardContent, CardHeader, Grid, IconButton, List, ListItem, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@material-ui/core";
 import { AddBoxOutlined, ExpandMore, ExpandMoreOutlined } from "@material-ui/icons";
 import React from "react";
 import { Threat } from "../../interfaces/Threat";
@@ -14,21 +14,28 @@ export const ThreatStatBlock = ({ threat }: ThreatStatBlockProps) => {
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(false);
     const [currentWounds, setCurrentWounds] = React.useState(0);
     const [currentShock, setCurrentShock] = React.useState(0);
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
     const classes = useAppStyles();
+
+    const toggleModal = () => setIsModalOpen(!isModalOpen);
 
     return (
         <div>
-            <Accordion expanded={isAccordionExpanded}>
-                <AccordionSummary>
-                    <Grid container spacing={3}>
-                        <Grid item xs={12}>
+                <Paper>
+                <Grid container justifyContent="center" spacing={3}>
+                        <Grid item>
                             <Grid container>
                                 <Grid item>
                                     <Typography variant="h6">{threat.Name}</Typography>
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item>
+                            <Button variant="outlined" onClick={() => setIsModalOpen(true)}>
+                                Open Stats
+                            </Button>
+                        </Grid>
+                        <Grid item>
                             <Grid container spacing={3}>
                                 <Grid item>
                                     <Typography>Defence: {threat.Defence}</Typography>
@@ -59,20 +66,20 @@ export const ThreatStatBlock = ({ threat }: ThreatStatBlockProps) => {
                                     shrink: true,
                                 }}
                                 variant="outlined"
-                                value={currentWounds}
+                                value={currentShock}
                                 onChange={(e) => setCurrentShock(parseFloat(e.target.value))}
                                 className={classes.numberInputMd}
                             />
                         </Grid>
-                        <Grid item>
-                            <Button variant="outlined" onClick={() => setIsAccordionExpanded(!isAccordionExpanded)}>
-                                Toggle Stats
-                            </Button>
-                        </Grid>
                     </Grid>
-                </AccordionSummary>
-                <AccordionDetails>
-                    <Grid container spacing={3}>
+                </Paper>
+            <Modal
+                open={isModalOpen}
+                onClose={toggleModal}
+                className={classes.centerScreen}
+            >
+                <Paper className={classes.scrollBoxLong}>
+                <Grid container justifyContent="center" spacing={3}>
                         <Grid item>
                             <TableContainer>
                                 <Table>
@@ -101,9 +108,12 @@ export const ThreatStatBlock = ({ threat }: ThreatStatBlockProps) => {
                                 </Table>
                             </TableContainer>
                         </Grid>
+                        <Grid container justifyContent="center">
                         <Grid item>
                             <Typography>Default Skill Value: {threat.DefaultSkill}</Typography>
                         </Grid>
+                        </Grid>
+                        <Grid container justifyContent="center">
                         <Grid item>
                             <TableContainer>
                                 <Table>
@@ -124,6 +134,8 @@ export const ThreatStatBlock = ({ threat }: ThreatStatBlockProps) => {
                                 </Table>
                             </TableContainer>
                         </Grid>
+                        </Grid>
+                        <Grid container justifyContent="center">
                         <Grid item>
                             <TableContainer>
                                 <Table>
@@ -144,9 +156,11 @@ export const ThreatStatBlock = ({ threat }: ThreatStatBlockProps) => {
                                 </Table>
                             </TableContainer>
                         </Grid>
+                        </Grid>
                         {threat.Weapons.length > 0 &&
-                            <Grid item>
-                                <TableContainer className={classes.multiScrollBox}>
+                        <Grid container justifyContent="center">
+                                                        <Grid item className={classes.multiScrollBox}>
+                                <TableContainer>
                                     <Table size="small">
                                         <TableHead>
                                             <TableRow>
@@ -158,9 +172,9 @@ export const ThreatStatBlock = ({ threat }: ThreatStatBlockProps) => {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {threat.Weapons.map(x => {
+                                            {threat.Weapons.map((x, key) => {
                                                 return (
-                                                    <TableRow>
+                                                    <TableRow key={key}>
                                                         <TableCell align="right">{x.Name}</TableCell>
                                                         <TableCell align="right">{x.Damage}</TableCell>
                                                         <TableCell align="right">{x.ED}</TableCell>
@@ -173,10 +187,12 @@ export const ThreatStatBlock = ({ threat }: ThreatStatBlockProps) => {
                                     </Table>
                                 </TableContainer>
                             </Grid>
+                            </Grid>
                         }
                         {threat.Armor.length > 0 &&
-                            <Grid item>
-                                <TableContainer className={classes.multiScrollBox}>
+                        <Grid container justifyContent="center">
+                                                        <Grid item className={classes.multiScrollBox}>
+                                <TableContainer>
                                     <Table size="small">
                                         <TableHead>
                                             <TableRow>
@@ -186,9 +202,9 @@ export const ThreatStatBlock = ({ threat }: ThreatStatBlockProps) => {
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {threat.Armor.map(x => {
+                                            {threat.Armor.map((x, key) => {
                                                 return (
-                                                    <TableRow>
+                                                    <TableRow key={key}>
                                                         <TableCell align="right">{x.Name}</TableCell>
                                                         <TableCell align="right">{x.AR}</TableCell>
                                                         <TableCell align="right"><ArmorTraitsList traits={x.ArmorTraits} /></TableCell>
@@ -199,9 +215,11 @@ export const ThreatStatBlock = ({ threat }: ThreatStatBlockProps) => {
                                     </Table>
                                 </TableContainer>
                             </Grid>
+                            </Grid>
                         }
                         {threat.Talents.length > 0 &&
-                            <Grid item>
+                        <Grid container justifyContent="center">
+                            <Grid item className={classes.multiScrollBox}>
                                 <Typography>Talents</Typography>
                                 <List>
                                     {threat.Talents.map(x => {
@@ -220,13 +238,13 @@ export const ThreatStatBlock = ({ threat }: ThreatStatBlockProps) => {
                                     })}
                                 </List>
                             </Grid>
+                            </Grid>
+                        
                         }
-                        <Grid item>
-                            <Typography>{threat.Description}</Typography>
-                        </Grid>
                     </Grid>
-                </AccordionDetails>
-            </Accordion>
+                </Paper>
+                    
+            </Modal>
         </div>
     );
 }
