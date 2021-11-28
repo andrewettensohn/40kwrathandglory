@@ -47,14 +47,7 @@ export const ThreatManager = () => {
     return !isLoading
         ?
         <Grid container justifyContent="center">
-            <Grid item xs={12}>
-                <Grid container justifyContent="flex-start" className={classes.m3}>
-                    <Grid item>
-                        <DiceRoller initalDiceValue={0} />
-                    </Grid>
-                </Grid>
-            </Grid>
-            <Grid container justifyContent="center">
+            <Grid container justifyContent="center" className={classes.mt5}>
             <Grid item>
                         <Button variant="outlined" onClick={resetThreatList}>Reset Encounter List</Button>
                     </Grid>
