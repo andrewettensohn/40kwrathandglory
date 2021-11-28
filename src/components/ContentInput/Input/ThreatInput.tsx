@@ -20,7 +20,7 @@ interface ThreatInputProps {
     syncModels: SyncModel[],
 }
 
-export const ThreatInput = ({ isModify, selectedThreat, updateThreatList, toggleSaveSuccessSnackBar, syncModels }: ThreatInputProps) => {
+export const ThreatInput = ({ selectedThreat, updateThreatList, isModify, toggleSaveSuccessSnackBar, syncModels }: ThreatInputProps) => {
 
     const setInitalThreatValues = (): Threat => {
 
@@ -77,7 +77,7 @@ export const ThreatInput = ({ isModify, selectedThreat, updateThreatList, toggle
             PsychicPowers: [],
         };
 
-        if (isModify && selectedThreat !== undefined && selectedThreat !== null) {
+        if (isModify && (selectedThreat !== undefined && selectedThreat !== null)) {
             initialThreat = { ...selectedThreat };
         }
 

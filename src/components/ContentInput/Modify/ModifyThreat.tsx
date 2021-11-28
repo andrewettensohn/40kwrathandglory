@@ -15,18 +15,14 @@ interface ModifyThreatProps {
 }
 
 export const ModifyThreat = ({ syncModels, threatList, toggleSaveSuccessSnackBar }: ModifyThreatProps) => {
-    const [threats, setThreats] = React.useState(threatList);
     const [selectedThreat, setSelectedThreat] = React.useState(threatList[0]);
     const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(true);
     const classes = useAppStyles();
 
     const updateThreatList = async (threat: Threat) => {
 
-        let newThreatList = [...threats];
-        let threatToUpdateIndex = newThreatList.findIndex(x => x.Id == threat.Id);
-        newThreatList[threatToUpdateIndex] = threat;
-
-        setThreats(newThreatList);
+        let threatToUpdateIndex = threatList.findIndex(x => x.Id == threat.Id);
+        threatList[threatToUpdateIndex] = threat;
 
         await validateCharacterModels(threat.Id, ModelType.Threat);
     }
@@ -46,7 +42,7 @@ export const ModifyThreat = ({ syncModels, threatList, toggleSaveSuccessSnackBar
                     </AccordionSummary>
                     <AccordionDetails className={classes.scrollBox}>
                         <List component="nav">
-                            {threats.map(x => {
+                            {threatList.map(x => {
                                 return (
                                     <ListItem key={x.Id} button onClick={() => onThreatSelected(x)}>
                                         <Typography>{x.Name}</Typography>
@@ -58,7 +54,7 @@ export const ModifyThreat = ({ syncModels, threatList, toggleSaveSuccessSnackBar
                 </Accordion>
             </Grid>
             <Grid item xs={12} md={6}>
-                <ThreatInput selectedThreat={selectedThreat} isModify={true} updateThreatList={updateThreatList} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} syncModels={syncModels} />
+                <ThreatInput selectedThreat={selectedThreat} isModify={true} key={selectedThreat.Id} updateThreatList={updateThreatList} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} syncModels={syncModels} />
             </Grid>
         </Grid>
     );
