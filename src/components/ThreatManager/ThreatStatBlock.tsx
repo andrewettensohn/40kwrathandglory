@@ -4,6 +4,7 @@ import React from "react";
 import { Threat } from "../../interfaces/Threat";
 import { useAppStyles } from "../AppStyles";
 import { ArmorTraitsList } from "../CharacterSheet/CharacterSheetActions/ArmorTraits";
+import { DiceRoller } from "../CharacterSheet/CharacterSheetActions/DiceRoller";
 import { WeaponTraitsList } from "../CharacterSheet/CharacterSheetActions/WeaponTraitsList";
 
 export interface ThreatStatBlockProps {
@@ -11,7 +12,6 @@ export interface ThreatStatBlockProps {
 };
 
 export const ThreatStatBlock = ({ threat }: ThreatStatBlockProps) => {
-    const [isAccordionExpanded, setIsAccordionExpanded] = React.useState(false);
     const [currentWounds, setCurrentWounds] = React.useState(0);
     const [currentShock, setCurrentShock] = React.useState(0);
     const [isModalOpen, setIsModalOpen] = React.useState(false);
@@ -79,6 +79,11 @@ export const ThreatStatBlock = ({ threat }: ThreatStatBlockProps) => {
                 className={classes.centerScreen}
             >
                 <Paper className={classes.scrollBoxLong}>
+                    <Grid container justifyContent="center" className={classes.mt10}>
+                        <Grid item>
+                            <DiceRoller initalDiceValue={0} />
+                        </Grid>
+                    </Grid>
                 <Grid container justifyContent="center" spacing={3}>
                         <Grid item>
                             <TableContainer>
@@ -243,7 +248,6 @@ export const ThreatStatBlock = ({ threat }: ThreatStatBlockProps) => {
                         }
                     </Grid>
                 </Paper>
-                    
             </Modal>
         </div>
     );

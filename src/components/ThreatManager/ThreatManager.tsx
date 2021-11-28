@@ -1,4 +1,4 @@
-import { Accordion, AccordionDetails, AccordionSummary, CircularProgress, FormControl, Grid, IconButton, List, ListItem, Select, Snackbar, Switch, Typography, } from "@material-ui/core";
+import { Accordion, AccordionDetails, AccordionSummary, Button, CircularProgress, FormControl, Grid, IconButton, List, ListItem, Select, Snackbar, Switch, Typography, } from "@material-ui/core";
 import { AddBox, AddBoxOutlined, ExpandMore } from "@material-ui/icons";
 import { Alert } from "@material-ui/lab";
 import React, { useEffect } from "react";
@@ -42,6 +42,8 @@ export const ThreatManager = () => {
         setEncounterList(newEncounterList);
     }
 
+    const resetThreatList = () => setEncounterList([] as Threat[]);
+
     return !isLoading
         ?
         <Grid container justifyContent="center">
@@ -51,6 +53,11 @@ export const ThreatManager = () => {
                         <DiceRoller initalDiceValue={0} />
                     </Grid>
                 </Grid>
+            </Grid>
+            <Grid container justifyContent="center">
+            <Grid item>
+                        <Button variant="outlined" onClick={resetThreatList}>Reset Encounter List</Button>
+                    </Grid>
             </Grid>
             <Grid container justifyContent="center">
                 <Grid item>
