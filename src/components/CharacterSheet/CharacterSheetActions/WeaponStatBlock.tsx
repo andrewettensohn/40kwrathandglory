@@ -1,4 +1,5 @@
-import { Grid, Typography, Divider, Button, Modal, Paper } from "@material-ui/core"
+import { Grid, Typography, Divider, Button, Modal, Paper, TableContainer, Table, TableBody, TableCell, TableHead, TableRow } from "@material-ui/core"
+import { TableChartSharp } from "@material-ui/icons";
 import React from "react"
 import { HitCheck, WeaponDamageCheck } from "../../../helpers/CheckHelper";
 import { Character } from "../../../interfaces/Character";
@@ -21,37 +22,49 @@ export const WeaponStatBlock = ({ weapon, character, displayAttackButton }: Weap
 
     return (
         <div>
-            <Grid container className={classes.m3}>
-                {displayAttackButton &&
-                    <Grid item>
-                        <Button variant="outlined" onClick={toggleModal}>Attack</Button>
-                    </Grid>}
+            <Grid container>
+                <Grid item>
+                    {displayAttackButton &&
+                        <Grid item>
+                            <Button variant="outlined" onClick={toggleModal}>Attack</Button>
+                        </Grid>}
+                </Grid>
                 <Grid item xs={12}>
                     <Typography variant="h6">{weapon.Name}</Typography>
                 </Grid>
-                <Grid item xs={12}>
-                    <Typography>Hit: {HitCheck(weapon, character)}</Typography>
+                <Grid item>
+                    <Grid container>
+                        <Grid item>
+                            <WeaponTraitsList salvo={weapon.Salvo} traits={weapon.WeaponTraits} />
+                        </Grid>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12}>
-                    <Typography>Damage: {WeaponDamageCheck(weapon, character)}</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography>ED: {weapon.ED}</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography>AP: {weapon.AP}</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography>Salvo: {weapon.Salvo}</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography>Range: {weapon.Range}</Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <WeaponTraitsList traits={weapon.WeaponTraits} />
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography>{weapon.Description}</Typography>
+                <Grid item>
+                    <Grid container>
+                        <TableContainer>
+                            <Table size="small">
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Hit</TableCell>
+                                        <TableCell>DMG</TableCell>
+                                        <TableCell>ED</TableCell>
+                                        <TableCell>AP</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    <TableRow>
+                                        <TableCell>{HitCheck(weapon, character)}</TableCell>
+                                        <TableCell>{WeaponDamageCheck(weapon, character)}</TableCell>
+                                        <TableCell>{weapon.ED}</TableCell>
+                                        <TableCell>{weapon.AP}</TableCell>
+                                    </TableRow>
+                                </TableBody>
+                            </Table>
+                        </TableContainer>
+                    </Grid>
+                    <Grid item>
+                        <Typography>{weapon.Description}</Typography>
+                    </Grid>
                 </Grid>
             </Grid>
             <Modal
@@ -61,7 +74,7 @@ export const WeaponStatBlock = ({ weapon, character, displayAttackButton }: Weap
             >
                 <Paper className={classes.scrollBox}>
                     <Grid container spacing={3}>
-                        <Grid item>
+                        <Grid item xs={12}>
                             <WeaponStatBlock weapon={weapon} character={character} displayAttackButton={false} />
                         </Grid>
                         <Grid item>

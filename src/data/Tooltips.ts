@@ -1,4 +1,6 @@
 
+export const SalvoTooltip: string = "You can make a Full Auto ranged attack to gain a number of bonus dice to your attack Test equal to the weapon’s Salvo value OR you can make a Spray Shot as part of a Multi-Attack, reducing the DN of the Test by the weapon’s Salvo value."
+
 export const AgonisingTooltip: string = "Designed to inflict maximum pain, these weapons damage mind and morale as much as body. Every Wound inflicted by an Agonising weapon also inflicts 1 Shock.";
 
 export const ArcTooltip: string = "The deadly electrical discharge of Arc weapons scrambles vehicle technology. Arc weapons gain +ED equal to their rating when you use them to attack a vehicle..";

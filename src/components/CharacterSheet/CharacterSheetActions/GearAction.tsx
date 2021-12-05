@@ -124,7 +124,7 @@ export const GearAction = ({ gearList, character, updateCharacter }: GearActionP
         <div>
             <Grid container className={classes.mt5}>
                 <Grid item>
-                    <TextField value={inventorySearchValue} onChange={(e) => onInventorySearchValueChange(e.target.value)} label="Search Your-+ Gear" variant="outlined" />
+                    <TextField value={inventorySearchValue} onChange={(e) => onInventorySearchValueChange(e.target.value)} label="Search Your Gear" variant="outlined" />
                 </Grid>
             </Grid>
             <Grid container justifyContent="flex-start" className={classes.mt5}>

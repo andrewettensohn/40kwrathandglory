@@ -1,19 +1,29 @@
 import { Grid, Typography, Divider, Chip, Tooltip } from "@material-ui/core"
 import React from "react"
-import { AgonisingTooltip, ArcTooltip, AssaultTooltip, BlastTooltip, BrutalTooltip, BulkTooltip, FlamerTooltip, ForceTooltip, HeavyTooltip, MeltaTooltip, ParryTooltip, PistolTooltip, PoweredTooltip, RadTooltip, RapidFireTooltip, ReliableTooltip, RendingTooltip, SilentTooltip, SniperTooltip, SpreadTooltip, SuperchargeTooltip, UnwieldyTooltip, WaaaghTooltip, WarpTooltip } from "../../../data/Tooltips";
+import { AgonisingTooltip, ArcTooltip, AssaultTooltip, BlastTooltip, BrutalTooltip, BulkTooltip, FlamerTooltip, ForceTooltip, HeavyTooltip, MeltaTooltip, ParryTooltip, PistolTooltip, PoweredTooltip, RadTooltip, RapidFireTooltip, ReliableTooltip, RendingTooltip, SalvoTooltip, SilentTooltip, SniperTooltip, SpreadTooltip, SuperchargeTooltip, UnwieldyTooltip, WaaaghTooltip, WarpTooltip } from "../../../data/Tooltips";
 import { Weapon } from "../../../interfaces/Weapon";
 import { WeaponTraits } from "../../../interfaces/WeaponTraits";
 import { Character } from "../../../interfaces/Character";
 
 interface WeaponTraitsProps {
     traits: WeaponTraits,
+    salvo: string
 }
 
-export const WeaponTraitsList = ({ traits }: WeaponTraitsProps) => {
+export const WeaponTraitsList = ({ traits, salvo }: WeaponTraitsProps) => {
 
     return traits !== undefined && traits !== null
         ?
         <Grid container spacing={1} >
+            {(salvo != "0" && salvo != "" && salvo.length > 0) &&
+                <Grid item>
+                    <Tooltip title={SalvoTooltip}>
+                        <Chip
+                            label={`Salvo (${salvo})`}
+                            variant="outlined"
+                        />
+                    </Tooltip>
+                </Grid>}
             {traits.Agonising &&
                 <Grid item >
                     <Tooltip title={AgonisingTooltip}>
@@ -45,7 +55,7 @@ export const WeaponTraitsList = ({ traits }: WeaponTraitsProps) => {
                 <Grid item >
                     <Tooltip title={BlastTooltip}>
                         <Chip
-                            label={`Blast(${traits.Blast})`}
+                            label={`Blast (${traits.Blast})`}
                             variant="outlined"
                         />
                     </Tooltip>
@@ -81,7 +91,7 @@ export const WeaponTraitsList = ({ traits }: WeaponTraitsProps) => {
                 <Grid item >
                     <Tooltip title={HeavyTooltip}>
                         <Chip
-                            label={`Heavy(${traits.Heavy})`}
+                            label={`Heavy (${traits.Heavy})`}
                             variant="outlined"
                         />
                     </Tooltip>
@@ -117,7 +127,7 @@ export const WeaponTraitsList = ({ traits }: WeaponTraitsProps) => {
                 <Grid item >
                     <Tooltip title={RadTooltip}>
                         <Chip
-                            label={`Rad(${traits.Rad})`}
+                            label={`Rad (${traits.Rad})`}
                             variant="outlined"
                         />
                     </Tooltip>
@@ -126,7 +136,7 @@ export const WeaponTraitsList = ({ traits }: WeaponTraitsProps) => {
                 <Grid item >
                     <Tooltip title={RapidFireTooltip}>
                         <Chip
-                            label={`Rapid Fire(${traits.RapidFire})`}
+                            label={`Rapid Fire (${traits.RapidFire})`}
                             variant="outlined"
                         />
                     </Tooltip>
@@ -144,7 +154,7 @@ export const WeaponTraitsList = ({ traits }: WeaponTraitsProps) => {
                 <Grid item >
                     <Tooltip title={RendingTooltip}>
                         <Chip
-                            label={`Rending(${traits.Rending})`}
+                            label={`Rending (${traits.Rending})`}
                             variant="outlined"
                         />
                     </Tooltip>
@@ -162,7 +172,7 @@ export const WeaponTraitsList = ({ traits }: WeaponTraitsProps) => {
                 <Grid item>
                     <Tooltip title={SniperTooltip}>
                         <Chip
-                            label={`Sniper(${traits.Sniper})`}
+                            label={`Sniper (${traits.Sniper})`}
                             variant="outlined"
                         />
                     </Tooltip>
@@ -189,7 +199,7 @@ export const WeaponTraitsList = ({ traits }: WeaponTraitsProps) => {
                 <Grid item >
                     <Tooltip title={UnwieldyTooltip}>
                         <Chip
-                            label={`Unwieldy(${traits.Unwieldy})`}
+                            label={`Unwieldy (${traits.Unwieldy})`}
                             variant="outlined"
                         />
                     </Tooltip>
