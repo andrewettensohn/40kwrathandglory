@@ -15,7 +15,7 @@ export const WeaponTraitsList = ({ traits, salvo }: WeaponTraitsProps) => {
     return traits !== undefined && traits !== null
         ?
         <Grid container spacing={1} >
-            {(salvo != "0" && salvo != "" && salvo.length > 0) &&
+            {(salvo != "0" && salvo != "" && salvo?.length > 0) &&
                 <Grid item>
                     <Tooltip title={SalvoTooltip}>
                         <Chip
