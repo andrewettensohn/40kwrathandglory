@@ -1,6 +1,6 @@
-import { Grid, List, ListItem, Button, Typography, Divider, IconButton, Modal, Paper, Box } from "@material-ui/core";
+import { Grid, List, ListItem, Button, Typography, Divider, IconButton, Modal, Paper, Box, TextField } from "@material-ui/core";
 import { ControlCamera } from "@material-ui/icons";
-import React from "react";
+import React, { useEffect } from "react";
 import { HitCheck } from "../../../helpers/CheckHelper";
 import { Character } from "../../../interfaces/Character";
 import { Weapon } from "../../../interfaces/Weapon";
@@ -17,73 +17,124 @@ interface WeaponActionProps {
 export const WeaponAction = ({ weaponsList, character, updateCharacter }: WeaponActionProps): JSX.Element => {
 
     const [showInput, setShowInput] = React.useState(false);
+    const [characterWeapons, setCharacterWeapons] = React.useState([...character.Weapons]);
+    const [allWeapons, setAllWeapons] = React.useState([...weaponsList])
+    const [inventorySearchValue, setInventorySearchValue] = React.useState("");
+    const [allWeaponsSearchValue, setAllWeaponsSearchValue] = React.useState("");
     const classes = useAppStyles();
+
+    const updateCharacterWeapons = async () => {
+        const characterUpdate = { ...character, "Weapons": characterWeapons }
+        await updateCharacter(characterUpdate);
+    };
 
     const onManageWeaponsClicked = () => setShowInput(!showInput);
 
     const onAddToInventoryClicked = async (weapon: Weapon): Promise<void> => {
+        characterWeapons.push(weapon);
+        setCharacterWeapons(characterWeapons);
 
-        const characterUpdate = JSON.parse(JSON.stringify(character)) as Character;
-        characterUpdate.Weapons.push(weapon);
-        await updateCharacter(characterUpdate);
-    }
+        await updateCharacterWeapons();
+    };
 
     const onRemoveFromInventoryClicked = async (weapon: Weapon): Promise<void> => {
-
-        const characterUpdate = JSON.parse(JSON.stringify(character)) as Character;
-        characterUpdate.Weapons = characterUpdate.Weapons.filter(x => x.Id != weapon.Id);
-        await updateCharacter(characterUpdate);
-    }
+        const newWeaponList = [...characterWeapons.filter(x => x.Id != weapon.Id)];
+        setCharacterWeapons(newWeaponList);
+        await updateCharacterWeapons();
+    };
 
     const onEquipChangeClicked = async (weapon: Weapon, isEquipped: boolean): Promise<void> => {
-        const characterUpdate = JSON.parse(JSON.stringify(character)) as Character;
-        const weaponToEquip = characterUpdate.Weapons.find(x => x.Id == weapon.Id);
+        const weaponToEquip = characterWeapons.find(x => x.Id == weapon.Id);
 
         if (weaponToEquip !== undefined) {
             weaponToEquip.IsEquipped = isEquipped;
-            await updateCharacter(characterUpdate);
+            await updateCharacterWeapons();
         }
-    }
+    };
+
+    const onInventorySearchValueChange = (newSearchValue: string) => {
+
+        setInventorySearchValue(newSearchValue);
+
+        if (newSearchValue?.length == 0) {
+            setCharacterWeapons([...character.Weapons])
+            return;
+        }
+
+        const filteredWeapons = character.Weapons.filter(x =>
+            x.Name.toLowerCase().includes(newSearchValue.toLowerCase())
+        );
+
+        setCharacterWeapons(filteredWeapons);
+    };
+
+    const onAllWeaponsSearchValueChange = (newSearchValue: string) => {
+
+        setAllWeaponsSearchValue(newSearchValue);
+
+        if (newSearchValue?.length == 0) {
+            setAllWeapons([...weaponsList]);
+            return;
+        }
+
+        const filteredWeapons = weaponsList.filter(x =>
+            x.Name.toLowerCase().includes(newSearchValue.toLowerCase())
+        );
+
+        setAllWeapons(filteredWeapons);
+    };
 
     return showInput
         ?
-        <Grid container>
-            <Grid item>
-                <Button
-                    startIcon={<ControlCamera />}
-                    color="primary"
-                    variant="outlined"
-                    onClick={onManageWeaponsClicked}>Close</Button>
+        <div>
+            <Grid container className={classes.mt5}>
+                <Grid item>
+                    <TextField value={allWeaponsSearchValue} onChange={(e) => onAllWeaponsSearchValueChange(e.target.value)} label="Search All Weapons" variant="outlined" />
+                </Grid>
             </Grid>
-            <Grid item>
-                <List component="nav">
-                    {weaponsList.map(x => {
-                        return character.Weapons.some(y => y.Id == x.Id)
-                            ?
-                            <ListItem key={x.Id} divider={true}>
-                                <Grid container>
-                                    <Grid item>
-                                        <Button variant="outlined" onClick={() => onRemoveFromInventoryClicked(x)}>Remove From Inventory</Button>
+            <Grid container className={classes.mt5}>
+                <Grid item>
+                    <Button
+                        startIcon={<ControlCamera />}
+                        color="primary"
+                        variant="outlined"
+                        onClick={onManageWeaponsClicked}>Close</Button>
+                </Grid>
+                <Grid item>
+                    <List component="nav">
+                        {allWeapons.map(x => {
+                            return characterWeapons.some(y => y.Id == x.Id)
+                                ?
+                                <ListItem key={x.Id} divider={true}>
+                                    <Grid container>
+                                        <Grid item>
+                                            <Button variant="outlined" onClick={() => onRemoveFromInventoryClicked(x)}>Remove From Inventory</Button>
+                                        </Grid>
+                                        <WeaponStatBlock weapon={x} character={character} displayAttackButton={false} />
                                     </Grid>
-                                    <WeaponStatBlock weapon={x} character={character} displayAttackButton={false} />
-                                </Grid>
-                            </ListItem>
-                            :
-                            <ListItem key={x.Id} divider={true}>
-                                <Grid container>
-                                    <Grid item>
-                                        <Button variant="outlined" onClick={() => onAddToInventoryClicked(x)}>Add to Inventory</Button>
+                                </ListItem>
+                                :
+                                <ListItem key={x.Id} divider={true}>
+                                    <Grid container>
+                                        <Grid item>
+                                            <Button variant="outlined" onClick={() => onAddToInventoryClicked(x)}>Add to Inventory</Button>
+                                        </Grid>
+                                        <WeaponStatBlock weapon={x} character={character} displayAttackButton={false} />
                                     </Grid>
-                                    <WeaponStatBlock weapon={x} character={character} displayAttackButton={false} />
-                                </Grid>
-                            </ListItem>
-                    })}
-                </List>
+                                </ListItem>
+                        })}
+                    </List>
+                </Grid>
             </Grid>
-        </Grid>
+        </div>
         :
         <div>
-            <Grid container justifyContent="flex-start">
+            <Grid container className={classes.mt5}>
+                <Grid item>
+                    <TextField value={inventorySearchValue} onChange={(e) => onInventorySearchValueChange(e.target.value)} label="Search Weapons" variant="outlined" />
+                </Grid>
+            </Grid>
+            <Grid container justifyContent="flex-start" className={classes.mt5}>
                 <Grid item>
                     <Button
                         startIcon={<ControlCamera />}
@@ -93,7 +144,7 @@ export const WeaponAction = ({ weaponsList, character, updateCharacter }: Weapon
                 </Grid>
                 <Grid item>
                     <List component="nav">
-                        {character.Weapons.map(x => {
+                        {characterWeapons.map(x => {
                             return x.IsEquipped
                                 ?
                                 <ListItem key={x.Id} divider={true}>
