@@ -23,24 +23,20 @@ export const WeaponAction = ({ weaponsList, character, updateCharacter }: Weapon
     const [allWeaponsSearchValue, setAllWeaponsSearchValue] = React.useState("");
     const classes = useAppStyles();
 
-    const updateCharacterWeapons = async () => {
-        const characterUpdate = { ...character, "Weapons": characterWeapons }
-        await updateCharacter(characterUpdate);
-    };
-
     const onManageWeaponsClicked = () => setShowInput(!showInput);
 
     const onAddToInventoryClicked = async (weapon: Weapon): Promise<void> => {
         characterWeapons.push(weapon);
         setCharacterWeapons(characterWeapons);
 
-        await updateCharacterWeapons();
+        await updateCharacter({ ...character, "Weapons": characterWeapons });
     };
 
     const onRemoveFromInventoryClicked = async (weapon: Weapon): Promise<void> => {
-        const newWeaponList = [...characterWeapons.filter(x => x.Id != weapon.Id)];
-        setCharacterWeapons(newWeaponList);
-        await updateCharacterWeapons();
+        const newWeapons = characterWeapons.filter(x => x.Id != weapon.Id);
+        setCharacterWeapons(newWeapons);
+
+        await updateCharacter({ ...character, "Weapons": newWeapons });
     };
 
     const onEquipChangeClicked = async (weapon: Weapon, isEquipped: boolean): Promise<void> => {
@@ -48,7 +44,7 @@ export const WeaponAction = ({ weaponsList, character, updateCharacter }: Weapon
 
         if (weaponToEquip !== undefined) {
             weaponToEquip.IsEquipped = isEquipped;
-            await updateCharacterWeapons();
+            await updateCharacter({ ...character, "Weapons": characterWeapons });
         }
     };
 

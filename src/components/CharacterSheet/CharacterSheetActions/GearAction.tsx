@@ -22,19 +22,15 @@ export const GearAction = ({ gearList, character, updateCharacter }: GearActionP
 
     const onManageArmorClicked = () => setShowInput(!showInput);
 
-    const updateCharacterGear = async (): Promise<void> => {
-        await updateCharacter({
-            ...character,
-            CharacterGear: [...characterGear]
-        });
-    }
-
     const onAddToInventoryClicked = async (gear: Gear): Promise<void> => {
 
         characterGear.push(gear);
         setCharacterGear(characterGear);
 
-        await updateCharacterGear();
+        await updateCharacter({
+            ...character,
+            CharacterGear: [...characterGear]
+        });
     };
 
     const onRemoveFromInventoryClicked = async (gear: Gear): Promise<void> => {
@@ -42,7 +38,10 @@ export const GearAction = ({ gearList, character, updateCharacter }: GearActionP
         const newGearList = [...characterGear.filter(x => x.Id != gear.Id)];
         setCharacterGear(newGearList);
 
-        await updateCharacterGear();
+        await updateCharacter({
+            ...character,
+            CharacterGear: [...newGearList]
+        });
     };
 
     const onInventorySearchValueChange = (newSearchValue: string) => {
