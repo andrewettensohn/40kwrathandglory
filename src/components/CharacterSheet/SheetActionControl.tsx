@@ -9,6 +9,7 @@ import { ArmorAction } from "./CharacterSheetActions/ArmorAction";
 import { AttributesAction } from "./CharacterSheetActions/AttributesAction";
 import { CombatAction } from "./CharacterSheetActions/CombatAction";
 import { GearAction } from "./CharacterSheetActions/GearAction";
+import { PyschicPowerAction } from "./CharacterSheetActions/PsychicPowerAction";
 import { QuestList } from "./CharacterSheetActions/Quests";
 import { QuickReference } from "./CharacterSheetActions/QuickReference";
 import { SkillsAction } from "./CharacterSheetActions/SkillsAction";
@@ -81,6 +82,10 @@ export const SheetActionControl = ({ character, actionType, syncModels, updateCh
     } else if (actionType == ActionType.QuickReference) {
         return (
             <QuickReference />
+        );
+    } else if (actionType == ActionType.Pyschic) {
+        return (
+            <PyschicPowerAction character={character} updateCharacter={updateCharacter} pyschicList={getDeserializedModelsForModelType(syncModels, ModelType.Pyschic)} />
         );
     } else {
 

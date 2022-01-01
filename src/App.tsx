@@ -14,6 +14,7 @@ import { amber, blueGrey, deepPurple, green, red } from '@material-ui/core/color
 import { ContentInput } from './components/ContentInput/ContentInput';
 import { CharacterSheetLarge } from './components/CharacterSheet/CharacterSheetLarge';
 import { ThreatManager } from './components/ThreatManager/ThreatManager';
+import { IsSmallScreen } from './helpers/MediaQueryHelper';
 
 const theme = createTheme({
   palette: {
@@ -29,7 +30,7 @@ const theme = createTheme({
 });
 
 export default function App() {
-  const isActive = useMediaQuery('(max-width: 1200px)');
+  const isSmallScreenSize = IsSmallScreen();
   return (
     <ThemeProvider theme={theme}>
       <Paper style={{ height: "100vh" }}>
@@ -40,8 +41,8 @@ export default function App() {
               <Home />
             </Route>
             <Route path="/characterSheet">
-              {isActive && <CharacterSheet />}
-              {!isActive && <CharacterSheetLarge />}
+              {isSmallScreenSize && <CharacterSheet />}
+              {!isSmallScreenSize && <CharacterSheetLarge />}
             </Route>
             <Route path="/contentInput">
               <ContentInput />

@@ -126,6 +126,11 @@ export const CharacterSheet = () => {
                                 <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.QuickReference)}>Quick Reference</Button>
                             </Grid>
                         </Grid>
+                        <Grid container justifyContent="center" spacing={1} className={classes.mt10}>
+                            <Grid item>
+                                <Button color="primary" variant="outlined" onClick={() => handleActionTypeSwitch(ActionType.Pyschic)}>Pyschic Powers</Button>
+                            </Grid>
+                        </Grid>
                     </Grid>
                 </Paper>
             </Modal>

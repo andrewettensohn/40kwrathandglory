@@ -15,6 +15,8 @@ import { ModifyArchetype } from "./Modify/ModifyArchetype";
 import { ModifyArmor } from "./Modify/ModifyArmor";
 import { ThreatInput } from "./Input/ThreatInput";
 import { ModifyThreat } from "./Modify/ModifyThreat";
+import { PyschicPowerInput } from "./Input/PyschicPowerInput";
+import { ModifyPyschicPower } from "./Modify/ModifyPyschicPower";
 
 interface ContentActionControlProps {
     modelType: ModelType,
@@ -61,6 +63,12 @@ export const ContentActionControl = ({ modelType, syncModels, isCreateMode, togg
             <ThreatInput isModify={false} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} syncModels={syncModels} />
             :
             <ModifyThreat syncModels={syncModels} threatList={getDeserializedModelsForModelType(syncModels, ModelType.Threat)} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
+    } else if (modelType == ModelType.Pyschic) {
+        return isCreateMode
+            ?
+            <PyschicPowerInput isModify={false} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
+            :
+            <ModifyPyschicPower PyschicPowerList={getDeserializedModelsForModelType(syncModels, ModelType.Pyschic)} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />
     } else {
         return (<div></div>)
     }

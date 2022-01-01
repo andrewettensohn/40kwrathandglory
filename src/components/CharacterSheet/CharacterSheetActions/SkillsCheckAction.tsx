@@ -12,23 +12,12 @@ interface SkillsCheckActionProps {
 export const SkillsCheckAction = ({ character, updateCharacter }: SkillsCheckActionProps) => {
     const classes = useAppStyles();
 
-    const onWrathChanged = async (value: number) => {
-
+    const onValueChanged = async (value: number, propName: string) => {
         if (isNaN(value)) value = 0;
 
         await updateCharacter({
             ...character,
-            Wrath: value
-        });
-    }
-
-    const onGloryChanged = async (value: number) => {
-
-        if (isNaN(value)) value = 0;
-
-        await updateCharacter({
-            ...character,
-            Glory: value
+            [propName]: value
         });
     }
 
@@ -45,8 +34,8 @@ export const SkillsCheckAction = ({ character, updateCharacter }: SkillsCheckAct
                                 shrink: true,
                             }}
                             variant="outlined"
-                            value={character.Wrath.toString()}
-                            onChange={(e) => onWrathChanged(parseFloat(e.target.value))}
+                            value={character.Wrath?.toString()}
+                            onChange={(e) => onValueChanged(parseFloat(e.target.value), "Wrath")}
                             className={classes.numberInput}
                         />
                     </Grid>
@@ -59,8 +48,22 @@ export const SkillsCheckAction = ({ character, updateCharacter }: SkillsCheckAct
                                 shrink: true,
                             }}
                             variant="outlined"
-                            value={character.Glory.toString()}
-                            onChange={(e) => onGloryChanged(parseFloat(e.target.value))}
+                            value={character.Glory?.toString()}
+                            onChange={(e) => onValueChanged(parseFloat(e.target.value), "Glory")}
+                            className={classes.numberInput}
+                        />
+                    </Grid>
+                    <Grid item>
+                        <TextField
+                            id="outlined-number"
+                            label="Corruption"
+                            type="number"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            variant="outlined"
+                            value={character.Corruption?.toString()}
+                            onChange={(e) => onValueChanged(parseFloat(e.target.value), "Corruption")}
                             className={classes.numberInput}
                         />
                     </Grid>

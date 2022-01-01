@@ -2,6 +2,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Grid, List, ListItem, Ty
 import { ExpandMore } from "@material-ui/icons";
 import React, { useEffect } from "react";
 import { validateCharacterModels } from "../../../data/RestService";
+import { IsSmallScreen } from "../../../helpers/MediaQueryHelper";
 import { Archetype } from "../../../interfaces/Archetype";
 import { ModelType } from "../../../interfaces/Enumerations/ModelType";
 import { useAppStyles } from "../../AppStyles";
@@ -25,31 +26,41 @@ export const ModifyArchetype = ({ ArchetypeList, toggleSaveSuccessSnackBar }: Mo
         await validateCharacterModels(Archetype.Id, ModelType.Archetype);
     }
 
-    const onArchetypeSelected = (Archetype: Archetype) => {
-        setIsAccordionExpanded(false);
-        setSelectedArchetype(Archetype);
-    }
+    const isSmallScreen = IsSmallScreen();
 
     return (
         <Grid container justifyContent="center">
             <Grid item>
-                <Accordion expanded={isAccordionExpanded} onClick={() => setIsAccordionExpanded(!isAccordionExpanded)}>
-                    <AccordionSummary
-                        expandIcon={<ExpandMore />}>
-                        <Typography>Archetype List</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails className={classes.scrollBox}>
-                        <List component="nav">
-                            {ArchetypeList.map(x => {
-                                return (
-                                    <ListItem key={x.Id} button onClick={() => onArchetypeSelected(x)}>
-                                        <Typography>{x.Name}</Typography>
-                                    </ListItem>
-                                )
-                            })}
-                        </List>
-                    </AccordionDetails>
-                </Accordion>
+                {isSmallScreen &&
+                    <Accordion expanded={isAccordionExpanded} onClick={() => setIsAccordionExpanded(!isAccordionExpanded)}>
+                        <AccordionSummary
+                            expandIcon={<ExpandMore />}>
+                            <Typography>Archetype List</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails className={classes.scrollBox}>
+                            <List component="nav">
+                                {ArchetypeList.map(x => {
+                                    return (
+                                        <ListItem key={x.Id} button onClick={() => setSelectedArchetype(x)}>
+                                            <Typography>{x.Name}</Typography>
+                                        </ListItem>
+                                    )
+                                })}
+                            </List>
+                        </AccordionDetails>
+                    </Accordion>
+                }
+                {!isSmallScreen &&
+                    <List component="nav" className={classes.scrollBox}>
+                        {ArchetypeList.map(x => {
+                            return (
+                                <ListItem key={x.Id} button onClick={() => setSelectedArchetype(x)}>
+                                    <Typography>{x.Name}</Typography>
+                                </ListItem>
+                            )
+                        })}
+                    </List>
+                }
             </Grid>
             <Grid item xs={12} md={6}>
                 <ArchetypeInput selectedArchetype={selectedArchetype} isModify={true} key={selectedArchetype.Id} updateArchetypeList={updateArchetypeList} toggleSaveSuccessSnackBar={toggleSaveSuccessSnackBar} />

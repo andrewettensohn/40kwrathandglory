@@ -22,6 +22,7 @@ import { ArmorAction } from "./CharacterSheetActions/ArmorAction";
 import { TalentAction } from "./CharacterSheetActions/TalentAction";
 import { AmmoAction } from "./CharacterSheetActions/AmmoAction";
 import { QuickReference } from "./CharacterSheetActions/QuickReference";
+import { PyschicPowerAction } from "./CharacterSheetActions/PsychicPowerAction";
 
 export const CharacterSheetLarge = () => {
 
@@ -90,6 +91,7 @@ export const CharacterSheetLarge = () => {
                                 <Tab label="Modify Skills" value="2" />
                                 <Tab label="Modify Attributes" value="3" />
                                 <Tab label="Reference" value="4" />
+                                <Tab label="Ammo" value="5" />
                             </TabList>
                         </AppBar>
                         <TabPanel value="1">
@@ -125,6 +127,13 @@ export const CharacterSheetLarge = () => {
                                 </Grid>
                             </Grid>
                         </TabPanel>
+                        <TabPanel value="5">
+                            <Grid container className={classes.scrollBoxLargeScreen}>
+                                <Grid item className={classes.mt5}>
+                                    <AmmoAction character={character} updateCharacter={setAndUpdateCharacter} />
+                                </Grid>
+                            </Grid>
+                        </TabPanel>
                     </TabContext>
                 </Grid>
                 <Grid item lg={6}>
@@ -135,7 +144,7 @@ export const CharacterSheetLarge = () => {
                                 <Tab label="Gear" value="2" />
                                 <Tab label="Armor" value="3" />
                                 <Tab label="Talents" value="4" />
-                                <Tab label="Ammo" value="5" />
+                                <Tab label="Pyschic" value="5" />
                             </TabList>
                         </AppBar>
                         <TabPanel value="1">
@@ -172,7 +181,7 @@ export const CharacterSheetLarge = () => {
                         <TabPanel value="5">
                             <Grid container className={classes.scrollBoxLargeScreen}>
                                 <Grid item className={classes.mt5}>
-                                    <AmmoAction character={character} updateCharacter={setAndUpdateCharacter} />
+                                    <PyschicPowerAction character={character} updateCharacter={setAndUpdateCharacter} pyschicList={getDeserializedModelsForModelType(syncModels, ModelType.Pyschic)} />
                                 </Grid>
                             </Grid>
                         </TabPanel>

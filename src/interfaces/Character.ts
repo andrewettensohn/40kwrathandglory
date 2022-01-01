@@ -16,6 +16,7 @@ export interface Character {
     XP: number;
     CurrentWounds: number;
     CurrentShock: number;
+    Corruption: number;
     Tier: number;
     Rank: number;
     Notes: string;
